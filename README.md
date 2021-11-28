@@ -1,1 +1,1 @@
-God is Greater than Everythin'.
+God is Greater than Everything.
