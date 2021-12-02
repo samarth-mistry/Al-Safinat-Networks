@@ -16,17 +16,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('admin-dashboard/', function () {return view('admin_views.admin_dashboard');});
-Route::get('/test2', function () {return view('pages.dashboard');});
-Route::get('/test', 'HomeController@index')->name('test');
-Route::get('/login', 'HomeController@index')->name('login');
-Route::get('/register', 'HomeController@index')->name('register');
-//Route::get('/', 'HomeController@index')->name('dashboard');
-Auth::routes();
-
-Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('starter', 'AdminDashboardController@starter')->name('starter');
+//Route::resource('teacher', 'TeacherController');
