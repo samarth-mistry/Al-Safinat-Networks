@@ -2,31 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AdminDashboard;
+use App\Models\Continents;
 use Illuminate\Http\Request;
 
-class AdminDashboardController extends Controller
+class ContinentsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function dashboard_1()
-    {
-        return view('admins.dashboard2');
+    public function data(){
+        //work under progress
+    }
+    public function index(){
+        return view('admin_controlls.continent');
     }
 
-    public function index()
-    {
-        return view('admins.dashboard1');
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
@@ -46,10 +33,10 @@ class AdminDashboardController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\AdminDashboard  $adminDashboard
+     * @param  \App\Models\Continents  $continents
      * @return \Illuminate\Http\Response
      */
-    public function show(AdminDashboard $adminDashboard)
+    public function show(Continents $continents)
     {
         //
     }
@@ -57,10 +44,10 @@ class AdminDashboardController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\AdminDashboard  $adminDashboard
+     * @param  \App\Models\Continents  $continents
      * @return \Illuminate\Http\Response
      */
-    public function edit(AdminDashboard $adminDashboard)
+    public function edit(Continents $continents)
     {
         //
     }
@@ -69,10 +56,10 @@ class AdminDashboardController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\AdminDashboard  $adminDashboard
+     * @param  \App\Models\Continents  $continents
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AdminDashboard $adminDashboard)
+    public function update(Request $request, Continents $continents)
     {
         //
     }
@@ -80,10 +67,10 @@ class AdminDashboardController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\AdminDashboard  $adminDashboard
+     * @param  \App\Models\Continents  $continents
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AdminDashboard $adminDashboard)
+    public function destroy(Continents $continents)
     {
         //
     }

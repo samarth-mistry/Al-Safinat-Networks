@@ -16,5 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('starter', 'AdminDashboardController@starter')->name('starter');
-//Route::resource('teacher', 'TeacherController');
+Route::get('dashboard-1', 'AdminDashboardController@dashboard_1')->name('dashboard-1');
+Route::get('admin-continents/data', 'ContinentsController@data')->name('admin-continents.data');
+Route::resource('admin-continents', 'ContinentsController');
