@@ -4,64 +4,68 @@ namespace App\Http\Controllers;
 
 use App\Models\Continents;
 use Illuminate\Http\Request;
+use DataTables;
 
 class ContinentsController extends Controller
 {
     public function data(){
-        //work under progress
+        $continents = Continents::all();
+        return DataTables::of($continents)
+            ->addColumn('actions', function ($continent) {
+                return view('admins.continents.action', ['continent' => $continent]);
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
     }
     public function index(){
-        return view('admin_controlls.continent');
+        //$continents = Continents::all();
+        //dd($continents);
+        return view('admins.continents.index');
     }
 
-    public function create()
-    {
-        //
+    public function create(){
+        return view('admins.continents.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request){
+        $this->validate($request, [
+            'name' => 'required',
+            'abbr' =>'required'
+        ]);
+
+        $continent = new Continents();
+        $continent->name = $request->name;
+        $continent->abbr = $request->abbr;
+        $continent->coordinates = $request->cords;
+        $continent->remarks = $request->remarks;
+        $continent->save();
+
+        return redirect()->route('admin-continents.index')->with('message', 'New Continent created successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Continents  $continents
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Continents $continents)
-    {
-        //
+    public function show(Continents $continents){
+        
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Continents  $continents
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Continents $continents)
-    {
-        //
+    public function edit(Request $request, $id){
+        $continent = Continents::find($id);
+        return view('admins.continents.edit', ['continent' => $continent]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Continents  $continents
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Continents $continents)
-    {
-        //
+    public function update(Request $request, $id){
+        $this->validate($request, [
+            'name' => 'required',
+            'abbr' =>'required'
+        ]);
+
+        $continent = Continents::find($id);
+        $continent->name = $request->name;
+        $continent->abbr = $request->abbr;
+        $continent->coordinates = $request->cords;
+        $continent->remarks = $request->remarks;
+        $continent->save();
+
+        return redirect()->route('admin-continents.index')->with('message', 'Continent updated successfully!');
     }
 
     /**
@@ -70,7 +74,7 @@ class ContinentsController extends Controller
      * @param  \App\Models\Continents  $continents
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Continents $continents)
+    public function destroy(Continents $continents, $id)
     {
         //
     }
