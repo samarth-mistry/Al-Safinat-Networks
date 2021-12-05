@@ -7,14 +7,9 @@ use Illuminate\Http\Request;
 
 class AdminDashboardController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function dashboard_1()
+    public function starter()
     {
-        return view('admins.dashboard2');
+        return view('admins.starter');
     }
 
     public function index()
