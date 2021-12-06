@@ -3,80 +3,87 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
+use App\Models\Country;
+use App\Models\Continents;
 use Illuminate\Http\Request;
+use DataTables;
 
 class CityController extends Controller
 {
     public function data(){
-        //work under progress
+        $cities = City::all();
+        return DataTables::of($cities)
+            ->editColumn('country', function ($city) {
+                $country = Country::find($city->country_id);
+                return $country->name;
+            })
+            ->editColumn('continent', function ($city) {
+                $country = Country::find($city->country_id);
+                $continent = Continents::find($country->continent_id);
+                return $continent->name;
+            })
+            ->addColumn('actions', function ($city) {
+                return view('admins.cities.action', ['city' => $city]);
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
     }
     public function index(){
         return view('admins.cities.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
+    public function create(){
+        $countries = Country::all();
+        return view('admins.cities.create', compact('countries'));
+    }
+
+    public function store(Request $request){
+        $this->validate($request, [
+            'country_id' => 'required',
+            'name' => 'required',
+            'abbr' =>'required'
+        ]);
+
+        $city = new City();
+        $city->name = $request->name;
+        $city->abbr = $request->abbr;
+        $city->country_id = $request->country_id;
+        //$city->remarks = $request->remarks;
+        $city->save();
+
+        return redirect()->route('admin-cities.index')->with('message', 'New City created successfully!');
+    }
+
+    public function show(City $city){
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function edit(City $city, $id){
+        $city = City::find($id);
+        $countries = Country::all();
+        return view('admins.cities.edit', ['city' => $city, 'countries' => $countries]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\City  $city
-     * @return \Illuminate\Http\Response
-     */
-    public function show(City $city)
-    {
-        //
+    public function update(Request $request, $id){
+        $this->validate($request, [
+            'country_id' => 'required',
+            'name' => 'required',
+            'abbr' =>'required'
+        ]);
+
+        $city = City::find($id);
+        $city->name = $request->name;
+        $city->abbr = $request->abbr;
+        $city->country_id = $request->country_id;
+        //$city->remarks = $request->remarks;
+        $city->save();
+
+        return redirect()->route('admin-cities.index')->with('message', 'City updated successfully!');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\City  $city
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(City $city)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\City  $city
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, City $city)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\City  $city
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(City $city)
-    {
-        //
+    public function destroy($id){
+        $city = City::find($id);
+        $city->delete();
+        return redirect()->route('admin-cities.index')->with('message', 'City deleted successfully!');
     }
 }

@@ -1,4 +1,3 @@
-<aside class="control-sidebar control-sidebar-dark">
 <div class="p-3 control-sidebar-content os-host os-theme-light os-host-resize-disabled os-host-scrollbar-horizontal-hidden os-host-transition os-host-overflow os-host-overflow-y" style="height: 150px;">
     <div class="os-resize-observer-host observed">
         <div class="os-resize-observer" style="left: 0px; right: auto;">
@@ -235,4 +234,3 @@
     </div>
     <div class="os-scrollbar-corner"></div>
 </div>
-</aside>

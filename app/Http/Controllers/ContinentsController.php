@@ -68,14 +68,9 @@ class ContinentsController extends Controller
         return redirect()->route('admin-continents.index')->with('message', 'Continent updated successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Continents  $continents
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Continents $continents, $id)
-    {
-        //
+    public function destroy(Continents $continents, $id){
+        $continent = Continents::find($id);
+        $continent->delete();
+        return redirect()->route('admin-continents.index')->with('message', 'Continent deleted successfully!');
     }
 }

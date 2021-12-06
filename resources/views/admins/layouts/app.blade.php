@@ -43,11 +43,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <!-- Main Footer -->
   @include('admins.layouts.footer')
+
+  <!-- <aside class="control-sidebar control-sidebar-dark"></aside> -->
+  <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
 
 <!-- jQuery -->
   <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+  <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+  <script>
+  $.widget.bridge('uibutton', $.ui.button)
+  </script>
 <!-- Bootstrap 4 -->
   <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->

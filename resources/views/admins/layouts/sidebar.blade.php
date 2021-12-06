@@ -33,7 +33,7 @@
         <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-            <a href="#" class="nav-link active">
+            <a href="#" class="nav-link {{ request()->is('admin-dashboard') ? 'active':'' }}">
                 <i class="nav-icon fas fa-th"></i>
                 <p>Dashboard</p>
             </a>
@@ -92,74 +92,40 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
+            <li class="nav-item {{ request()->is('admin-continents*') || request()->is('admin-countries*') || request()->is('admin-cities*') ? 'menu-open':'' }}">
+                <a href="#" class="nav-link {{ request()->is('admin-continents*') || request()->is('admin-countries*') || request()->is('admin-cities*') ? 'active':'' }}">
                 <i class="nav-icon fas fa fa-gears"></i>
                 <p>Ad. Settings
                     <i class="fas fa-angle-left right"></i>
                 </p>
                 </a>
                 <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
+                    <li class="nav-item {{ request()->is('admin-continents*') || request()->is('admin-countries*') || request()->is('admin-cities*') ? 'menu-open':'' }}">
+                        <a href="#" class="nav-link {{ request()->is('admin-continents*') || request()->is('admin-countries*') || request()->is('admin-cities*') ? 'active':'' }}">
                         <i class="fa fa-globe nav-icon"></i>
                         <p>Geography<i class="fas fa-angle-left right"></i></p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ url('admin-continents') }}" class="nav-link">
+                                <a href="{{ url('admin-continents') }}" class="nav-link {{ request()->is('admin-continents*') ? 'active':'' }}">
                                 <i class="fa fa-map-pin nav-icon"></i>
                                 <p>Continents</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('admin-countries') }}" class="nav-link">
+                                <a href="{{ url('admin-countries') }}" class="nav-link {{ request()->is('admin-countries*') ? 'active':'' }}">
                                 <i class="fa fa-map-pin nav-icon"></i>
                                 <p>Countires</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ url('admin-cities') }}" class="nav-link">
+                                <a href="{{ url('admin-cities') }}" class="nav-link {{ request()->is('admin-cities*') ? 'active':'' }}">
                                 <i class="fa fa-map-pin nav-icon"></i>
                                 <p>Cities</p>
                                 </a>
                             </li>
                         </ul>
                     </li>
-                    <!-- <li class="nav-item">
-                        <a href="#" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Login & Register v2
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="pages/examples/login-v2.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Login v2</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pages/examples/register-v2.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Register v2</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pages/examples/forgot-password-v2.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Forgot Password v2</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="pages/examples/recover-password-v2.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Recover Password v2</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li> -->
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
