@@ -18,6 +18,7 @@ class CreateContinentsTable extends Migration
             $table->string('name', 255);
             $table->string('abbr', 10);
             $table->string('coordinates', 255)->nullable();
+            $table->string('remarks',255)->nullable();
             $table->timestamps();
         });
     }
