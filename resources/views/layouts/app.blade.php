@@ -22,7 +22,7 @@
     <!-- Styles -->
     <link href="{{ asset('dist/css/adminlte.css') }}" rel="stylesheet">
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background: #a36a15;">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
