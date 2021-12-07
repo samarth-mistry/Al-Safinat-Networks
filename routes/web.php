@@ -19,3 +19,7 @@ Route::resource('admin-cities', 'CityController');
 
 Route::post('admin-office/data', 'OfficeController@data')->name('admin-office.data');
 Route::resource('admin-office', 'OfficeController');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
