@@ -8,6 +8,9 @@ use DataTables;
 
 class ContinentsController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
     public function data(){
         $continents = Continents::all();
         return DataTables::of($continents)

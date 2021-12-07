@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         $continent->save();
         
         $continent = new Continents();
-        $continent->name = 'Fae East';
+        $continent->name = 'Far East';
         $continent->abbr = "FE";
         $continent->coordinates = "54N 49E";
         $continent->remarks = "FE remarks";
