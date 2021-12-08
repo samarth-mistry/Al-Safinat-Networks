@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('admins.starter');
+        //return view('admins.dashboard');
+        return redirect()->route('admin-dashboard')->with("message", "New Document created successfully!");
     }
 }
