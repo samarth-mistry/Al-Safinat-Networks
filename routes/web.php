@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('bizland');
 });
 //Route::get('dashboard-1', 'AdminDashboardController@dashboard_1')->name('dashboard-1');
 Route::get('admin-dashboard', 'AdminDashboardController@starter')->name('admin-dashboard');
