@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container">
+<div class="row justify-content-center">
 <div class="login-box">
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
@@ -69,4 +71,6 @@
   <!-- /.card -->
 </div>
 <!-- /.login-box -->
+</div>
+</div>
 @endsection
