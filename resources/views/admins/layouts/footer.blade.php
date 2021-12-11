@@ -4,5 +4,5 @@
       Serving Global networks....
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2021 <a href="{{ url('/') }}">Al-Gujarati Networks</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2014-2021 <a href="{{ url('/') }}">{{ config('app.name') }}</a>.</strong> All rights reserved.
 </footer>

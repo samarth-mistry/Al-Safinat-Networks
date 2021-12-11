@@ -1,7 +1,7 @@
 <header id="header" class="d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <h1 class="logo"><a href="{{ url('/') }}">Al-Gujarati <span>Networks</span></a></h1>
+      <h1 class="logo"><a href="{{ url('/') }}">{{ config('app.name') }} <span>Networks</span></a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="/" class="logo"><img src="{{ asset('dist/img/sa-flag-icon.png') }}" alt=""></a> -->
 
@@ -33,7 +33,7 @@
           @if (Route::has('login'))
             <!-- <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block"> -->
                 @auth
-                    <!-- <li><a href="{{ url('/home') }}" class="nav-link scrollto text-danger">Home</a></li> -->
+                    <li><a href="{{ route('logout') }}" class="nav-link scrollto text-danger">Logout</a></li>
                 @else
                     <li><a href="{{ route('login') }}" class="nav-link scrollto text-success">Log in</a></li>
                     @if (Route::has('register'))
@@ -42,7 +42,7 @@
                 @endauth
             <!-- </div> -->
         @endif
-        <li><a class="nav-link scrollto text-danger" href="{{ route('logout') }}">Logout</a></li>
+        <!-- <li><a class="nav-link scrollto text-danger" href="{{ route('logout') }}">Logout</a></li> -->
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

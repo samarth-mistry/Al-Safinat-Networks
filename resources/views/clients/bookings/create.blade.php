@@ -9,7 +9,10 @@
                     <h3 class="card-label">New Booking
                 </div>
             </div>
-            @include('clients.bookings.fields')
+            <form action="{{ route('client-booking.create') }}" method="POST">
+                @csrf
+                @include('clients.bookings.fields')
+            </form>
         </div><!-- /.card -->
     </div><!-- /.col-md-12 -->
 </div><!-- /.row -->
