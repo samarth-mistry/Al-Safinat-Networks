@@ -25,3 +25,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+
+Route::get('client-dashboard', 'BookingController@dashboard')->name('client-dashboard');
+Route::post('client-booking/data', 'BookingController@data')->name('client-booking.data');
+Route::resource('client-booking', 'BookingController');

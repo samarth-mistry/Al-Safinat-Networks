@@ -24,6 +24,7 @@ class HomeController extends Controller
     public function index()
     {
         //return view('admins.dashboard');
-        return redirect()->route('admin-dashboard')->with("message", "New Document created successfully!");
+        //return redirect()->route('admin-dashboard')->with("message", "Admin login successfull!");
+        return redirect()->route('client-dashboard')->with("message", "Login successfull!");
     }
 }
