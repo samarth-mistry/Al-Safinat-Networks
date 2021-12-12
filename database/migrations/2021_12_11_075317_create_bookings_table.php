@@ -26,18 +26,18 @@ class CreateBookingsTable extends Migration
             $table->boolean('unit_size')->default(0);
             $table->integer('source_country_id');
             $table->integer('source_port_id');
-            $table->string('s_date_of_arrival', 10);
+            $table->string('s_date_of_arrival', 20);
 
             $table->integer('material_type_id');
             $table->integer('weight');
             $table->integer('d_l');
             $table->integer('d_w');
             $table->integer('d_h');
-            $table->boolean('unit_size')->default(0);
+            $table->boolean('sensitivity')->default(0);
 
             $table->integer('destination_country_id');
             $table->integer('destination_port_id');
-            $table->string('d_date_of_arrival_approx', 10);
+            $table->string('d_date_of_arrival_approx', 20)->nullable();
             $table->string('destination_address', 255);
             $table->timestamps();
         });

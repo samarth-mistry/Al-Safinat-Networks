@@ -15,9 +15,14 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
-                            <th>Abbrevation</th>
-                            <th>Remarks</th>
+                            <th>Owner Name</th>
+                            <th>Source Email</th>
+                            <th>Source Phone</th>
+                            <th>Unit Size</th>
+                            <th>Source Port</th>
+                            <th>Arrival at Source port</th>
+                            <th>Destination Port</th>
+                            <th>Dimentions</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -35,7 +40,7 @@
         processing: true,
         serverSide: true,
         ajax: {
-                'url': '{!! route("admin-continents.data") !!}',
+                'url': '{!! route("client-booking.data") !!}',
                 'type': 'POST',
                 'headers': {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -43,9 +48,14 @@
             },
         columns: [
             {data: 'id', name: 'id'},
-            {data: 'name', name: 'name'},
-            {data: 'abbr', name: 'abbr'},
-            {data: 'remarks', name: 'remarks'},
+            {data: 'owner_name', name: 'owner_name'},
+            {data: 'source_email', name: 'source_email'},
+            {data: 'source_phone', name: 'source_phone'},
+            {data: 'unit_size', name: 'unit_size'},
+            {data: 'source_port', name: 'source_port'},
+            {data: 's_date_arrival', name: 's_date_arrival'},
+            {data: 'destination_port', name: 'destination_port'},
+            {data: 'dimentions', name: 'dimentions'},
             {data: 'actions', name: 'actions', orderable: false, searchable: false},
         ]
     });
