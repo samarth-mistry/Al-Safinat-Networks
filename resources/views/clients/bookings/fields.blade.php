@@ -233,7 +233,11 @@
         <div class="form-group row">
             <label class="col-lg-3 col-form-label text-right">Sensitivity</label>
             <div class="custom-control custom-switch col-lg-5">
+                @if(empty($booking))
+                <input type="checkbox" class="custom-control-input" id="sensitivity_switch" name="sensitivity">
+                @else
                 <input type="checkbox" class="custom-control-input" id="sensitivity_switch" name="sensitivity" {{ $booking->sensitivity == 1 ? 'checked' : ''}}>
+                @endif
                 <label class="custom-control-label" for="sensitivity_switch">It is your container</label>
                 <span class="form-text text-muted">Note : Sensitive material can increase the cost</span>
             </div>

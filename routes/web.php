@@ -6,6 +6,7 @@ Route::get('/', function () {
     return view('bizland');
 });
 
+Route::get('client-dashboard', 'BookingController@dashboard')->name('client-dashboard');
 Route::get('admin-dashboard', 'AdminDashboardController@index')->name('admin-dashboard');
 
 Route::post('admin-continents/data', 'ContinentsController@data')->name('admin-continents.data');
@@ -23,9 +24,8 @@ Route::resource('admin-office', 'OfficeController');
 Auth::routes();
 //Auth::routes(['register' => false]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
-Route::get('client-dashboard', 'BookingController@dashboard')->name('client-dashboard');
 Route::post('client-booking/data', 'BookingController@data')->name('client-booking.data');
 Route::resource('client-booking', 'BookingController');

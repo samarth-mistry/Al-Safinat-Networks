@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\Continents;
 use App\Models\Country;
 use App\Models\City;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -53,5 +55,25 @@ class DatabaseSeeder extends Seeder
         $city->abbr = "ABD";
         $city->country_id = "2";
         $city->save();
+
+        User::create([
+            'name' => 'Alizeh Nour-ud-Din',
+            'email' => 'alizeh@algj.net',
+            'password' => Hash::make('///'),
+        ]);
+
+        User::create([
+            'name' => 'Larsha Nazakat',
+            'email' => 'larsha@algj.net',
+            'password' => Hash::make('///'),
+        ]);
+
+        User::create([
+            'name' => 'Rania Tabrez',
+            'email' => 'rania@algj.net',
+            'password' => Hash::make('///'),
+        ]);
+
+        $this->call(LaratrustSeeder::class);
     }
 }
