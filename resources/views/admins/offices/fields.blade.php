@@ -73,34 +73,66 @@
     </div>
     <div class="form-group row">
         <div class="col-md-6">
-            <label>Remarks </label>
+            <label>Address <span class="text-danger">*</span></label>
             @if(empty($city))
-            <textarea name="remarks" class="form-control" placeholder="Enter remarks">{{ old('remarks') }}</textarea>
+            <textarea name="address" class="form-control" placeholder="Enter address">{{ old('address') }}</textarea>
             @else
-            <textarea name="remarks" class="form-control" placeholder="Enter remarks">{{ $city->remarks }}</textarea>
+            <textarea name="address" class="form-control" placeholder="Enter address">{{ $city->address }}</textarea>
+            @endif
+        </div>
+        <div class="col-md-6">
+            <label>Phone <span class="text-danger">*</span></label>
+            @if(empty($city))
+                <input type="text" class="form-control" name="phone" value="{{ old('phone') }}"/>
+            @else
+                <input type="text" class="form-control" name="phone" value="{{ $city->phone }}"/>
             @endif
         </div>
     </div>
     <div class="form-group row">
         <div class="col-md-6">
-            <div class="form-group">
-                <label>Status </label>
-                @if(empty($city))
-                <label class="checkbox checkbox-lg checkbox-lg flex-shrink-0 mr-4">
-                    <input type="checkbox" name="status" value='1' checked="checked">
-                    <span></span>&nbsp;&nbsp; Enable/Disable
-                </label>
-                @else
-                <label class="checkbox checkbox-lg checkbox-lg flex-shrink-0 mr-4">
-                    <input type="checkbox" name="status" value='1' @if($city->status == 1 ) checked @endif>
-                    <span></span>&nbsp;&nbsp; Enable/Disable
-                </label>
-                @endif
-            </div>
+            <label>Import Email <span class="text-danger">*</span></label>
+            @if(empty($city))
+                <input type="text" class="form-control" name="email_import" value="{{ old('email_import') }}"/>
+            @else
+                <input type="text" class="form-control" name="email_import" value="{{ $city->email_import }}"/>
+            @endif
+        </div>
+        <div class="col-md-6">
+            <label>Export Email <span class="text-danger">*</span></label>
+            @if(empty($city))
+                <input type="text" class="form-control" name="email_export" value="{{ old('email_export') }}"/>
+            @else
+                <input type="text" class="form-control" name="email_export" value="{{ $city->email_export }}"/>
+            @endif
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-6">
+            <label>Status <span class="text-danger">*</span></label>
+            @if(empty($city))
+            <label class="checkbox checkbox-lg checkbox-lg flex-shrink-0 mr-4">
+                <input type="checkbox" name="status" value='1' checked="checked">
+                <span></span>&nbsp;&nbsp; Enable/Disable
+            </label>
+            @else
+            <label class="checkbox checkbox-lg checkbox-lg flex-shrink-0 mr-4">
+                <input type="checkbox" name="status" value='1' @if($city->status == 1 ) checked @endif>
+                <span></span>&nbsp;&nbsp; Enable/Disable
+            </label>
+            @endif
+        </div>
+        <div class="col-md-6">
+            <label>Opening Hours <span class="text-danger">*</span></label>
+            @if(empty($city))
+                <input type="text" class="form-control" name="opening_time" value="{{ old('opening_time') }}"/>
+            @else
+                <input type="text" class="form-control" name="opening_time" value="{{ $city->opening_time }}"/>
+            @endif
         </div>
     </div>
 </div>            
-<!--end::Body-->
+
 <div class="card-footer" style="background: khaki;">
     <button type="submit" class="btn btn-primary mr-2">Save</button>
     <input type="reset" class="btn btn-warning mr-2" value="Reset"/>
