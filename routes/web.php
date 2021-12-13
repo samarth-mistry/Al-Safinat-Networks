@@ -18,8 +18,8 @@ Route::resource('admin-countries', 'CountryController');
 Route::post('admin-cities/data', 'CityController@data')->name('admin-cities.data');
 Route::resource('admin-cities', 'CityController');
 
-Route::post('admin-office/data', 'OfficeController@data')->name('admin-office.data');
-Route::resource('admin-office', 'OfficeController');
+Route::post('admin-offices/data', 'OfficeController@data')->name('admin-offices.data');
+Route::resource('admin-offices', 'OfficeController');
 
 Auth::routes();
 //Auth::routes(['register' => false]);

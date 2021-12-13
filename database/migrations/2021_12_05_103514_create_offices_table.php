@@ -18,6 +18,7 @@ class CreateOfficesTable extends Migration
             $table->integer('city_id');
             $table->boolean('type_id')->default(1);//0-port_office, 1-city_office
             $table->integer('country_id');
+            $table->string('name', 255);
             $table->string('address', 255);
             $table->integer('phone');
             $table->string('email_import', 255);
