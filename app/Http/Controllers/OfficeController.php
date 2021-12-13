@@ -12,26 +12,21 @@ class OfficeController extends Controller
 {
     public function data()
     {
-        //work under progress
-        $bookings = Booking::all();
-        return DataTables::of($bookings)
-            ->editColumn('unit_size', function ($booking) {
-                return $booking->unit_size == 0 ? "TEU" : "FEU";
+        $offices = Office::all();
+        return DataTables::of($offices)
+            ->editColumn('type', function ($office) {
+                return $office->type == 0 ? "Port Office" : "Non Port Office";
             })
-            ->editColumn('source_port', function ($booking) {
-                return "El Sheikh Al-Arabi, UAE";
+            ->editColumn('city', function ($office) {
+                $city = City::find($office->city_id);
+                return $city->name;
             })
-            ->editColumn('s_date_arrival', function ($booking) {
-                return $booking->s_date_of_arrival;
+            ->editColumn('country', function ($office) {
+                $country = Country::find($office->country_id);
+                return $country->name;
             })
-            ->editColumn('destination_port', function ($booking) {
-                return "Jawaharlal Nehru, Gujarat";
-            })
-            ->editColumn('dimentions', function ($booking) {
-                return $booking->weight.' kg, ['.$booking->d_l.' x '.$booking->d_w.' x '.$booking->d_h.'] m';
-            })
-            ->addColumn('actions', function ($booking) {
-                return view('clients.bookings.action', ['booking' => $booking]);
+            ->addColumn('actions', function ($office) {
+                return view('admins.offices.action', ['office' => $office]);
             })
             ->rawColumns(['actions'])
             ->make(true);
@@ -51,83 +46,75 @@ class OfficeController extends Controller
 
     public function store(Request $request)
     {
-        dd($request);
+        //dd($request);
         $this->validate($request, [
-            'owner_name' => 'required|min:3',
-            'proof_id' => 'required|min:3|max:50',
+            'name' => 'required|min:3',
+            'type_id' => 'required',
+            'city_id' => 'required',
             'country_id' => 'required',
-            'source_address' => 'required',
-            'source_email' => 'required',
-            'source_phone' => 'required',
-            'source_country_id' => 'required',
-            's_date_of_arrival' => 'required',
-            'material_type_id' => 'required',
-            'weight' => 'required',
-            'length' => 'required',
-            'width' => 'required',
-            'height' => 'required',
-            'destination_country_id' => 'required',
-            'destination_port_id' => 'required',
-            'destination_address' => 'required',
+            'address' => 'required',
+            'email_import' => 'required',
+            'email_export' => 'required',
+            'phone' => 'required',
+            'opening_time' => 'required',
         ]);
-        $booking = new Booking();
-        $booking->is_own = $request->is_own == "on" ? 1 : 0;
-        $booking->owner_name = $request->owner_name;
-        $booking->proof_id = $request->proof_id;
-        $booking->country_id = $request->country_id;
-        $booking->source_address = $request->source_address;
-        $booking->source_email = $request->source_email;
-        $booking->source_phone = $request->source_phone;
-        $booking->unit_size = $request->unit_size;
-        $booking->source_country_id = $request->source_country_id;
-        $booking->source_port_id = $request->source_port_id;
-        $booking->s_date_of_arrival = $request->s_date_of_arrival;
-        $booking->material_type_id = $request->material_type_id;
-        $booking->weight = $request->weight;
-        $booking->d_l = $request->length;
-        $booking->d_w = $request->width;
-        $booking->d_h = $request->height;
-        $booking->sensitivity = $request->sensitivity == "on" ? 1 : 0;
-        $booking->destination_country_id = $request->destination_country_id;
-        $booking->destination_port_id = $request->destination_port_id;
-        $booking->destination_address = $request->destination_address;
-        $booking->save();
+        $office = new Office();
+        $office->name = $request->name;
+        $office->type_id = $request->type_id;
+        $office->city_id = $request->city_id;
+        $office->country_id = $request->country_id;
+        $office->address = $request->address;
+        $office->email_import = $request->email_import;
+        $office->email_export = $request->email_export;
+        $office->phone = $request->phone;
+        $office->opening_time = $request->opening_time;
+        $office->status = $request->status;
+        $office->save();
 
-        return redirect()->route('client-booking.index')->with('message', 'New Booking created successfully!');
+        return redirect()->route('admin-offices.index')->with('message', 'New Office created successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Office  $office
-     * @return \Illuminate\Http\Response
-     */
     public function show(Office $office)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Office  $office
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Office $office)
+    public function edit($id)
     {
-        //
+        $office = Office::find($id);
+        $countries = Country::all();
+        $cities = City::all();
+        return view('admins.offices.edit', compact('countries', 'cities', 'office'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Office  $office
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Office $office)
+    public function update(Request $request, $id)
     {
-        //
+        //dd($request);
+        $this->validate($request, [
+            'name' => 'required|min:3',
+            'type_id' => 'required',
+            'city_id' => 'required',
+            'country_id' => 'required',
+            'address' => 'required',
+            'email_import' => 'required',
+            'email_export' => 'required',
+            'phone' => 'required',
+            'opening_time' => 'required',
+        ]);
+        $office = Office::find($id);
+        $office->name = $request->name;
+        $office->type_id = $request->type_id;
+        $office->city_id = $request->city_id;
+        $office->country_id = $request->country_id;
+        $office->address = $request->address;
+        $office->email_import = $request->email_import;
+        $office->email_export = $request->email_export;
+        $office->phone = $request->phone;
+        $office->opening_time = $request->opening_time;
+        $office->status = $request->status;
+        $office->save();
+
+        return redirect()->route('admin-offices.index')->with('message', 'Office updated successfully!');
     }
 
     /**
