@@ -51,12 +51,8 @@ class BookingController extends Controller
 
     public function create()
     {
-        $schoolCategories = array();
-        $schools = array();
-        $years = array();
-        $levels = array();
         $countries = Country::all();
-        return view('clients.bookings.create', compact('schoolCategories','schools','years','levels','countries'));
+        return view('clients.bookings.create', compact('countries'));
     }
 
     public function store(Request $request)

@@ -39,6 +39,12 @@
             </a>
             </li>
             <li class="nav-item">
+                <a href="{{ route('admin-offices.index') }}" class="nav-link {{ request()->is('admin-offices*') ? 'active':'' }}">
+                    <i class="nav-icon fa fa-angle-double-left"></i>
+                    <p>Offices</p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="#" class="nav-link">
                 <i class="fa fa-ship nav-icon"></i>
                     <p>Ports<i class="right fas fa-angle-left"></i></p>
