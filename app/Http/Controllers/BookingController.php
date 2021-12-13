@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Country;
+use App\Models\Office;
 use Illuminate\Http\Request;
 use DataTables;
 
@@ -22,13 +23,15 @@ class BookingController extends Controller
                 return $booking->unit_size == 0 ? "TEU" : "FEU";
             })
             ->editColumn('source_port', function ($booking) {
-                return "El Sheikh Al-Arabi, UAE";
+                $port = Office::find($booking->source_port_id);
+                return $port->name;
             })
             ->editColumn('s_date_arrival', function ($booking) {
                 return $booking->s_date_of_arrival;
             })
             ->editColumn('destination_port', function ($booking) {
-                return "Jawaharlal Nehru, Gujarat";
+                $port = Office::find($booking->destination_port_id);
+                return $port->name;
             })
             ->editColumn('dimentions', function ($booking) {
                 return $booking->weight.' kg, ['.$booking->d_l.' x '.$booking->d_w.' x '.$booking->d_h.'] m';
@@ -52,7 +55,8 @@ class BookingController extends Controller
     public function create()
     {
         $countries = Country::all();
-        return view('clients.bookings.create', compact('countries'));
+        $ports = Office::where('type_id', 0)->get();
+        return view('clients.bookings.create', compact('countries', 'ports'));
     }
 
     public function store(Request $request)
@@ -107,11 +111,12 @@ class BookingController extends Controller
         //
     }
 
-    public function edit(Booking $booking, $id)
+    public function edit($id)
     {
         $booking = Booking::find($id);
         $countries = Country::all();
-        return view('clients.bookings.edit', compact('booking','countries'));
+        $ports = Office::where('type_id', 0)->get();
+        return view('clients.bookings.edit', compact('booking','countries', 'ports'));
     }
 
     public function update(Request $request, $id)

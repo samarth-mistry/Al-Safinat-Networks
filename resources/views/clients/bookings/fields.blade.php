@@ -128,15 +128,15 @@
             @if(empty($booking))
                 <select name="source_port_id" id="source_port_id" class="form-control">
                     <option value="">--Select Port--</option>
-                    @foreach($countries as $country)
-                        <option value="{{ $country->id }}" {{ old('source_port_id') == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
+                    @foreach($ports as $port)
+                        <option value="{{ $port->id }}" {{ old('source_port_id') == $port->id ? 'selected':'' }}>{{ $port->name }}</option>
                     @endforeach
                 </select>
             @else
                 <select name="source_port_id" id="source_port_id" class="form-control">
                     <option value="">--Select Port--</option>
-                    @foreach($countries as $country)
-                        <option value="{{ $country->id }}" {{ $booking->source_port_id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
+                    @foreach($ports as $country)
+                        <option value="{{ $port->id }}" {{ $booking->source_port_id == $port->id ? 'selected':'' }}>{{ $port->name }}</option>
                     @endforeach
                 </select>
             @endif
@@ -195,8 +195,8 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-lg-2 col-form-label text-right">Weight <span class="text-danger">*</span></label>
-            <div class="col-lg-4">
+            <label class="col-lg-3 col-form-label text-right">Weight <span class="text-danger">*</span></label>
+            <div class="col-lg-3">
                 @if(empty($booking))
                     <input type="number" class="form-control" name="weight" value="{{ old('weight') }}"/>
                 @else
@@ -204,7 +204,7 @@
                 @endif
                 <span class="form-text text-muted">[in Kilograms] eg. 1002.45</span>
             </div>
-            <label class="col-lg-1 col-form-label text-right">Dimentions <span class="text-danger">*</span></label>
+            <label class="col-lg-2 col-form-label text-right">Dimentions <span class="text-danger">*</span></label>
             <div class="col-lg-1">
                 @if(empty($booking))
                     <input type="number" class="form-control" name="length" value="{{ old('length') }}"/>
@@ -269,15 +269,15 @@
             @if(empty($booking))
                 <select name="destination_port_id" id="destination_port_id" class="form-control">
                     <option value="">--Select Port--</option>
-                    @foreach($countries as $country)
-                        <option value="{{ $country->id }}" {{ old('destination_port_id') == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
+                    @foreach($ports as $port)
+                        <option value="{{ $port->id }}" {{ old('destination_port_id') == $port->id ? 'selected':'' }}>{{ $port->name }}</option>
                     @endforeach
                 </select>
             @else
                 <select name="destination_port_id" id="destination_port_id" class="form-control">
                     <option value="">--Select Port--</option>
-                    @foreach($countries as $country)
-                        <option value="{{ $country->id }}" {{ $booking->destination_port_id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
+                    @foreach($ports as $port)
+                        <option value="{{ $port->id }}" {{ $booking->destination_port_id == $port->id ? 'selected':'' }}>{{ $port->name }}</option>
                     @endforeach
                 </select>
             @endif
@@ -316,7 +316,7 @@
         </div>
     </div>
 </div>
-<div class="card-footer">
+<div class="card-footer" style="background: khaki;">
     <button type="submit" class="btn btn-primary mr-2">Save</button>
     <input type="reset" class="btn btn-warning mr-2"value="Reset"/>
 	<a href="{{ route('client-booking.index') }}" class="btn btn-secondary">Back</a>
