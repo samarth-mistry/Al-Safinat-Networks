@@ -7,19 +7,20 @@
             <div class="card-body">
                 <h3 class="text-light">Welcome!</h3><h4> to {{ config('app.name') }} <span class="text-info">Networks</span></h4>
             </div>
-        </div><!-- /.card -->
+        </div>
     </div>
     <div class="col-lg-6">
         <div class="card card-primary mb-3 card-outline border-warning bg-dark">
             <div class="card-body">
                 <h3 class="text-light">Sample DashBoard</h3>
+                <h4> Demonstration</h4>
             </div>
-        </div><!-- /.card -->
+        </div>
     </div>
-</div><!-- /.row -->
+</div>
 <div class="row">
-    <div class="col-lg-6">
-        <div class="card card-primary card-outline bg-secondary">
+    <div class="col-lg-12">
+        <div class="card card-info card-outline bg-dark">
             <div class="card-body">
             <h5 class="card-title"><a href="{{ route('logout') }}" class="text-warning">Logout</a></h5>
             <p class="card-text">
