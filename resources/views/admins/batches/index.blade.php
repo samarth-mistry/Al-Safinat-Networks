@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
 @endpush
 @section('page-title')
-<title>AGN | Units</title>
+<title>AGN | Batches</title>
 @endsection
 
 @section('content-header')
@@ -12,19 +12,19 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-4">
-          <h1 class="m-0">Units</h1>
+          <h1 class="m-0">Batches</h1>
         </div>
         <div class="col-sm-4">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
             <li class="breadcrumb-item"><a href="{{ url('/admin-dashboard') }}">Admin</a></li>
-            <li class="breadcrumb-item active">Units</li>
+            <li class="breadcrumb-item active">Batches</li>
           </ol>
         </div>
         <div class="col-sm-4">
-          <a href="{{ route('admin-units.create') }}" class="btn btn-primary float-sm-right">
+          <a href="{{ route('admin-batches.create') }}" class="btn btn-primary float-sm-right">
             <i class="fa fa-plus"></i>
-            &nbsp;&nbsp;&nbsp;New Unit
+            &nbsp;&nbsp;&nbsp;New Batch
           </a>
         </div>
       </div><!-- /.row -->
@@ -44,10 +44,10 @@
           <thead>
               <tr>
                   <th>#</th>
-                  <th>Type</th>
                   <th>Name</th>
-                  <th>Origin Port</th>
-                  <th>Max. Load</th>
+                  <th>Vessel</th>
+                  <th>From Unit</th>
+                  <th>To Unit</th>
                   <th>Status</th>
                   <th>Action</th>
               </tr>
@@ -65,7 +65,7 @@
         processing: true,
         serverSide: true,
         ajax: {
-                'url': '{!! route("admin-units.data") !!}',
+                'url': '{!! route("admin-batches.data") !!}',
                 'type': 'POST',
                 'headers': {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -73,10 +73,10 @@
             },
         columns: [
             {data: 'id', name: 'id'},
-            {data: 'type', name: 'type'},
             {data: 'name', name: 'name'},
-            {data: 'port', name: 'port'},
-            {data: 'max_load', name: 'max_load'},
+            {data: 'vessel', name: 'vessel'},
+            {data: 'from_unit', name: 'from_unit'},
+            {data: 'to_unit', name: 'to_unit'},
             {data: 'status', name: 'status'},
             {data: 'actions', name: 'actions', orderable: false, searchable: false},
         ]

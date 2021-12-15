@@ -15,6 +15,13 @@ class CreateBatchesTable extends Migration
     {
         Schema::create('batches', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 255);
+            $table->integer('annual_id')->nullable();
+            $table->integer('vessel_id');
+            $table->integer('from_unit');
+            $table->integer('to_unit');
+            $table->string('description');
+            $table->enum('status', ['travelling', 'ported', 'deported', 'waiting', 'OOS', 'ideal'])->default('ideal');
             $table->timestamps();
         });
     }

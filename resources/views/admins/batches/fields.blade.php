@@ -11,69 +11,82 @@
     @endif
     <div class="form-group row">
         <div class="col-md-6">
-            <label>Name <span class="text-danger">*</span></label>
-            @if(empty($unit))
+            <label>Name (Batch number)<span class="text-danger">*</span></label>
+            @if(empty($batch))
                 <input type="text" class="form-control" name="name" value="{{ old('name') }}"/>
             @else
-                <input type="text" class="form-control" name="name" value="{{ $unit->name }}"/>
+                <input type="text" class="form-control" name="name" value="{{ $batch->name }}"/>
             @endif
         </div>
         <div class="col-md-6">
-            <label>Type <span class="text-danger">*</span></label>
-            @if(empty($unit))
-                <select class="form-control" id="" name="unit_size">
-                    <option value="0">TEU</option>
-                    <option value="1">FEU</option>
+        <label>Vessel <span class="text-danger">*</span></label>
+            @if(empty($batch))
+                <select name="vessel_id" id="vessel_id" class="form-control">
+                    <option value="">--Select Vessel--</option>
+                    @foreach($vessels as $vessel)
+                        <option value="{{ $vessel->id }}" {{ old('vessel_id') == $vessel->id ? 'selected':'' }}>{{ $vessel->name }}</option>
+                    @endforeach
                 </select>
             @else
-                <select class="form-control" id="" name="unit_size">
-                    <option value="0" {{ $unit->unit_size == 0 ? 'selected':'' }}>TEU</option>
-                    <option value="1" {{ $unit->unit_size == 1 ? 'selected':'' }}>FEU</option>
+                <select name="vessel_id" id="vessel_id" class="form-control">
+                    <option value="">--Select Vessel--</option>
+                    @foreach($vessels as $vessel)
+                        <option value="{{ $vessel->id }}" {{ $batch->vessel_id == $vessel->id ? 'selected':'' }}>{{ $vessel->name }}</option>
+                    @endforeach
                 </select>
             @endif
         </div>
     </div>
     <div class="form-group row">
         <div class="col-md-6">
-            <label>Origin Port <span class="text-danger">*</span></label>
-            @if(empty($unit))
-                <select name="port_id" id="port_id" class="form-control">
-                    <option value="">--Select Port--</option>
-                    @foreach($ports as $port)
-                        <option value="{{ $port->id }}" {{ old('port_id') == $port->id ? 'selected':'' }}>{{ $port->name }}</option>
+            <label>From Unit <span class="text-danger">*</span></label>
+            @if(empty($batch))
+                <select name="from_unit" id="from_unit" class="form-control">
+                    <option value="">--Select Unit--</option>
+                    @foreach($units as $unit)
+                        <option value="{{ $unit->id }}" {{ old('from_unit') == $unit->id ? 'selected':'' }}>{{ $unit->name }}</option>
                     @endforeach
                 </select>
             @else
-                <select name="port_id" id="port_id" class="form-control">
-                    <option value="">--Select Port--</option>
-                    @foreach($ports as $port)
-                        <option value="{{ $port->id }}" {{ $unit->port_id == $port->id ? 'selected':'' }}>{{ $port->name }}</option>
+                <select name="from_unit" id="from_unit" class="form-control">
+                    <option value="">--Select Unit--</option>
+                    @foreach($units as $unit)
+                        <option value="{{ $unit->id }}" {{ $batch->from_unit == $unit->id ? 'selected':'' }}>{{ $unit->name }}</option>
                     @endforeach
                 </select>
             @endif
         </div>
         <div class="col-md-6">
-            <label>Maximum Load <span class="text-danger">*</span></label>
-            @if(empty($unit))
-                <input type="number" class="form-control" name="max_load" value="{{ old('max_load') }}"/>
+            <label>To Unit <span class="text-danger">*</span></label>
+            @if(empty($batch))
+                <select name="to_unit" id="to_unit" class="form-control">
+                    <option value="">--Select Unit--</option>
+                    @foreach($units as $unit)
+                        <option value="{{ $unit->id }}" {{ old('to_unit') == $unit->id ? 'selected':'' }}>{{ $unit->name }}</option>
+                    @endforeach
+                </select>
             @else
-                <input type="number" class="form-control" name="max_load" value="{{ $unit->max_load }}"/>
+                <select name="to_unit" id="to_unit" class="form-control">
+                    <option value="">--Select Unit--</option>
+                    @foreach($units as $unit)
+                        <option value="{{ $unit->id }}" {{ $batch->to_unit == $unit->id ? 'selected':'' }}>{{ $unit->name }}</option>
+                    @endforeach
+                </select>
             @endif
-            <span class="form-text text-muted">in Metric tonnes (x 1000kg)</span>
         </div>
     </div>
     <div class="form-group row">
         <div class="col-md-6">
             <label>Description </label>
-            @if(empty($unit))
+            @if(empty($batch))
             <textarea name="description" class="form-control" placeholder="Enter description">{{ old('description') }}</textarea>
             @else
-            <textarea name="description" class="form-control" placeholder="Enter description">{{ $unit->description }}</textarea>
+            <textarea name="description" class="form-control" placeholder="Enter description">{{ $batch->description }}</textarea>
             @endif
         </div>
         <div class="col-md-6">
             <label>Status <span class="text-danger">*</span></label>
-            @if(empty($unit))
+            @if(empty($batch))
                 <select name="status" id="status" class="form-control">
                     <option value="ideal">Ideal</option>
                     <option value="travelling">Travelling</option>
@@ -83,11 +96,11 @@
                 </select>
             @else
                 <select name="status" id="status" class="form-control">
-                    <option value="ideal" {{ $unit->status == 'ideal' ? 'selected':'' }}>Ideal</option>
-                    <option value="travelling" {{ $unit->status == 'travelling' ? 'selected':'' }}>Travelling</option>
-                    <option value="ported" {{ $unit->status == 'ported' ? 'selected':'' }}>Ported</option>
-                    <option value="deported" {{ $unit->status == 'deported' ? 'selected':'' }}>Deported</option>
-                    <option value="OOS" {{ $unit->status == 'OOS' ? 'selected':'' }}>Out of service</option>
+                    <option value="ideal" {{ $batch->status == 'ideal' ? 'selected':'' }}>Ideal</option>
+                    <option value="travelling" {{ $batch->status == 'travelling' ? 'selected':'' }}>Travelling</option>
+                    <option value="ported" {{ $batch->status == 'ported' ? 'selected':'' }}>Ported</option>
+                    <option value="deported" {{ $batch->status == 'deported' ? 'selected':'' }}>Deported</option>
+                    <option value="OOS" {{ $batch->status == 'OOS' ? 'selected':'' }}>Out of service</option>
                 </select>
             @endif
         </div>
@@ -97,5 +110,5 @@
 <div class="card-footer" style="background: khaki;">
     <button type="submit" class="btn btn-primary mr-2">Save</button>
     <input type="reset" class="btn btn-warning mr-2" value="Reset"/>
-	<a href="{{ route('admin-offices.index') }}" class="btn btn-secondary">Back</a>
+	<a href="{{ route('admin-batches.index') }}" class="btn btn-secondary">Back</a>
 </div>
