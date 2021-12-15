@@ -13,22 +13,22 @@
         <div class="col-md-6">
             <label>Name <span class="text-danger">*</span></label>
             @if(empty($office))
-            <input type="text" class="form-control" name="name" value="{{ old('name') }}"/>
+                <input type="text" class="form-control" name="name" value="{{ old('name') }}"/>
             @else
-            <input type="text" class="form-control" name="name" value="{{ $office->name }}"/>
+                <input type="text" class="form-control" name="name" value="{{ $office->name }}"/>
             @endif
         </div>
         <div class="col-md-6">
             <label>Type <span class="text-danger">*</span></label>
             @if(empty($office))
-                <select class="form-control" id="" name="type_id">
-                    <option value="0">Port Office</option>
-                    <option value="1">Non Port Office</option>
+                <select class="form-control" id="" name="unit_size">
+                    <option value="0">TEU</option>
+                    <option value="1">FEU</option>
                 </select>
             @else
                 <select class="form-control" id="" name="type_id">
-                    <option value="0" {{ $office->type_id == 0 ? 'selected':'' }}>Port Office</option>
-                    <option value="1" {{ $office->type_id == 1 ? 'selected':'' }}>Non Port Office</option>
+                    <option value="0" {{ $office->type_id == 0 ? 'selected':'' }}>TEU</option>
+                    <option value="1" {{ $office->type_id == 1 ? 'selected':'' }}>FEU</option>
                 </select>
             @endif
         </div>

@@ -47,6 +47,7 @@ class BookingController extends Controller
     {
         return view('clients.dashboard');
     }
+    
     public function index()
     {
         return view('clients.bookings.index');
