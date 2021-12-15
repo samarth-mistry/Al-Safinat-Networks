@@ -15,6 +15,11 @@ class CreateVesselsTable extends Migration
     {
         Schema::create('vessels', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 255);
+            $table->string('vompany', 255);
+            $table->integer('max_units');
+            $table->string('description');
+            $table->enum('status', ['travelling', 'ported', 'deported', 'waiting', 'OOS', 'ideal'])->default('ideal');
             $table->timestamps();
         });
     }

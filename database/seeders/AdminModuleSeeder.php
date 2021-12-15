@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Config;
+use App\Models\Continents;
+use App\Models\Country;
+use App\Models\City;
 
 class AdminModuleSeeder extends Seeder
 {
