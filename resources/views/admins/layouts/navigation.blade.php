@@ -17,7 +17,7 @@
         <!-- Navbar Search -->
         <li class="nav-item">
             <a class="nav-link text-red font-weight-bold" href="{{ route('logout') }}">
-                <i class="fas fa-logout"></i>Logout
+                <i class="fa fa-sign-out"></i>Logout
             </a>
         </li>
         <li class="nav-item">

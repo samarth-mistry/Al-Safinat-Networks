@@ -16,9 +16,9 @@ class CreateUnitsTable extends Migration
         Schema::create('units', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255);
-            $table->string('origin_port', 255);
-            $table->integer('group_id');
-            $table->integer('unit_size');
+            $table->integer('port_id');
+            $table->integer('group_id')->default(1);
+            $table->integer('unit_size')->default(0);
             $table->integer('max_load');
             $table->string('description');
             $table->enum('status', ['travelling', 'ported', 'deported', 'queued', 'dequeued', 'OOS', 'ideal'])->default('ideal');

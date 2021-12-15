@@ -21,6 +21,16 @@ Route::resource('admin-cities', 'CityController');
 Route::post('admin-offices/data', 'OfficeController@data')->name('admin-offices.data');
 Route::resource('admin-offices', 'OfficeController');
 
+Route::post('admin-units/data', 'UnitController@data')->name('admin-units.data');
+Route::resource('admin-units', 'UnitController');
+
+Route::post('admin-vessels/data', 'VesselController@data')->name('admin-vessels.data');
+Route::resource('admin-vessels', 'VesselController');
+
+Route::post('admin-batches/data', 'BatchController@data')->name('admin-batches.data');
+Route::resource('admin-batches', 'BatchController');
+
+
 Auth::routes();
 //Auth::routes(['register' => false]);
 

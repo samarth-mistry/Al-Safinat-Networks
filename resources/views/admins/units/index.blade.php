@@ -46,9 +46,9 @@
                   <th>#</th>
                   <th>Type</th>
                   <th>Name</th>
-                  <th>City</th>
-                  <th>Country</th>
-                  <th>Phone</th>
+                  <th>Origin Port</th>
+                  <th>Max. Load</th>
+                  <th>Status</th>
                   <th>Action</th>
               </tr>
           </thead>
@@ -75,9 +75,9 @@
             {data: 'id', name: 'id'},
             {data: 'type', name: 'type'},
             {data: 'name', name: 'name'},
-            {data: 'city', name: 'city'},
-            {data: 'country', name: 'country'},
-            {data: 'phone', name: 'phone'},
+            {data: 'port', name: 'port'},
+            {data: 'max_load', name: 'max_load'},
+            {data: 'status', name: 'status'},
             {data: 'actions', name: 'actions', orderable: false, searchable: false},
         ]
     });

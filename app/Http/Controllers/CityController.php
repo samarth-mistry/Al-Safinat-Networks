@@ -10,6 +10,11 @@ use DataTables;
 
 class CityController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:superadministrator');
+    }
+    
     public function data(){
         $cities = City::all();
         return DataTables::of($cities)

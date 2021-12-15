@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="{{ url('/') }}" class="brand-link">
         <img src="{{ asset('dist/img/cre-star.png') }}" alt="{{ config('app.name') }} Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">{{ config('app.name') }} Networks</span>
     </a>
@@ -40,40 +40,40 @@
             </li>
             <li class="nav-item">
                 <a href="{{ route('admin-offices.index') }}" class="nav-link {{ request()->is('admin-offices*') ? 'active':'' }}">
-                    <i class="nav-icon fa fa-angle-double-left"></i>
+                    <i class="nav-icon fa fa-building"></i>
                     <p>Offices</p>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                <i class="fa fa-ship nav-icon"></i>
-                    <p>Ports<i class="right fas fa-angle-left"></i></p>
+            <li class="nav-item {{ request()->is('admin-units*') || request()->is('admin-vessels*') || request()->is('admin-batches*') ? 'menu-open':'' }}">
+                <a href="#" class="nav-link {{ request()->is('admin-vessels*') || request()->is('admin-batches*') || request()->is('admin-units*') ? 'active':'' }}">
+                <i class="fa fa-flag nav-icon"></i>
+                    <p>Resources<i class="right fas fa-angle-left"></i></p>
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                    <a href="{{ url('admin-continents') }}" class="nav-link">
-                        <i class="fa fa-map-pin nav-icon"></i>
-                        <p>s1</p>
+                    <a href="{{ route('admin-units.index') }}" class="nav-link {{ request()->is('admin-units*') ? 'active':'' }}">
+                        <i class="fa fa-cube nav-icon"></i>
+                        <p>Units</p>
                     </a>
                     </li>
                     <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="fa fa-map-pin nav-icon"></i>
-                        <p>s2</p>
+                    <a href="{{ route('admin-vessels.index') }}" class="nav-link {{ request()->is('admin-vessels*') ? 'active':'' }}">
+                        <i class="fa fa-ship nav-icon"></i>
+                        <p>Vessels</p>
                     </a>
                     </li>
                     <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="fa fa-map-pin nav-icon"></i></i>
-                        <p>s3</p>
+                    <a href="{{ route('admin-batches.index') }}" class="nav-link {{ request()->is('admin-batches*') ? 'active':'' }}">
+                        <i class="fa fa-cubes nav-icon"></i></i>
+                        <p>Batches</p>
                     </a>
                     </li>
                 </ul>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fa fa-gear"></i>
-                    <p>Settings
+                    <i class="nav-icon fa fa-road"></i>
+                    <p>Trackings
                     <i class="right fas fa-angle-left"></i>
                     </p>
                 </a>

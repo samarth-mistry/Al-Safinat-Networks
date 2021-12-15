@@ -12,122 +12,83 @@
     <div class="form-group row">
         <div class="col-md-6">
             <label>Name <span class="text-danger">*</span></label>
-            @if(empty($office))
+            @if(empty($unit))
                 <input type="text" class="form-control" name="name" value="{{ old('name') }}"/>
             @else
-                <input type="text" class="form-control" name="name" value="{{ $office->name }}"/>
+                <input type="text" class="form-control" name="name" value="{{ $unit->name }}"/>
             @endif
         </div>
         <div class="col-md-6">
             <label>Type <span class="text-danger">*</span></label>
-            @if(empty($office))
+            @if(empty($unit))
                 <select class="form-control" id="" name="unit_size">
                     <option value="0">TEU</option>
                     <option value="1">FEU</option>
                 </select>
             @else
-                <select class="form-control" id="" name="type_id">
-                    <option value="0" {{ $office->type_id == 0 ? 'selected':'' }}>TEU</option>
-                    <option value="1" {{ $office->type_id == 1 ? 'selected':'' }}>FEU</option>
+                <select class="form-control" id="" name="unit_size">
+                    <option value="0" {{ $unit->unit_size == 0 ? 'selected':'' }}>TEU</option>
+                    <option value="1" {{ $unit->unit_size == 1 ? 'selected':'' }}>FEU</option>
                 </select>
             @endif
         </div>
     </div>
     <div class="form-group row">
         <div class="col-md-6">
-            <label>Country <span class="text-danger">*</span></label>
-            @if(empty($office))
-                <select name="country_id" id="country_id" class="form-control">
-                    <option value="">--Select Country--</option>
-                    @foreach($countries as $country)
-                        <option value="{{ $country->id }}" {{ old('country_id') == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
+            <label>Origin Port <span class="text-danger">*</span></label>
+            @if(empty($unit))
+                <select name="port_id" id="port_id" class="form-control">
+                    <option value="">--Select Port--</option>
+                    @foreach($ports as $port)
+                        <option value="{{ $port->id }}" {{ old('port_id') == $port->id ? 'selected':'' }}>{{ $port->name }}</option>
                     @endforeach
                 </select>
             @else
-                <select name="country_id" id="country_id" class="form-control">
-                    <option value="">--Select Country--</option>
-                    @foreach($countries as $country)
-                        <option value="{{ $country->id }}" {{ $office->country_id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
+                <select name="port_id" id="port_id" class="form-control">
+                    <option value="">--Select Port--</option>
+                    @foreach($ports as $port)
+                        <option value="{{ $port->id }}" {{ $unit->port_id == $port->id ? 'selected':'' }}>{{ $port->name }}</option>
                     @endforeach
                 </select>
             @endif
         </div>
         <div class="col-md-6">
-            <label>City <span class="text-danger">*</span></label>
-            @if(empty($office))
-                <select name="city_id" id="city_id" class="form-control">
-                    <option value="">--Select City--</option>
-                    @foreach($cities as $city)
-                        <option value="{{ $city->id }}" {{ old('city_id') == $city->id ? 'selected':'' }}>{{ $city->name }}</option>
-                    @endforeach
-                </select>
+            <label>Maximum Load <span class="text-danger">*</span></label>
+            @if(empty($unit))
+                <input type="number" class="form-control" name="max_load" value="{{ old('max_load') }}"/>
             @else
-                <select name="city_id" id="city_id" class="form-control">
-                    <option value="">--Select City--</option>
-                    @foreach($cities as $city)
-                        <option value="{{ $city->id }}" {{ $office->city_id == $city->id ? 'selected':'' }}>{{ $city->name }}</option>
-                    @endforeach
-                </select>
+                <input type="number" class="form-control" name="max_load" value="{{ $unit->max_load }}"/>
             @endif
+            <span class="form-text text-muted">in Metric tonnes (x 1000kg)</span>
         </div>
     </div>
     <div class="form-group row">
         <div class="col-md-6">
-            <label>Address <span class="text-danger">*</span></label>
-            @if(empty($office))
-            <textarea name="address" class="form-control" placeholder="Enter address">{{ old('address') }}</textarea>
+            <label>Description </label>
+            @if(empty($unit))
+            <textarea name="description" class="form-control" placeholder="Enter description">{{ old('description') }}</textarea>
             @else
-            <textarea name="address" class="form-control" placeholder="Enter address">{{ $office->address }}</textarea>
+            <textarea name="description" class="form-control" placeholder="Enter description">{{ $unit->description }}</textarea>
             @endif
         </div>
-        <div class="col-md-6">
-            <label>Phone <span class="text-danger">*</span></label>
-            @if(empty($office))
-                <input type="number" class="form-control" name="phone" value="{{ old('phone') }}"/>
-            @else
-                <input type="number" class="form-control" name="phone" value="{{ $office->phone }}"/>
-            @endif
-        </div>
-    </div>
-    <div class="form-group row">
-        <div class="col-md-6">
-            <label>Import Email <span class="text-danger">*</span></label>
-            @if(empty($office))
-                <input type="text" class="form-control" name="email_import" value="{{ old('email_import') }}"/>
-            @else
-                <input type="text" class="form-control" name="email_import" value="{{ $office->email_import }}"/>
-            @endif
-        </div>
-        <div class="col-md-6">
-            <label>Export Email <span class="text-danger">*</span></label>
-            @if(empty($office))
-                <input type="text" class="form-control" name="email_export" value="{{ old('email_export') }}"/>
-            @else
-                <input type="text" class="form-control" name="email_export" value="{{ $office->email_export }}"/>
-            @endif
-        </div>
-    </div>
-    <div class="form-group row">
         <div class="col-md-6">
             <label>Status <span class="text-danger">*</span></label>
-            @if(empty($office))
-            <label class="checkbox checkbox-lg checkbox-lg flex-shrink-0 mr-4">
-                <input type="checkbox" name="status" value='1' checked="checked">
-                <span></span>&nbsp;&nbsp; Enable/Disable
-            </label>
+            @if(empty($unit))
+                <select name="status" id="status" class="form-control">
+                    <option value="ideal">Ideal</option>
+                    <option value="travelling">Travelling</option>
+                    <option value="ported">Ported</option>
+                    <option value="deported">Deported</option>
+                    <option value="OOS">Out of service</option>
+                </select>
             @else
-            <label class="checkbox checkbox-lg checkbox-lg flex-shrink-0 mr-4">
-                <input type="checkbox" name="status" value='1' @if($office->status == 1 ) checked @endif>
-                <span></span>&nbsp;&nbsp; Enable/Disable
-            </label>
-            @endif
-        </div>
-        <div class="col-md-6">
-            <label>Opening Hours <span class="text-danger">*</span></label>
-            @if(empty($office))
-                <input type="text" class="form-control" name="opening_time" value="{{ old('opening_time') }}"/>
-            @else
-                <input type="text" class="form-control" name="opening_time" value="{{ $office->opening_time }}"/>
+                <select name="status" id="status" class="form-control">
+                    <option value="ideal" {{ $unit->status == 'ideal' ? 'selected':'' }}>Ideal</option>
+                    <option value="travelling" {{ $unit->status == 'travelling' ? 'selected':'' }}>Travelling</option>
+                    <option value="ported" {{ $unit->status == 'ported' ? 'selected':'' }}>Ported</option>
+                    <option value="deported" {{ $unit->status == 'deported' ? 'selected':'' }}>Deported</option>
+                    <option value="OOS" {{ $unit->status == 'OOS' ? 'selected':'' }}>Out of service</option>
+                </select>
             @endif
         </div>
     </div>

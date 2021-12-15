@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class OfficeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:superadministrator');
+    }
+    
     public function data()
     {
         $offices = Office::all();

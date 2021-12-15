@@ -9,6 +9,11 @@ use DataTables;
 
 class CountryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:superadministrator');
+    }
+    
     public function data(){
         $countries = Country::all();
         return DataTables::of($countries)

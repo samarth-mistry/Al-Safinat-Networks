@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Batch;
 use Illuminate\Http\Request;
+use DataTables;
 
 class BatchController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function data()
+    {
+        
+    }
+    
     public function index()
     {
         //
