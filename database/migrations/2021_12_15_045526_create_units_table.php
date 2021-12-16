@@ -20,7 +20,7 @@ class CreateUnitsTable extends Migration
             $table->integer('group_id')->default(1);
             $table->integer('unit_size')->default(0);
             $table->integer('max_load');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->enum('status', ['travelling', 'ported', 'deported', 'queued', 'dequeued', 'OOS', 'ideal'])->default('ideal');
             $table->timestamps();
         });

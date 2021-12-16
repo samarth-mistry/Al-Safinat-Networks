@@ -18,7 +18,7 @@ class CreateVesselsTable extends Migration
             $table->string('name', 255);
             $table->integer('batch_id')->default(1);
             $table->integer('max_units');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->enum('status', ['travelling', 'ported', 'deported', 'waiting', 'OOS', 'ideal'])->default('ideal');
             $table->timestamps();
         });

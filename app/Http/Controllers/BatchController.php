@@ -111,12 +111,6 @@ class BatchController extends Controller
         return redirect()->route('admin-batches.index')->with('message', 'New Batch created successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Batch  $batch
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $batch = Batch::find($id);

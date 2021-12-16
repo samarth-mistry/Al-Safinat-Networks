@@ -20,7 +20,7 @@ class CreateBatchesTable extends Migration
             $table->integer('vessel_id');
             $table->integer('from_unit');
             $table->integer('to_unit');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->enum('status', ['travelling', 'ported', 'deported', 'waiting', 'OOS', 'ideal'])->default('ideal');
             $table->timestamps();
         });
