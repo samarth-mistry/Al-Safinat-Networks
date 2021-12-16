@@ -20,7 +20,7 @@ class OfficeController extends Controller
         $offices = Office::all();
         return DataTables::of($offices)
             ->editColumn('type', function ($office) {
-                return $office->type == 0 ? "Port Office" : "Non Port Office";
+                return $office->type_id == 0 ? "Port Office" : "Non Port Office";
             })
             ->editColumn('city', function ($office) {
                 $city = City::find($office->city_id);

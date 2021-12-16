@@ -64,7 +64,7 @@ class OfficeSeeder extends Seeder
 
         $office = new Office();
         $office->name = "Beijing HQ";
-        $office->type_id = "0";
+        $office->type_id = "1";
         $office->city_id = "9";
         $office->country_id = "9";
         $office->address = "HQ Shanghai, CN";

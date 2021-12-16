@@ -1,3 +1,8 @@
+<style>
+.main-drop-bg{
+    background: #334e54;
+}
+</style>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ url('/') }}" class="brand-link">
@@ -33,19 +38,19 @@
         <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-            <a href="{{ route('admin-dashboard') }}" class="nav-link {{ request()->is('admin-dashboard') ? 'active':'' }}">
+            <a href="{{ route('admin-dashboard') }}" class="main-drop-bg nav-link {{ request()->is('admin-dashboard') ? 'active':'' }}">
                 <i class="nav-icon fas fa-th"></i>
                 <p>Dashboard</p>
             </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('admin-offices.index') }}" class="nav-link {{ request()->is('admin-offices*') ? 'active':'' }}">
+                <a href="{{ route('admin-offices.index') }}" class="main-drop-bg nav-link {{ request()->is('admin-offices*') ? 'active':'' }}">
                     <i class="nav-icon fa fa-building"></i>
                     <p>Offices</p>
                 </a>
             </li>
             <li class="nav-item {{ request()->is('admin-units*') || request()->is('admin-vessels*') || request()->is('admin-batches*') ? 'menu-open':'' }}">
-                <a href="#" class="nav-link {{ request()->is('admin-vessels*') || request()->is('admin-batches*') || request()->is('admin-units*') ? 'active':'' }}">
+                <a href="#" class="main-drop-bg nav-link {{ request()->is('admin-vessels*') || request()->is('admin-batches*') || request()->is('admin-units*') ? 'active':'' }}">
                 <i class="fa fa-flag nav-icon"></i>
                     <p>Resources<i class="right fas fa-angle-left"></i></p>
                 </a>
@@ -71,7 +76,7 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="#" class="main-drop-bg nav-link">
                     <i class="nav-icon fa fa-road"></i>
                     <p>Trackings
                     <i class="right fas fa-angle-left"></i>
@@ -99,7 +104,7 @@
                 </ul>
             </li>
             <li class="nav-item {{ request()->is('admin-continents*') || request()->is('admin-countries*') || request()->is('admin-cities*') ? 'menu-open':'' }}">
-                <a href="#" class="nav-link {{ request()->is('admin-continents*') || request()->is('admin-countries*') || request()->is('admin-cities*') ? 'active':'' }}">
+                <a href="#" class="main-drop-bg nav-link {{ request()->is('admin-continents*') || request()->is('admin-countries*') || request()->is('admin-cities*') ? 'active':'' }}">
                 <i class="nav-icon fas fa fa-gears"></i>
                 <p>Ad. Settings
                     <i class="fas fa-angle-left right"></i>
@@ -141,13 +146,13 @@
                  </ul>
             </li>
             <li class="nav-item">
-            <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-angle-double-left"></i>
-                <p>
-                FeedBack
-                <span class="right badge badge-success">New</span>
-                </p>
-            </a>
+                <a href="#" class="main-drop-bg nav-link">
+                    <i class="nav-icon fa fa-angle-double-left"></i>
+                    <p>
+                    FeedBack
+                    <span class="right badge badge-success">New</span>
+                    </p>
+                </a>
             </li>
         </ul>
         </nav>
