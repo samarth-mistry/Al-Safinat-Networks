@@ -31,16 +31,57 @@
 <div class="content">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-12">
-        <div class="card card-primary card-outline">
+      <div class="col-lg-8">
+        <div class="card card-info card-outline bg-dark">
           <div class="card-body">
-            <h5 class="card-title"><a href="{{ route('logout') }}">Logout</a></h5>
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the bulk of the card's
-              content.
+            <h5 class="card-title"><a class="text-info" href="{{ route('logout') }}">Logout</a></h5>
+            <p class="card-text font-weight-bold">
+              Welcome Superadmin
             </p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
+            <a href="#" class="text-info card-link">Card link</a>
+            <a href="#" class="text-info card-link">Another link</a>
+          </div>
+        </div><!-- /.card -->
+      </div><!-- /.col-md-12 -->
+      <div class="col-lg-4">
+        <div class="card card-info card-outline bg-warning  ">
+          <div class="card-body">
+            <h5 class="card-title text-warning"><a href="">Tasks</a></h5>
+            <p class="card-text">
+              <ul>
+                <li>Task 1</li>
+                <li>Task 2</li>
+                <li>Task 3</li>
+                <li>Task 4</li>
+              </ul>
+            </p>
+          </div>
+        </div><!-- /.card -->
+      </div><!-- /.col-md-12 -->
+      <div class="col-lg-4">
+        <div class="card card-info card-outline bg-warning">
+          <div class="card-body">
+            <h5 class="card-title"><a class="text-info" href="">News</a></h5>
+            <p class="card-text font-weight-bold">
+              Welcome Superadmin
+            </p>
+            <a href="#" class="text-info card-link">Card link</a>
+            <a href="#" class="text-info card-link">Another link</a>
+          </div>
+        </div><!-- /.card -->
+      </div><!-- /.col-md-12 -->
+      <div class="col-lg-8">
+        <div class="card card-info card-outline bg-dark  ">
+          <div class="card-body">
+            <h5 class="card-title text-warning"><a class="text-warning" href="">Messages</a></h5>
+            <p class="card-text">
+              <ul>
+                <li>From chat Arbella, UK : we all have done the migration.....</li>
+                <li>From chat Scott, DEN : hey there!</li>
+                <li>From chat Al-Faruz, SA : tasks completed</li>
+                <li>From chat Jalal, PK : ship is rocking</li>
+              </ul>
+            </p>
           </div>
         </div><!-- /.card -->
       </div><!-- /.col-md-12 -->
