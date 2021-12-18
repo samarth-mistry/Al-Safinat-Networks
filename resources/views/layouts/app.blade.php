@@ -21,8 +21,17 @@
 
     <!-- Styles -->
     <link href="{{ asset('dist/css/adminlte.css') }}" rel="stylesheet">
+    <style>
+    body {
+        background-image: url("{{ asset('dist/img/clients/norfolk-port-greer.jpg') }}");
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    </style>
 </head>
-<body class="hold-transition login-page" style="background: #a36a15;">
+<body class="hold-transition login-page">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">

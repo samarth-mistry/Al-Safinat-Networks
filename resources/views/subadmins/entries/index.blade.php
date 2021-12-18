@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
 @endpush
 @section('page-title')
-<title>AGN | Cities</title>
+<title>AGN | Trackings</title>
 @endsection
 
 @section('content-header')
@@ -12,17 +12,17 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-4">
-          <h1 class="m-0">Cities</h1>
+          <h1 class="m-0">Trackings</h1>
         </div>
         <div class="col-sm-4">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
             <li class="breadcrumb-item"><a href="{{ url('/admin-dashboard') }}">Admin</a></li>
-            <li class="breadcrumb-item active">Cities</li>
+            <li class="breadcrumb-item active">Trackings</li>
           </ol>
         </div>
         <div class="col-sm-4">
-          <a href="{{ route('admin-cities.create') }}" class="btn btn-primary float-sm-right">
+          <a href="{{ route('admin-trackings.create') }}" class="btn btn-primary float-sm-right">
             <i class="fa fa-plus"></i>
             &nbsp;&nbsp;&nbsp;New City
           </a>
@@ -64,7 +64,7 @@
         processing: true,
         serverSide: true,
         ajax: {
-                'url': '{!! route("admin-cities.data") !!}',
+                'url': '{!! route("admin-trackings.data") !!}',
                 'type': 'POST',
                 'headers': {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
