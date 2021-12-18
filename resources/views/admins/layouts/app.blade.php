@@ -11,6 +11,7 @@
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Theme style -->
+  <link rel="stylesheet" href="{{ asset('dist/css/sel2.css') }}">
   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
   @stack('styles')
 </head>
@@ -57,6 +58,7 @@
 <!-- AdminLTE App -->
   <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="{{ asset('dist/js/sel2.js') }}"></script>
   @stack('scripts')
 </body>
 </html>

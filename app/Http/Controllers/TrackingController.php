@@ -61,15 +61,9 @@ class TrackingController extends Controller
 
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Tracking  $tracking
-     * @return \Illuminate\Http\Response
-     */
     public function show(Tracking $tracking)
     {
         //
