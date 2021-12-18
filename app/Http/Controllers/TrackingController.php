@@ -22,21 +22,29 @@ class TrackingController extends Controller
         $trackings = Tracking::all();
         return DataTables::of($trackings)
             ->editColumn('name', function ($tracking) {
-                //return $office->type_id == 0 ? "Port Office" : "Non Port Office";
                 return "-";
+            })
+            ->editColumn('curr_port', function ($tracking) {
+                $port = Office::find($tracking->curr_port_id);
+                return $port->name;
+            })
+            ->editColumn('next_port', function ($tracking) {
+                $port = Office::find($tracking->next_port_id);
+                return $port->name;
             })
             ->editColumn('batch', function ($tracking) {
-                //$city = City::find($office->city_id);
-                //return $city->name;
-                return "-";
+                $batch = Batch::find($tracking->batch_id);
+                return $batch->name;
             })
             ->editColumn('vessel', function ($tracking) {
-                //$country = Country::find($tracking->country_id);
-                //return $country->name;
-                return "-";
+                $batch = Vessel::find($tracking->vessel_id);
+                return $batch->name;
             })
             ->editColumn('status', function ($tracking) {
                 return ucfirst($tracking->status);
+            })
+            ->editColumn('time', function ($tracking) {
+                return date('d-M-Y', strtotime($tracking->created_at));
             })
             ->addColumn('actions', function ($tracking) {
                 return view('subadmins.entries.action', ['tracking' => $tracking]);
@@ -61,7 +69,23 @@ class TrackingController extends Controller
 
     public function store(Request $request)
     {
-        dd($request);
+        //dd($request);
+        $this->validate($request, [
+            'curr_port_id' => 'required',
+            'next_port_id' => 'required',
+            'vessel_id' => 'required',
+            'batch_id' => 'required',
+            'status' => 'required'
+        ]);
+        $tracking = new Tracking();
+        $tracking->curr_port_id = $request->curr_port_id;
+        $tracking->next_port_id = $request->next_port_id;
+        $tracking->vessel_id = $request->vessel_id;
+        $tracking->batch_id = $request->batch_id;
+        $tracking->status = $request->status;
+        $tracking->save();
+
+        return redirect()->route('admin-trackings.index')->with('message', 'Entry created successfully!');
     }
 
     public function show(Tracking $tracking)
@@ -69,35 +93,41 @@ class TrackingController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Tracking  $tracking
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Tracking $tracking)
+    public function edit($id)
     {
-        //
+        $tracking = Tracking::find($id);
+        $countries = Country::all();
+        $curr_port = Office::find($tracking->curr_port_id);
+        $next_port = Office::find($tracking->next_port_id);
+        //dd($curr_port->country->name);
+        //$curr_country = Country::find($curr_port->);
+        $vessels = Vessel::all();
+        $batches = Batch::all();
+        $ports = Office::where('type_id', 0)->get();
+        return view('subadmins.entries.edit', compact('tracking','countries','ports','batches','vessels','curr_port','next_port'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Tracking  $tracking
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Tracking $tracking)
+    public function update(Request $request, $id)
     {
-        //
+        //dd($request);
+        $this->validate($request, [
+            'curr_port_id' => 'required',
+            'next_port_id' => 'required',
+            'vessel_id' => 'required',
+            'batch_id' => 'required',
+            'status' => 'required'
+        ]);
+        $tracking = Tracking::find($id);
+        $tracking->curr_port_id = $request->curr_port_id;
+        $tracking->next_port_id = $request->next_port_id;
+        $tracking->vessel_id = $request->vessel_id;
+        $tracking->batch_id = $request->batch_id;
+        $tracking->status = $request->status;
+        $tracking->save();
+
+        return redirect()->route('admin-trackings.index')->with('message', 'Entry updated successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Tracking  $tracking
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Tracking $tracking)
     {
         //

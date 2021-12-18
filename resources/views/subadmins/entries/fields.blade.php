@@ -23,7 +23,7 @@
                 <select name="curr_country_id" id="curr_country_id" class="form-control">
                     <option value="">--Select Country--</option>
                     @foreach($countries as $country)
-                        <option value="{{ $country->id }}" {{ $tracking->country_id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
+                        <option value="{{ $country->id }}" {{ $curr_port->country->id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
                     @endforeach
                 </select>
             @endif
@@ -41,7 +41,7 @@
                 <select name="next_country_id" id="next_country_id" class="form-control">
                     <option value="">--Select Country--</option>
                     @foreach($countries as $country)
-                        <option value="{{ $country->id }}" {{ $tracking->country_id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
+                        <option value="{{ $country->id }}" {{ $next_port->country->id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
                     @endforeach
                 </select>
             @endif
@@ -155,9 +155,9 @@
 	<a href="{{ route('admin-trackings.index') }}" class="btn btn-secondary">Back</a>
 </div>
 @push('scripts')
-<script>
-$(document).ready(function(){
-    $("#curr_port_id, #next_port_id,  #curr_country_id, #next_country_id, #batch_id, #vessel_id, #status").select2({});
-});
-</script>
+    <script>
+    $(document).ready(function(){
+        $("#curr_port_id, #next_port_id,  #curr_country_id, #next_country_id, #batch_id, #vessel_id, #status").select2({});
+    });
+    </script>
 @endpush
