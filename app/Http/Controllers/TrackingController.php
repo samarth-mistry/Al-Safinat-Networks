@@ -2,37 +2,63 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
+use App\Models\Office;
+use App\Models\Batch;
+use App\Models\Vessel;
 use App\Models\Tracking;
 use Illuminate\Http\Request;
+use DataTables;
 
 class TrackingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('role:superadministrator');
+    }
+    
+    public function data()
+    {
+        $trackings = Tracking::all();
+        return DataTables::of($trackings)
+            ->editColumn('name', function ($tracking) {
+                //return $office->type_id == 0 ? "Port Office" : "Non Port Office";
+                return "-";
+            })
+            ->editColumn('batch', function ($tracking) {
+                //$city = City::find($office->city_id);
+                //return $city->name;
+                return "-";
+            })
+            ->editColumn('vessel', function ($tracking) {
+                //$country = Country::find($tracking->country_id);
+                //return $country->name;
+                return "-";
+            })
+            ->editColumn('status', function ($tracking) {
+                return ucfirst($tracking->status);
+            })
+            ->addColumn('actions', function ($tracking) {
+                return view('subadmins.entries.action', ['tracking' => $tracking]);
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+    
     public function index()
     {
-        //
+        return view('subadmins.entries.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $countries = Country::all();
+        $vessels = Vessel::all();
+        $batches = Batch::all();
+        $ports = Office::where('type_id', 0)->get();
+        return view('subadmins.entries.create', compact('countries','ports','batches','vessels'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //

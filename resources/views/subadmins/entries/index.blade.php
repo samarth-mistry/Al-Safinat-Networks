@@ -24,7 +24,7 @@
         <div class="col-sm-4">
           <a href="{{ route('admin-trackings.create') }}" class="btn btn-primary float-sm-right">
             <i class="fa fa-plus"></i>
-            &nbsp;&nbsp;&nbsp;New City
+            &nbsp;&nbsp;&nbsp;New Entry
           </a>
         </div>
       </div><!-- /.row -->
@@ -44,11 +44,14 @@
           <thead>
               <tr>
                   <th>#</th>
-                  <th>Name</th>
-                  <th>Abbrevation</th>
-                  <th>Country</th>
-                  <th>Continent</th>
-                  <th>Action</th>
+                  <th>Tracking #</th>
+                  <th>Batch #</th>
+                  <th>Vessel</th>
+                  <th>Current port</th>
+                  <th>Next port</th>
+                  <th>Time of arrival</th>
+                  <th>Status</th>
+                  <th>Actions</th>
               </tr>
           </thead>
       </table>
@@ -73,9 +76,12 @@
         columns: [
             {data: 'id', name: 'id'},
             {data: 'name', name: 'name'},
-            {data: 'abbr', name: 'abbr'},
-            {data: 'country', name: 'country'},
-            {data: 'continent', name: 'continent'},
+            {data: 'batch', name: 'batch'},
+            {data: 'vessel', name: 'vessel'},
+            {data: 'curr_port', name: 'curr_port'},
+            {data: 'next_port', name: 'next_port'},
+            {data: 'time', name: 'time'},
+            {data: 'status', name: 'status'},
             {data: 'actions', name: 'actions', orderable: false, searchable: false},
         ]
     });

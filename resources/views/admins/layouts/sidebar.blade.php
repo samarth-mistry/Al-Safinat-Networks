@@ -75,18 +75,16 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item">
-                <a href="#" class="main-drop-bg nav-link">
+            <li class="nav-item {{ request()->is('admin-trackings*') ? 'menu-open':'' }}">
+                <a href="#" class="main-drop-bg nav-link {{ request()->is('admin-trackings*') ? 'active':'' }}">
                     <i class="nav-icon fa fa-road"></i>
-                    <p>Trackings
-                    <i class="right fas fa-angle-left"></i>
-                    </p>
+                    <p>Trackings<i class="right fas fa-angle-left"></i></p>
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('admin-trackings.index') }}" class="nav-link {{ request()->is('admin-trackings*') ? 'active':'' }}">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>s1</p>
+                        <p>Arrival Ships</p>
                     </a>
                     </li>
                     <li class="nav-item">

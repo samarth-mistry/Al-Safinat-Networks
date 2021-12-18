@@ -9,58 +9,118 @@
             </ul>
         </div>
     @endif
-    <div class="row">
+    <div class="form-group row">
         <div class="col-md-6">
-            <div class="form-group">
-                <label>Name <span class="text-danger">*</span></label>
-                @if(empty($city))
-                <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Enter title"/>
-                @else
-                <input type="text" class="form-control" name="name" value="{{ $city->name }}" placeholder="Enter title"/>
-                @endif
-            </div>
+            <label>Current Country <span class="text-danger">*</span></label>
+            @if(empty($city))
+                <select name="curr_country_id" id="curr_country_id" class="form-control">
+                    <option value="">--Select Country--</option>
+                    @foreach($countries as $country)
+                        <option value="{{ $country->id }}" {{ old('curr_country_id') == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
+                    @endforeach
+                </select>
+            @else
+                <select name="curr_country_id" id="curr_country_id" class="form-control">
+                    <option value="">--Select Country--</option>
+                    @foreach($countries as $country)
+                        <option value="{{ $country->id }}" {{ $city->country_id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
+                    @endforeach
+                </select>
+            @endif
         </div>
         <div class="col-md-6">
-            <div class="form-group">
-                <label>Abbreviation [Capital letters only] <span class="text-danger">*</span></label>
-                @if(empty($city))
-                <input type="text" class="form-control" name="abbr" value="{{ old('abbr') }}" placeholder="Enter Abbr"/>
-                @else
-                <input type="text" class="form-control" name="abbr" value="{{ $city->abbr }}" placeholder="Enter Abbr"/>
-                @endif
-            </div>
+            <label>Next Country <span class="text-danger">*</span></label>
+            @if(empty($city))
+                <select name="next_country_id" id="next_country_id" class="form-control">
+                    <option value="">--Select Country--</option>
+                    @foreach($countries as $country)
+                        <option value="{{ $country->id }}" {{ old('next_country_id') == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
+                    @endforeach
+                </select>
+            @else
+                <select name="next_country_id" id="next_country_id" class="form-control">
+                    <option value="">--Select Country--</option>
+                    @foreach($countries as $country)
+                        <option value="{{ $country->id }}" {{ $city->country_id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
+                    @endforeach
+                </select>
+            @endif
         </div>
     </div>
-    <div class="row">
+    <div class="form-group row">
         <div class="col-md-6">
-            <div class="form-group">
-                <label>Country <span class="text-danger">*</span></label>
-                @if(empty($city))
-                   <select name="country_id" id="country_id" class="form-control">
-                        <option value="">Select Country</option>
-                        @foreach($countries as $country)
-                            <option value="{{ $country->id }}" {{ old('country_id') == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
-                        @endforeach
-                    </select>
-                @else
-                    <select name="country_id" id="country_id" class="form-control">
-                        <option value="">Select Country</option>
-                        @foreach($countries as $country)
-                            <option value="{{ $country->id }}" {{ $city->country_id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
-                        @endforeach
-                    </select>
-                @endif
-            </div>
+            <label>Current Port <span class="text-danger">*</span></label>
+            @if(empty($city))
+                <select name="curr_port_id" id="curr_port_id" class="form-control">
+                    <option value="">--Select Port--</option>
+                    @foreach($countries as $country)
+                        <option value="{{ $country->id }}" {{ old('curr_port_id') == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
+                    @endforeach
+                </select>
+            @else
+                <select name="curr_port_id" id="curr_port_id" class="form-control">
+                    <option value="">--Select Port--</option>
+                    @foreach($countries as $country)
+                        <option value="{{ $country->id }}" {{ $city->curr_port_id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
+                    @endforeach
+                </select>
+            @endif
         </div>
         <div class="col-md-6">
-            <div class="form-group">
-                <label>Remarks </label>
-                @if(empty($city))
-                <textarea name="remarks" class="form-control" placeholder="Enter remarks">{{ old('remarks') }}</textarea>
-                @else
-                <textarea name="remarks" class="form-control" placeholder="Enter remarks">{{ $city->remarks }}</textarea>
-                @endif
-            </div>
+            <label>Next Port <span class="text-danger">*</span></label>
+            @if(empty($city))
+                <select name="next_port_id" id="next_port_id" class="form-control">
+                    <option value="">--Select Port--</option>
+                    @foreach($countries as $country)
+                        <option value="{{ $country->id }}" {{ old('next_port_id') == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
+                    @endforeach
+                </select>
+            @else
+                <select name="next_port_id" id="next_port_id" class="form-control">
+                    <option value="">--Select Port--</option>
+                    @foreach($countries as $country)
+                        <option value="{{ $country->id }}" {{ $city->next_port_id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
+                    @endforeach
+                </select>
+            @endif
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-6">
+            <label>Vessel <span class="text-danger">*</span></label>
+            @if(empty($city))
+                <select name="vessel_id" id="vessel_id" class="form-control">
+                    <option value="">--Select Vessel--</option>
+                    @foreach($countries as $country)
+                        <option value="{{ $country->id }}" {{ old('vessel_id') == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
+                    @endforeach
+                </select>
+            @else
+                <select name="vessel_id" id="vessel_id" class="form-control">
+                    <option value="">--Select Vessel--</option>
+                    @foreach($countries as $country)
+                        <option value="{{ $country->id }}" {{ $city->vessel_id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
+                    @endforeach
+                </select>
+            @endif
+        </div>
+        <div class="col-md-6">
+            <label>Batch <span class="text-danger">*</span></label>
+            @if(empty($city))
+                <select name="batch_id" id="batch_id" class="form-control">
+                    <option value="">--Select Batch--</option>
+                    @foreach($countries as $country)
+                        <option value="{{ $country->id }}" {{ old('batch_id') == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
+                    @endforeach
+                </select>
+            @else
+                <select name="batch_id" id="batch_id" class="form-control">
+                    <option value="">--Select Batch--</option>
+                    @foreach($countries as $country)
+                        <option value="{{ $country->id }}" {{ $city->batch_id == $country->id ? 'selected':'' }}>{{ $country->name }}</option>
+                    @endforeach
+                </select>
+            @endif
         </div>
     </div>
     <div class="row">

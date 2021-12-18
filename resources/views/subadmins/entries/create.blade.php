@@ -34,7 +34,7 @@
 <div class="card card-primary card-outline">
     <form method="POST" action="{{ route('admin-trackings.store') }}">
         @csrf
-        @include('admins.trackings.fields')
+        @include('subadmins.entries.fields')
     </form>
 </div>
 @endsection

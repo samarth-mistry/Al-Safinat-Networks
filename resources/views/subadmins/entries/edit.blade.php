@@ -35,7 +35,7 @@
     <form method="POST" action="{{ route('admin-trackings.update', $tracking->id) }}">
         @method('PUT')
         @csrf
-        @include('admins.trackings.fields')
+        @include('subadmins.entries.fields')
     </form>
 </div>
 @endsection
