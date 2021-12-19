@@ -3,7 +3,6 @@
 @section('page-title')
 <title>AGN | Vessel Routes</title>
 @endsection
-
 @section('content-header')
 <div class="content-header">
     <div class="container-fluid">
@@ -18,17 +17,16 @@
             <li class="breadcrumb-item active">Vessel Routes</li>
           </ol>
         </div>
-        <div class="col-sm-4">
+        <!-- <div class="col-sm-4">
           <a href="{{ route('admin-vessel-routes.create') }}" class="btn btn-primary float-sm-right">
             <i class="fa fa-plus"></i>
             &nbsp;&nbsp;&nbsp;New Vessel
           </a>
-        </div>
-      </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+        </div> -->
+      </div>
+    </div>
   </div>
 @endsection
-
 @section('content')
 <div class="card card-primary card-outline">
     <div class="card-body">
@@ -53,8 +51,6 @@
 </div>
 @endsection
 @push('scripts')
-<!-- <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script> -->
-
 <script>
   $(function () {
     var table = $('.data-table').DataTable({
@@ -69,7 +65,7 @@
             },
         columns: [
             {data: 'id', name: 'id'},
-            {data: 'vessel', name: 'vessel'},
+            {data: 'name', name: 'name'},
             {data: 'from', name: 'from'},
             {data: 'via', name: 'via'},
             {data: 'to', name: 'to'},

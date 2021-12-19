@@ -17,56 +17,31 @@ class VesselRouteController extends Controller
 
     public function data()
     {
-        $routes = VesselRoute::all();
-        $dt = DataTables::of($routes);
-        $dt->editColumn('vessel', function ($route) {
-            $vessel = Vessel::find($route->vessel_id);
-            return $vessel->name;
-        });
-        $dt->editColumn('from', function ($route) {
-            $port = Office::find($route->from_port);
+        $vessels = Vessel::where('id',1)->orWhere('id',2)->get();
+        $dt = DataTables::of($vessels);
+
+        $dt->editColumn('from', function ($vessel) {
+            $vessel_routes = VesselRoute::where('vessel_id', $vessel->id)->orderBy('id', 'ASC')->first();
+            $port = Office::find($vessel_routes->from_port);
             return $port->name;
         });
-        $dt->editColumn('via', function ($route) {
-            $port = Office::find($route->to_port);
+        $dt->editColumn('via', function ($vessel) {
+            $counts = VesselRoute::where('vessel_id', $vessel->id)->count();
+            $index = $counts/2;
+            $vessel_routes = VesselRoute::where('vessel_id', $vessel->id)->orderBy('id', 'DESC')->get();
+            $port = Office::find($vessel_routes[$index]->to_port);
             return $port->name;
         });
-        $dt->editColumn('to', function ($route) {
-            $port = Office::find($route->to_port);
+        $dt->editColumn('to', function ($vessel) {
+            $vessel_routes = VesselRoute::where('vessel_id', $vessel->id)->orderBy('id', 'DESC')->first();
+            $port = Office::find($vessel_routes->to_port);
             return $port->name;
         });
-        $dt->addColumn('actions', function ($route) {
-            return view('admins.vessel_routes.action', ['route' => $route]);
+        $dt->addColumn('actions', function ($vessel) {
+            return view('admins.vessel_routes.action', ['route' => $vessel]);
         });
-            // foreach($reservations as $reservation){
-            //     $class_summary = ClassDetail::find($reservation->class_id); 
-            //     $annualClassTerm = AnnualClassTerm::find($class_summary->annual_id);
-            //     for($i=1; $i<=$annualClassTerm->term; $i++) {
-            //         $dt->addColumn('VT' . $i, function ($reservation) use ($i) {
-            //             $class_summary = ClassDetail::find($reservation->class_id); 
-            //             $paymentAdvise = PaymentAdvise::where([['class_id', '=', $class_summary->id], ['annual_id', '=', $class_summary->annual_id], ['term', '=', $i]])->get();
-            //             $count = 0;
-            //             $last_student = 0;
-            //             foreach($paymentAdvise as $ent_no){
-            //                 // if($ent_no->student_id != $last_student){
-            //                 //     $last_student = $ent_no->student_id;
-            //                 //     $count++;
-            //                 // }
-            //                 if($ent_no->student_id != $last_student){
-            //                     $last_student = $ent_no->student_id;
-            //                     $stud = Student::find($last_student);
-            //                     if($stud->status == 'active'){
-            //                         $count++;
-            //                     }
-            //                 }
-            //             }
-            //             $reservations = Student::where('status', 'waiting')->where('class_id', $class_summary->id)->count();
-            //             return $class_summary->max_size_inperson - $count - $reservations;
-            //         });
-            //     }
-            // }
-            $dt->rawColumns(['actions']);
-            return $dt->make(true);
+        $dt->rawColumns(['actions']);
+        return $dt->make(true);
     }
 
     public function index()

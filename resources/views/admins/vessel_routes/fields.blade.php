@@ -17,27 +17,32 @@
     </div>
     <div class="form-group row">
         <div class="col-lg-12" id="kt_repeater_1">
-            <div data-repeater-list="terms_lessons">
-                <div data-repeater-item="" class="align-items-center">                                                                      
+            <div data-repeater-list="ports">
+                <div data-repeater-item="" class="align-items-center">
                     <div class="form-group row">
-                        <div class="col-lg-8">
-                            <select name="term" class="form-control" id="term"> 
+                        <div class="col-lg-3 text-right">
+                            <i class="fa fa-arrow-down"></i>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-6">
+                            <select name="port" class="form-control port-field" id="port"> 
                                 <option value="">Select Port</option>
                             </select>
                         </div>
                         <div class="col-lg-2">
-                            <a href="javascript:;" data-repeater-delete="group-a" class="btn btn-sm font-weight-bolder btn-light-danger">
-                            <i class="la la-trash-o"></i>Delete
+                            <a href="javascript:;" data-repeater-delete="group-a" class="btn btn-sm font-weight-bolder btn-danger">
+                            <i class="fa fa-trash"></i>
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <div class="col-lg-3 text-right">
-                        <a href="javascript:;" data-repeater-create="group-a" class="btn btn-sm font-weight-bolder btn-light-primary">
-                            <i class="la la-plus"></i>Add
-                        </a>
-                    </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-6 text-right">
+                    <a href="javascript:;" data-repeater-create="group-a" class="btn btn-sm font-weight-bolder btn-primary">
+                        <i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;Port
+                    </a>
                 </div>
             </div>
         </div>
@@ -50,9 +55,13 @@
 	<a href="{{ route('admin-vessel-routes.index') }}" class="btn btn-secondary">Back</a>
 </div>
 @push('scripts')
+<!-- <script src="{{ asset('dist/js/form_repeater/form-repeater.min.js') }}"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.repeater/1.2.1/jquery.repeater.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.repeater/1.2.1/jquery.repeater.js"></script>
 <script>
     $(document).ready(function () {
         $('#kt_repeater_1').repeater({});
+        // $('.port-field').select2({});
     });
 </script>
 @endpush
