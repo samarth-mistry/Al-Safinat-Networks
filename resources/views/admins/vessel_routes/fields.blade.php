@@ -12,49 +12,34 @@
     <div class="form-group row">
         <div class="col-md-6">
             <label>Name <span class="text-danger">*</span></label>
-            @if(empty($vessel))
-                <input type="text" class="form-control" name="name" value="{{ old('name') }}"/>
-            @else
-                <input type="text" class="form-control" name="name" value="{{ $vessel->name }}"/>
-            @endif
-        </div>
-        <div class="col-md-6">
-            <label>Maximum Units <span class="text-danger">*</span></label>
-            @if(empty($vessel))
-                <input type="number" class="form-control" name="max_units" value="{{ old('max_units') }}"/>
-            @else
-                <input type="number" class="form-control" name="max_units" value="{{ $vessel->max_units }}"/>
-            @endif
+            <input type="text" class="form-control" name="name" value="{{ $vessel->name }}" disabled="true"/>
         </div>
     </div>
     <div class="form-group row">
-        <div class="col-md-6">
-            <label>Description </label>
-            @if(empty($vessel))
-            <textarea name="description" class="form-control" placeholder="Enter description">{{ old('description') }}</textarea>
-            @else
-            <textarea name="description" class="form-control" placeholder="Enter description">{{ $vessel->description }}</textarea>
-            @endif
-        </div>
-        <div class="col-md-6">
-            <label>Status <span class="text-danger">*</span></label>
-            @if(empty($vessel))
-                <select name="status" id="status" class="form-control">
-                    <option value="ideal">Ideal</option>
-                    <option value="travelling">Travelling</option>
-                    <option value="ported">Ported</option>
-                    <option value="deported">Deported</option>
-                    <option value="OOS">Out of service</option>
-                </select>
-            @else
-                <select name="status" id="status" class="form-control">
-                    <option value="ideal" {{ $vessel->status == 'ideal' ? 'selected':'' }}>Ideal</option>
-                    <option value="travelling" {{ $vessel->status == 'travelling' ? 'selected':'' }}>Travelling</option>
-                    <option value="ported" {{ $vessel->status == 'ported' ? 'selected':'' }}>Ported</option>
-                    <option value="deported" {{ $vessel->status == 'deported' ? 'selected':'' }}>Deported</option>
-                    <option value="OOS" {{ $vessel->status == 'OOS' ? 'selected':'' }}>Out of service</option>
-                </select>
-            @endif
+        <div class="col-lg-12" id="kt_repeater_1">
+            <div data-repeater-list="terms_lessons">
+                <div data-repeater-item="" class="align-items-center">                                                                      
+                    <div class="form-group row">
+                        <div class="col-lg-8">
+                            <select name="term" class="form-control" id="term"> 
+                                <option value="">Select Port</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-2">
+                            <a href="javascript:;" data-repeater-delete="group-a" class="btn btn-sm font-weight-bolder btn-light-danger">
+                            <i class="la la-trash-o"></i>Delete
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-3 text-right">
+                        <a href="javascript:;" data-repeater-create="group-a" class="btn btn-sm font-weight-bolder btn-light-primary">
+                            <i class="la la-plus"></i>Add
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>            

@@ -19,7 +19,7 @@
             @endif
         </div>
         <div class="col-md-6">
-        <label>Vessel <span class="text-danger">*</span></label>
+            <label>Vessel <span class="text-danger">*</span></label>
             @if(empty($batch))
                 <select name="vessel_id" id="vessel_id" class="form-control">
                     <option value="">--Select Vessel--</option>
