@@ -76,7 +76,8 @@ class VesselRouteController extends Controller
     public function edit($id)
     {
         $vessel = Vessel::find($id);
-        return view('admins.vessel_routes.edit', compact('vessel'));
+        $ports = Office::where('type_id', 0)->get();
+        return view('admins.vessel_routes.edit', compact('vessel','ports'));
     }
 
     public function update(Request $request, $id)

@@ -78,5 +78,11 @@ class CitySeeder extends Seeder
         $city->abbr = "ISM";
         $city->country_id = "1";
         $city->save();
+
+        $city = new City();
+        $city->name = "Porbander";
+        $city->abbr = "PRD";
+        $city->country_id = "10";
+        $city->save();
     }
 }

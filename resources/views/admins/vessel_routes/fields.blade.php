@@ -26,8 +26,11 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-lg-6">
-                            <select name="port" class="form-control port-field" id="port"> 
-                                <option value="">Select Port</option>
+                            <select name="port" class="form-control port-field" id="port">
+                                <option value="">--Select Port--</option>
+                                @foreach($ports as $port)
+                                <option value="{{ $port->id }}">{{ $port->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-lg-2">

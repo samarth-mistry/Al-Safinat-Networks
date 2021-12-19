@@ -67,5 +67,11 @@ class CountrySeeder extends Seeder
         $country->abbr = "CN";
         $country->continent_id = "4";
         $country->save();
+
+        $country = new Country();
+        $country->name = "India";
+        $country->abbr = "IN";
+        $country->continent_id = "4";
+        $country->save();
     }
 }
