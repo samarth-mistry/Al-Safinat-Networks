@@ -1,10 +1,7 @@
 @extends('admins.layouts.app')
 
-@push('styles')
-<link rel="stylesheet" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
-@endpush
 @section('page-title')
-<title>AGN | Vessels</title>
+<title>AGN | Vessel Routes</title>
 @endsection
 
 @section('content-header')
@@ -12,17 +9,17 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-4">
-          <h1 class="m-0">Vessels</h1>
+          <h1 class="m-0">Vessel Routes</h1>
         </div>
         <div class="col-sm-4">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
             <li class="breadcrumb-item"><a href="{{ url('/admin-dashboard') }}">Admin</a></li>
-            <li class="breadcrumb-item active">Vessels</li>
+            <li class="breadcrumb-item active">Vessel Routes</li>
           </ol>
         </div>
         <div class="col-sm-4">
-          <a href="{{ route('admin-vessels.create') }}" class="btn btn-primary float-sm-right">
+          <a href="{{ route('admin-vessel-routes.create') }}" class="btn btn-primary float-sm-right">
             <i class="fa fa-plus"></i>
             &nbsp;&nbsp;&nbsp;New Vessel
           </a>
@@ -44,9 +41,10 @@
           <thead>
               <tr>
                   <th>#</th>
-                  <th>Name</th>
-                  <th>Max. Units</th>
-                  <th>Description</th>
+                  <th>Vessel</th>
+                  <th>From Port</th>
+                  <th>Via Port</th>
+                  <th>To Port</th>
                   <th>Action</th>
               </tr>
           </thead>
@@ -55,7 +53,7 @@
 </div>
 @endsection
 @push('scripts')
-<script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+<!-- <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script> -->
 
 <script>
   $(function () {
@@ -63,7 +61,7 @@
         processing: true,
         serverSide: true,
         ajax: {
-                'url': '{!! route("admin-vessels.data") !!}',
+                'url': '{!! route("admin-vessel-routes.data") !!}',
                 'type': 'POST',
                 'headers': {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -71,9 +69,10 @@
             },
         columns: [
             {data: 'id', name: 'id'},
-            {data: 'name', name: 'name'},
-            {data: 'max_units', name: 'max_units'},
-            {data: 'status', name: 'status'},
+            {data: 'vessel', name: 'vessel'},
+            {data: 'from', name: 'from'},
+            {data: 'via', name: 'via'},
+            {data: 'to', name: 'to'},
             {data: 'actions', name: 'actions', orderable: false, searchable: false},
         ]
     });

@@ -13,6 +13,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('dist/css/sel2.css') }}">
   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('dist/css/dataTables1.css') }}">
   @stack('styles')
 </head>
 <body class="hold-transition sidebar-mini">
@@ -59,6 +60,7 @@
   <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="{{ asset('dist/js/sel2.js') }}"></script>
+  <script src="{{ asset('dist/js/dataTables1.js') }}"></script>
   @stack('scripts')
 </body>
 </html>

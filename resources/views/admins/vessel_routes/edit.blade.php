@@ -35,7 +35,7 @@
     <form method="POST" action="{{ route('admin-vessel-routes.update', $vessel->id) }}">
         @method('PUT')
         @csrf
-        @include('admins.vessel-routes.fields')
+        @include('admins.vessel_routes.fields')
     </form>
 </div>
 @endsection

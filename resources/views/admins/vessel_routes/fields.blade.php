@@ -47,5 +47,12 @@
 <div class="card-footer" style="background: khaki;">
     <button type="submit" class="btn btn-primary mr-2">Save</button>
     <input type="reset" class="btn btn-warning mr-2" value="Reset"/>
-	<a href="{{ route('admin-vessels.index') }}" class="btn btn-secondary">Back</a>
+	<a href="{{ route('admin-vessel-routes.index') }}" class="btn btn-secondary">Back</a>
 </div>
+@push('scripts')
+<script>
+    $(document).ready(function () {
+        $('#kt_repeater_1').repeater({});
+    });
+</script>
+@endpush

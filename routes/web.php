@@ -33,7 +33,8 @@ Route::resource('admin-batches', 'BatchController');
 Route::post('admin-trackings/data', 'TrackingController@data')->name('admin-trackings.data');
 Route::resource('admin-trackings', 'TrackingController');
 
-Route::post('admin-vessel-routes/data', 'VesselRouteController@data')->name('admin-vessel-route.data');
+Route::get('admin-vessel-routes/data', 'VesselRouteController@data')->name('admin-vessel-routes.data');
+Route::post('admin-vessel-routes/data', 'VesselRouteController@data')->name('admin-vessel-routes.data');
 Route::resource('admin-vessel-routes', 'VesselRouteController');
 
 Auth::routes();
