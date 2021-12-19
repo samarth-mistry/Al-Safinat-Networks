@@ -62,7 +62,6 @@ class VesselRouteController extends Controller
 
     public function edit($id)
     {
-        //$route = VesselRoute::find($id);
         $vessel = Vessel::find($id);
         
         $route_array = array();
@@ -81,7 +80,6 @@ class VesselRouteController extends Controller
             }
             $index++;
         }
-        //dd($route_array);
         $ports = Office::where('type_id', 0)->get();
         return view('admins.vessel_routes.edit', compact('vessel','ports','route_array'));
     }

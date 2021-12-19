@@ -2,9 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('bizland');
-});
+Route::get('/', function () {return view('bizland');});
 
 Route::get('client-dashboard', 'BookingController@dashboard')->name('client-dashboard');
 Route::get('admin-dashboard', 'AdminDashboardController@index')->name('admin-dashboard');

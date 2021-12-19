@@ -149,32 +149,6 @@
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i class="fa fa-globe nav-icon"></i>
-                            <p>Sample<i class="fas fa-angle-left right"></i></p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{ url('admin-continents') }}" class="nav-link">
-                                    <i class="fa fa-map-pin nav-icon"></i>
-                                    <p>s1</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ url('admin-countries') }}" class="nav-link">
-                                    <i class="fa fa-map-pin nav-icon"></i>
-                                    <p>s1</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ url('admin-cities') }}" class="nav-link">
-                                    <i class="fa fa-map-pin nav-icon"></i>
-                                    <p>s1</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
                             <i class="far fa-user nav-icon"></i>
                             <p>Clients</p>
                         </a>
@@ -192,9 +166,35 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link text-red">
+                        <a href="#" class="nav-link text-red font-weight-bold">
                             <i class="fa fa-star nav-icon text-yellow"></i>
                             <p>Super Account</p>
+                        </a>
+                    </li>
+                 </ul>
+            </li><!-- Loggings -->
+            <li class="nav-item">
+                <a href="#" class="main-drop-bg nav-link">
+                    <i class="nav-icon fas fa-eye"></i>
+                    <p>Loggings Details<i class="fas fa-angle-left right"></i></p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="far fa-user nav-icon"></i>
+                            <p>Home Page</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fa fa-user nav-icon"></i>
+                            <p>Client Logs</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fa fa-users nav-icon"></i>
+                            <p>Admin Logs</p>
                         </a>
                     </li>
                  </ul>
