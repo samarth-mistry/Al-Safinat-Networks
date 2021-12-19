@@ -10,13 +10,31 @@
         </div>
     @endif
     <div class="form-group row">
-        <div class="col-md-6">
-            <label>Name <span class="text-danger">*</span></label>
+        <div class="col-md-3">
+            <label>Vessel:</label>
             <input type="text" class="form-control" name="name" value="{{ $vessel->name }}" disabled="true"/>
         </div>
     </div>
+    <hr class="solid">
+    <div class="form-group row">
+        <div class="col-md-1">
+            <label class="">Current Flow :</label>
+        </div>
+        @foreach($route_array as $port)
+            <div class="col-md-1">
+                <label class="text-primary">{{ $port }}</label>
+                <i class="fa fa-arrow-right"></i>
+            </div>
+        @endforeach
+    </div>
+    <hr class="solid">
     <div class="form-group row">
         <div class="col-lg-12" id="kt_repeater_1">
+            <div class="form-group row">
+                <div class="col-lg-1">
+                    <label class="col-form-label text-dark">New Route :</label>
+                </div>
+            </div>
             <div data-repeater-list="ports">
                 <div data-repeater-item="" class="align-items-center">
                     <div class="form-group row">
@@ -26,7 +44,7 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-lg-6">
-                            <select name="port" class="form-control port-field" id="port">
+                            <select name="port_id" class="form-control port-field" id="port">
                                 <option value="">--Select Port--</option>
                                 @foreach($ports as $port)
                                 <option value="{{ $port->id }}">{{ $port->name }}</option>

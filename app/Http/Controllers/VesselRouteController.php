@@ -57,43 +57,51 @@ class VesselRouteController extends Controller
 
     public function store(Request $request)
     {
-        //dd($request);
-        $this->validate($request, [
-            'name' => 'required|min:3',
-            'max_units' => 'required',
-            'status' => 'required'
-        ]);
-        $vessel = new Vessel();
-        $vessel->name = $request->name;
-        $vessel->max_units = $request->max_units;
-        $vessel->description = $request->description;
-        $vessel->status = $request->status;
-        $vessel->save();
-
-        return redirect()->route('admin-vessel-routes.index')->with('message', 'New Vessel Route created successfully!');
+        //return redirect()->route('admin-vessel-routes.index')->with('message', 'New Vessel Route created successfully!');
     }
 
     public function edit($id)
     {
+        //$route = VesselRoute::find($id);
         $vessel = Vessel::find($id);
+        
+        $route_array = array();
+        $routes = VesselRoute::where('vessel_id', $vessel->id)->get();
+        $index = 0;
+        foreach($routes as $route){
+            if($index == 0){
+                $init_port = Office::find($route->from_port);
+                $route_array[$index] = $init_port->name;
+                $index++;
+                $port = Office::find($route->to_port);
+                $route_array[$index] = $port->name;
+            } else {
+                $port = Office::find($route->to_port);
+                $route_array[$index] = $port->name;
+            }
+            $index++;
+        }
+        //dd($route_array);
         $ports = Office::where('type_id', 0)->get();
-        return view('admins.vessel_routes.edit', compact('vessel','ports'));
+        return view('admins.vessel_routes.edit', compact('vessel','ports','route_array'));
     }
 
     public function update(Request $request, $id)
     {
         //dd($request);
         $this->validate($request, [
-            'name' => 'required|min:3',
-            'max_units' => 'required',
-            'status' => 'required'
+            'ports' => 'required'
         ]);
-        $vessel = Vessel::find($id);
-        $vessel->name = $request->name;
-        $vessel->max_units = $request->max_units;
-        $vessel->description = $request->description;
-        $vessel->status = $request->status;
-        $vessel->save();
+
+        VesselRoute::where('vessel_id', $id)->delete();
+
+        for($i=0; $i<sizeof($request->ports)-1; $i++){
+            $route = new VesselRoute();
+            $route->vessel_id = $id;
+            $route->from_port = $request->ports[$i]["port_id"];
+            $route->to_port = $request->ports[$i+1]["port_id"];
+            $route->save();
+        }
 
         return redirect()->route('admin-vessel-routes.index')->with('message', 'Vessel Route updated successfully!');
     }
