@@ -17,12 +17,6 @@
             <li class="breadcrumb-item active">Vessel Routes</li>
           </ol>
         </div>
-        <!-- <div class="col-sm-4">
-          <a href="{{ route('admin-vessel-routes.create') }}" class="btn btn-primary float-sm-right">
-            <i class="fa fa-plus"></i>
-            &nbsp;&nbsp;&nbsp;New Vessel
-          </a>
-        </div> -->
       </div>
     </div>
   </div>

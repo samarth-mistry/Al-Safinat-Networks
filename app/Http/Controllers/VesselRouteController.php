@@ -17,7 +17,8 @@ class VesselRouteController extends Controller
 
     public function data()
     {
-        $vessels = Vessel::where('id',1)->orWhere('id',2)->get();
+        // $vessels = Vessel::where('id',1)->orWhere('id',2)->get();
+        $vessels = Vessel::all();
         $dt = DataTables::of($vessels);
 
         $dt->editColumn('from', function ($vessel) {
@@ -29,7 +30,7 @@ class VesselRouteController extends Controller
             $counts = VesselRoute::where('vessel_id', $vessel->id)->count();
             $index = $counts/2;
             $vessel_routes = VesselRoute::where('vessel_id', $vessel->id)->orderBy('id', 'DESC')->get();
-            $port = Office::find($vessel_routes[$index]->to_port);
+            $port = Office::find($vessel_routes[$index]->from_port);
             return $port->name;
         });
         $dt->editColumn('to', function ($vessel) {
