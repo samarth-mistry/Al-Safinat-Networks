@@ -6,6 +6,7 @@ use App\Models\Country;
 use App\Models\Office;
 use App\Models\Batch;
 use App\Models\Vessel;
+use App\Models\VesselRoute;
 use App\Models\Tracking;
 use Illuminate\Http\Request;
 use DataTables;
@@ -77,11 +78,13 @@ class TrackingController extends Controller
             'batch_id' => 'required',
             'status' => 'required'
         ]);
+        $route = VesselRoute::where([['from_port', '=', $request->curr_port_id],['vessel_id','=',$request->vessel_id]])->first();
+        $vessel = Vessel::find($request->vessel_id);
         $tracking = new Tracking();
         $tracking->curr_port_id = $request->curr_port_id;
-        $tracking->next_port_id = $request->next_port_id;
+        $tracking->next_port_id = $route->to_port;
         $tracking->vessel_id = $request->vessel_id;
-        $tracking->batch_id = $request->batch_id;
+        $tracking->batch_id = $vessel->batch_id;
         $tracking->status = $request->status;
         $tracking->save();
 
@@ -117,11 +120,13 @@ class TrackingController extends Controller
             'batch_id' => 'required',
             'status' => 'required'
         ]);
+        $route = VesselRoute::where([['from_port', '=', $request->curr_port_id],['vessel_id','=',$request->vessel_id]])->first();
+        $vessel = Vessel::find($request->vessel_id);
         $tracking = Tracking::find($id);
         $tracking->curr_port_id = $request->curr_port_id;
-        $tracking->next_port_id = $request->next_port_id;
+        $tracking->next_port_id = $route->to_port;
         $tracking->vessel_id = $request->vessel_id;
-        $tracking->batch_id = $request->batch_id;
+        $tracking->batch_id = $vessel->batch_id;
         $tracking->status = $request->status;
         $tracking->save();
 

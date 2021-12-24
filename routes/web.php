@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {return view('bizland');});
 
+Route::get('ajax/get-batch-by-vessel/{vessel_id}', 'AjaxController@getBatchByVessel')->name('ajax/get-batch-by-vessel');
+Route::get('ajax/get-port-by-country/{country_id}', 'AjaxController@getPortByCountry')->name('ajax/get-port-by-county');
+Route::get('ajax/get-next-port/{vessel_id}/{curr_port_id}', 'AjaxController@getNextPort')->name('ajax/get-next-port');
+
 Route::get('client-dashboard', 'BookingController@dashboard')->name('client-dashboard');
 Route::get('admin-dashboard', 'AdminDashboardController@index')->name('admin-dashboard');
 

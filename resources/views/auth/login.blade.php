@@ -8,7 +8,7 @@
     <div class="card-header text-center">
       <a href="{{ url('/') }}" class="h1">
         <img src="{{ asset('dist/img/sa-flag-icon.png') }}" height="70" width="70" class="img-circle elevation-2" alt="User Image">
-        <br><b>Al-Gujarati</b> Networks
+        <br><b>{{ config('app.name') }}</b> Networks
       </a>
     </div>
     <div class="card-body">

@@ -14,6 +14,25 @@
   <link rel="stylesheet" href="{{ asset('dist/css/sel2.css') }}">
   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
   <link rel="stylesheet" href="{{ asset('dist/css/dataTables1.css') }}">
+  <style>
+      .loading-image {
+          display: none;
+          position: fixed;
+          z-index: 999;
+          height: 10em;
+          width: 15em;
+          overflow: show;
+          margin: auto;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+      }
+      .error {
+          color: red;
+          background-color: #acf;
+      }
+  </style>
   @stack('styles')
 </head>
 <body class="hold-transition sidebar-mini">
@@ -26,6 +45,7 @@
   <!-- Content -->
   <div class="content-wrapper">
   @yield('content-header')
+  <img class="loading-image" src="{{ asset('dist/img/clients/loading.gif') }}" alt="loading..">
     <div class="content">
       <div class="container-fluid">
         <div class="row">
