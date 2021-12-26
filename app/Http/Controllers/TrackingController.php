@@ -17,7 +17,15 @@ class TrackingController extends Controller
     {
         $this->middleware('role:superadministrator');
     }
-    
+    public function upComingData()
+    {
+
+    }
+    public function outGoingData()
+    {
+        
+    }
+
     public function data()
     {
         $trackings = Tracking::all();

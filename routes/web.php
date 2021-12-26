@@ -39,6 +39,9 @@ Route::get('admin-vessel-routes/data', 'VesselRouteController@data')->name('admi
 Route::post('admin-vessel-routes/data', 'VesselRouteController@data')->name('admin-vessel-routes.data');
 Route::resource('admin-vessel-routes', 'VesselRouteController');
 
+Route::post('admin-pricings/data', 'PricingController@data')->name('admin-pricings.data');
+Route::resource('admin-pricings', 'PricingController');
+
 Auth::routes();
 //Auth::routes(['register' => false]);
 

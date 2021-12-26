@@ -101,7 +101,7 @@
                     </li>
                 </ul>
             </li><!-- Ad. settings -->
-            <li class="nav-item {{ request()->is('admin-vessel-routes*') || request()->is('admin-continents*') || request()->is('admin-countries*') || request()->is('admin-cities*') ? 'menu-open':'' }}">
+            <li class="nav-item {{ request()->is('admin-pricings*') || request()->is('admin-vessel-routes*') || request()->is('admin-continents*') || request()->is('admin-countries*') || request()->is('admin-cities*') ? 'menu-open':'' }}">
                 <a href="#" class="main-drop-bg nav-link {{ request()->is('admin-vessel-routes*') || request()->is('admin-continents*') || request()->is('admin-countries*') || request()->is('admin-cities*') ? 'active':'' }}">
                     <i class="nav-icon fas fa fa-gears"></i>
                     <p>Ad. Settings<i class="fas fa-angle-left right"></i></p>
@@ -137,6 +137,12 @@
                         <a href="{{ route('admin-vessel-routes.index') }}" class="nav-link {{ request()->is('admin-vessel-routes*') ? 'active' : '' }}">
                             <i class="fas fa-anchor nav-icon"></i>
                             <p>Vessel Routes</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin-pricings.index') }}" class="nav-link {{ request()->is('pricings*') ? 'active' : '' }}">
+                            <i class="fas fa-anchor nav-icon"></i>
+                            <p>Pricings</p>
                         </a>
                     </li>
                  </ul>
