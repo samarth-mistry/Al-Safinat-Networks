@@ -8,7 +8,15 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto {{ request()->is('/') ? 'active' : '' }}" href="{{ url('/') }}">Home</a></li>
-          <li><a class="nav-link scrollto {{ request()->is('client-dashboard*') ? 'active' : '' }}" href="{{ route('client-dashboard') }}">Dashboard</a></li>
+          @if(Auth::user())
+            <li>
+              @if(Auth::user()->getRoles()[0] == 'superadministrator')
+                <a class="nav-link scrollto {{ request()->is('admin-dashboard*') ? 'active' : '' }}" href="{{ route('admin-dashboard') }}">Dashboard</a>
+              @elseif(Auth::user()->getRoles()[0] == 'user')
+                <a class="nav-link scrollto {{ request()->is('client-dashboard*') ? 'active' : '' }}" href="{{ route('client-dashboard') }}">Dashboard</a>
+              @endif
+            </li>
+          @endif
           <li><a class="nav-link scrollto {{ request()->is('client-booking*') ? 'active' : '' }}" href="{{ route('client-booking.index') }}">Book</a></li>
           <li><a class="nav-link scrollto {{ request()->is('client-tracking*') ? 'active' : '' }}" href="{{ route('client-booking.create') }}">Track</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
