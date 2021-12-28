@@ -75,8 +75,8 @@
                     </li>
                 </ul>
             </li><!-- trackings -->
-            <li class="nav-item {{ request()->is('admin-trackings*') ? 'menu-open':'' }}">
-                <a href="#" class="main-drop-bg nav-link {{ request()->is('admin-trackings*') ? 'active':'' }}">
+            <li class="nav-item {{ request()->is('admin-trackings*') || request()->is('admin-delivered-batches*') || request()->is('admin-global-traffic*') ? 'menu-open':'' }}">
+                <a href="#" class="main-drop-bg nav-link {{ request()->is('admin-trackings*') || request()->is('admin-delivered-batches*') || request()->is('admin-global-traffic*') ? 'active':'' }}">
                     <i class="nav-icon fa fa-road"></i>
                     <p>Trackings<i class="right fas fa-angle-left"></i></p>
                 </a>
@@ -84,19 +84,19 @@
                     <li class="nav-item">
                         <a href="{{ route('admin-trackings.index') }}" class="nav-link {{ request()->is('admin-trackings*') ? 'active':'' }}">
                             <i class="far fa-circle nav-icon"></i>
-                            <p>Arrival Ships</p>
+                            <p>Port Monitoring</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>s2</p>
+                        <a href="{{ route('admin-global-traffic.index') }}" class="nav-link {{ request()->is('admin-global-traffic*') ? 'active':'' }}">
+                            <i class="fa fa-map-signs nav-icon"></i>
+                            <p>Global Traffic</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>s3</p>
+                        <a href="{{ route('admin-delivered-batches.index') }}" class="nav-link {{ request()->is('admin-delivered-batches*') ? 'active':'' }}">
+                            <i class="fa fa-check-circle nav-icon"></i>
+                            <p>Delivered Batches</p>
                         </a>
                     </li>
                 </ul>
@@ -141,7 +141,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('admin-pricings.index') }}" class="nav-link {{ request()->is('pricings*') ? 'active' : '' }}">
-                            <i class="fas fa-anchor nav-icon"></i>
+                            <i class="fas fa-dollar nav-icon"></i>
                             <p>Pricings</p>
                         </a>
                     </li>

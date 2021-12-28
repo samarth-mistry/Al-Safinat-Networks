@@ -33,6 +33,9 @@ Route::post('admin-batches/data', 'BatchController@data')->name('admin-batches.d
 Route::resource('admin-batches', 'BatchController');
 
 Route::post('admin-trackings/data', 'TrackingController@data')->name('admin-trackings.data');
+Route::post('admin-trackings/outgoing-data', 'TrackingController@outGoingData')->name('admin-trackings.outgoing-data');
+Route::get('admin-trackings/status-ported/{id}', 'TrackingController@setStatusPorted')->name('admin-trackings.status-ported');
+Route::get('admin-trackings/status-deported/{id}', 'TrackingController@setStatusDeported')->name('admin-trackings.status-deported');
 Route::resource('admin-trackings', 'TrackingController');
 
 Route::get('admin-vessel-routes/data', 'VesselRouteController@data')->name('admin-vessel-routes.data');
@@ -42,6 +45,9 @@ Route::resource('admin-vessel-routes', 'VesselRouteController');
 Route::post('admin-pricings/data', 'PricingController@data')->name('admin-pricings.data');
 Route::resource('admin-pricings', 'PricingController');
 
+Route::get('admin-global-traffic/index', 'TrackingController@index')->name('admin-global-traffic.index');
+Route::get('admin-delivered-batches/index', 'TrackingController@deliveredBatchesIndex')->name('admin-delivered-batches.index');
+
 Auth::routes();
 //Auth::routes(['register' => false]);
 
@@ -50,3 +56,4 @@ Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout
 
 Route::post('client-booking/data', 'BookingController@data')->name('client-booking.data');
 Route::resource('client-booking', 'BookingController');
+

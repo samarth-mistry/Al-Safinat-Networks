@@ -33,14 +33,39 @@
 @endsection
 
 @section('content')
-<div class="card card-primary card-outline">
+@if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
+<div class="card card-success card-outline" style="background: #e8f5e6;">
+    <div class="card-header">
+      <h4 class="text-center font-weight-bold text-success">Incoming Vessels</h4>
+    </div>
     <div class="card-body">
-      @if(session()->has('message'))
-          <div class="alert alert-success">
-              {{ session()->get('message') }}
-          </div>
-      @endif
       <table class="table table-bordered data-table">
+          <thead>
+              <tr>
+                  <th>#</th>
+                  <th>Tracking #</th>
+                  <th>Batch #</th>
+                  <th>Vessel</th>
+                  <th>Current port</th>
+                  <th>Next port</th>
+                  <th>Time of arrival</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+              </tr>
+          </thead>
+      </table>
+    </div>
+</div>
+<div class="card card-danger card-outline" style="background: #ffedf2;">
+    <div class="card-header">
+      <h4 class="text-center font-weight-bold text-danger">Outgoing Vessels</h4>
+    </div>
+    <div class="card-body">
+      <table class="table table-bordered data-table-outgoing">
           <thead>
               <tr>
                   <th>#</th>
@@ -66,8 +91,38 @@
     var table = $('.data-table').DataTable({
         processing: true,
         serverSide: true,
+        "fnRowCallback" : function(nRow, aData, iDisplayIndex){
+            $("td:first", nRow).html(iDisplayIndex +1);
+            return nRow;
+        },
         ajax: {
                 'url': '{!! route("admin-trackings.data") !!}',
+                'type': 'POST',
+                'headers': {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            },
+        columns: [
+            {data: 'id', name: 'id'},
+            {data: 'name', name: 'name'},
+            {data: 'batch', name: 'batch'},
+            {data: 'vessel', name: 'vessel'},
+            {data: 'curr_port', name: 'curr_port'},
+            {data: 'next_port', name: 'next_port'},
+            {data: 'time', name: 'time'},
+            {data: 'status', name: 'status'},
+            {data: 'actions', name: 'actions', orderable: false, searchable: false},
+        ]
+    });
+    var table = $('.data-table-outgoing').DataTable({
+        processing: true,
+        serverSide: true,
+        "fnRowCallback" : function(nRow, aData, iDisplayIndex){
+            $("td:first", nRow).html(iDisplayIndex +1);
+            return nRow;
+        },
+        ajax: {
+                'url': '{!! route("admin-trackings.outgoing-data") !!}',
                 'type': 'POST',
                 'headers': {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'

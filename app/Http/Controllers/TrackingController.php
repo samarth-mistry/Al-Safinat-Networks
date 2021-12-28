@@ -21,24 +21,26 @@ class TrackingController extends Controller
     {
 
     }
-    public function outGoingData()
-    {
-        
-    }
 
     public function data()
     {
-        $trackings = Tracking::all();
+        //$vessel_routes = VesselRoute::where('to_port', 4)->get();
+        $trackings = Tracking::where('status', 'deported')->orWhere('status', 'waiting')->get();
         return DataTables::of($trackings)
             ->editColumn('name', function ($tracking) {
                 return "-";
             })
             ->editColumn('curr_port', function ($tracking) {
                 $port = Office::find($tracking->curr_port_id);
+                if($tracking->status == 'deported')
+                    return $port->name.'&nbsp;&nbsp;<span class="badge badge-success"><i class="fa fa-check"></i></span>';
+                
                 return $port->name;
             })
             ->editColumn('next_port', function ($tracking) {
                 $port = Office::find($tracking->next_port_id);
+                if($tracking->status == 'deported')
+                    return $port->name.'&nbsp;&nbsp;<span class="badge badge-success"><i class="fa fa-check"></i></span>';
                 return $port->name;
             })
             ->editColumn('batch', function ($tracking) {
@@ -50,14 +52,63 @@ class TrackingController extends Controller
                 return $batch->name;
             })
             ->editColumn('status', function ($tracking) {
-                return ucfirst($tracking->status);
+                if($tracking->status == 'deported')
+                    return '<span class="badge badge-success">'.ucfirst($tracking->status).'</span>';
+                else
+                    return '<span class="badge badge-warning">'.ucfirst($tracking->status).'</span>';
             })
             ->editColumn('time', function ($tracking) {
                 return date('d-M-Y', strtotime($tracking->created_at));
             })
             ->addColumn('actions', function ($tracking) {
-                return view('subadmins.entries.action', ['tracking' => $tracking]);
+                return view('subadmins.entries.action', ['tracking' => $tracking, 'table_type' => 0]);
             })
+            ->escapeColumns('curr_port')
+            ->escapeColumns('next_port')
+            ->escapeColumns('status')
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+
+    public function outGoingData()
+    {
+        //$vessel_routes = VesselRoute::where('to_port', 4)->get();
+        $trackings = Tracking::where('status', 'ported')->get();
+        return DataTables::of($trackings)
+            ->editColumn('name', function ($tracking) {
+                return "-";
+            })
+            ->editColumn('curr_port', function ($tracking) {
+                $port = Office::find($tracking->curr_port_id);
+                if($tracking->status == 'ported')
+                    return $port->name.'&nbsp;&nbsp;<span class="badge badge-success"><i class="fa fa-check"></i></span>';
+                return $port->name;
+            })
+            ->editColumn('next_port', function ($tracking) {
+                $port = Office::find($tracking->next_port_id);
+                if($tracking->status == 'ported')
+                    return $port->name.'&nbsp;&nbsp;<span class="badge badge-warning"><i class="fa fa-clock"></i></span>';
+                return $port->name;
+            })
+            ->editColumn('batch', function ($tracking) {
+                $batch = Batch::find($tracking->batch_id);
+                return $batch->name;
+            })
+            ->editColumn('vessel', function ($tracking) {
+                $batch = Vessel::find($tracking->vessel_id);
+                return $batch->name;
+            })
+            ->editColumn('status', function ($tracking) {
+                return '<span class="badge badge-primary">'.ucfirst($tracking->status).'</span>';
+            })
+            ->editColumn('time', function ($tracking) {
+                return date('d-M-Y', strtotime($tracking->created_at));
+            })
+            ->addColumn('actions', function ($tracking) {
+                return view('subadmins.entries.action', ['tracking' => $tracking, 'table_type' => 1]);
+            })
+            ->escapeColumns('status')
+            ->escapeColumns('curr_port')
             ->rawColumns(['actions'])
             ->make(true);
     }
@@ -86,15 +137,32 @@ class TrackingController extends Controller
             'batch_id' => 'required',
             'status' => 'required'
         ]);
-        $route = VesselRoute::where([['from_port', '=', $request->curr_port_id],['vessel_id','=',$request->vessel_id]])->first();
+        //$route = VesselRoute::where([['from_port', '=', $request->curr_port_id],['vessel_id','=',$request->vessel_id]])->first();
         $vessel = Vessel::find($request->vessel_id);
-        $tracking = new Tracking();
-        $tracking->curr_port_id = $request->curr_port_id;
-        $tracking->next_port_id = $route->to_port;
-        $tracking->vessel_id = $request->vessel_id;
-        $tracking->batch_id = $vessel->batch_id;
-        $tracking->status = $request->status;
-        $tracking->save();
+        //$tracking_id = $vessel->name."-".date('d-m-Y');
+        $route_array = array();
+        $routes = VesselRoute::where('vessel_id', $vessel->id)->get();
+        $index = 0;
+        foreach($routes as $route){
+            if($index == 0){
+                $tracking = new Tracking();
+                $tracking->curr_port_id = $route->from_port;
+                $tracking->next_port_id = $route->to_port;
+                $tracking->vessel_id = $vessel->id;
+                $tracking->batch_id = $vessel->batch_id;
+                $tracking->status = $request->status;
+                $tracking->save();
+                $index++;
+            } else {
+                $tracking = new Tracking();
+                $tracking->curr_port_id = $route->from_port;
+                $tracking->next_port_id = $route->to_port;
+                $tracking->vessel_id = $vessel->id;
+                $tracking->batch_id = $vessel->batch_id;
+                $tracking->status = 'waiting';
+                $tracking->save();
+            }
+        }
 
         return redirect()->route('admin-trackings.index')->with('message', 'Entry created successfully!');
     }
@@ -144,5 +212,39 @@ class TrackingController extends Controller
     public function destroy(Tracking $tracking)
     {
         //
+    }
+
+    public function setStatusPorted($id)
+    {
+        $tracking = Tracking::find($id);
+        $last_port_tracking = Tracking::where('vessel_id', $tracking->vessel_id)->where('status', '!=', 'delivered')->orderBy('id', 'desc')->first();
+
+        if($tracking == $last_port_tracking){
+            $trackings = Tracking::where('vessel_id', $tracking->vessel_id)->where('status', '!=', 'delivered')->update(['status' => 'delivered']);
+        } else {
+            $tracking->status = 'ported';
+            $tracking->save();
+        }
+
+        return redirect()->route('admin-trackings.index')->with('message', 'Data updated successfully!');
+    }
+
+    public function setStatusDeported($id)
+    {
+        $tracking = Tracking::find($id);
+        $tracking->status = 'deported';
+        $tracking->save();
+
+        return redirect()->route('admin-trackings.index')->with('message', 'Data updated successfully!');
+    }
+
+    public function deliveredBatchesData()
+    {
+        //return view('admins.delivered_batches.index');
+    }
+
+    public function deliveredBatchesIndex()
+    {
+        return view('admins.delivered_batches.index');
     }
 }
