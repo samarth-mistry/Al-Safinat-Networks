@@ -15,20 +15,8 @@ class CountrySeeder extends Seeder
     public function run()
     {
         $country = new Country();
-        $country->name = "Pakistan";
-        $country->abbr = "IRP";
-        $country->continent_id = "1";
-        $country->save();
-
-        $country = new Country();
-        $country->name = "Arab Emirate";
-        $country->abbr = "UAE";
-        $country->continent_id = "1";
-        $country->save();
-
-        $country = new Country();
-        $country->name = "Yemen";
-        $country->abbr = "YMN";
+        $country->name = "Egypt";
+        $country->abbr = "EGY";
         $country->continent_id = "1";
         $country->save();
 
@@ -39,20 +27,50 @@ class CountrySeeder extends Seeder
         $country->save();
 
         $country = new Country();
+        $country->name = "Yemen";
+        $country->abbr = "YMN";
+        $country->continent_id = "1";
+        $country->save();
+
+        $country = new Country();
+        $country->name = "Oman";
+        $country->abbr = "OMN";
+        $country->continent_id = "1";
+        $country->save();
+
+        $country = new Country();
+        $country->name = "Iraq";
+        $country->abbr = "IRQ";
+        $country->continent_id = "1";
+        $country->save();
+
+        $country = new Country();
         $country->name = "Iran";
         $country->abbr = "IRN";
         $country->continent_id = "1";
         $country->save();
 
         $country = new Country();
-        $country->name = "South Africa";
-        $country->abbr = "SAA";
-        $country->continent_id = "2";
+        $country->name = "Arab Emirate";
+        $country->abbr = "UAE";
+        $country->continent_id = "1";
+        $country->save();
+
+        $country = new Country();
+        $country->name = "Pakistan";
+        $country->abbr = "IRP";
+        $country->continent_id = "1";
+        $country->save();
+
+        $country = new Country();
+        $country->name = "India";
+        $country->abbr = "IND";
+        $country->continent_id = "1";
         $country->save();
 
         $country = new Country();
         $country->name = "England";
-        $country->abbr = "GB";
+        $country->abbr = "GBR";
         $country->continent_id = "3";
         $country->save();
 
@@ -65,12 +83,6 @@ class CountrySeeder extends Seeder
         $country = new Country();
         $country->name = "China";
         $country->abbr = "CN";
-        $country->continent_id = "4";
-        $country->save();
-
-        $country = new Country();
-        $country->name = "India";
-        $country->abbr = "IN";
         $country->continent_id = "4";
         $country->save();
     }

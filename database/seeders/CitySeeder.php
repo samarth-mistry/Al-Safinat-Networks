@@ -15,14 +15,14 @@ class CitySeeder extends Seeder
     public function run()
     {
         $city = new City();
-        $city->name = "Karachi";
-        $city->abbr = "KRC";
+        $city->name = "Cario";
+        $city->abbr = "CR";
         $city->country_id = "1";
         $city->save();
 
         $city = new City();
-        $city->name = "Abu Dhabi";
-        $city->abbr = "ABD";
+        $city->name = "Jeddah";
+        $city->abbr = "JDH";
         $city->country_id = "2";
         $city->save();
 
@@ -33,55 +33,56 @@ class CitySeeder extends Seeder
         $city->save();
 
         $city = new City();
-        $city->name = "Jeddah";
-        $city->abbr = "JDH";
+        $city->name = "Muscat";
+        $city->abbr = "MSC";
         $city->country_id = "4";
         $city->save();
 
         $city = new City();
-        $city->name = "Bandar-e-Baber";
-        $city->abbr = "BEB";
+        $city->name = "Baghdad";
+        $city->abbr = "BDD";
         $city->country_id = "5";
         $city->save();
 
         $city = new City();
-        $city->name = "Cape Town";
-        $city->abbr = "CPT";
+        $city->name = "Tehran";
+        $city->abbr = "THR";
         $city->country_id = "6";
         $city->save();
 
         $city = new City();
-        $city->name = "Liverpool";
-        $city->abbr = "LPL";
+        $city->name = "Abu Dhabi";
+        $city->abbr = "ADB";
         $city->country_id = "7";
         $city->save();
 
         $city = new City();
-        $city->name = "Denmark";
-        $city->abbr = "DNM";
+        $city->name = "Karachi";
+        $city->abbr = "KRC";
         $city->country_id = "8";
         $city->save();
 
         $city = new City();
-        $city->name = "Shanghai";
-        $city->abbr = "SHG";
+        $city->name = "Mumbai";
+        $city->abbr = "BMB";
         $city->country_id = "9";
         $city->save();
+
         $city = new City();
-        $city->name = "Hong Kong";
-        $city->abbr = "HK";
-        $city->country_id = "9";
+        $city->name = "Dubai";
+        $city->abbr = "DBI";
+        $city->country_id = "7";
         $city->save();
 
         $city = new City();
         $city->name = "Islamabad";
         $city->abbr = "ISM";
-        $city->country_id = "1";
+        $city->country_id = "8";
         $city->save();
 
         $city = new City();
-        $city->name = "Porbander";
-        $city->abbr = "PRD";
+        $city->name = "Liverpool";
+        $city->abbr = "LPL";
         $city->country_id = "10";
         $city->save();
     }
