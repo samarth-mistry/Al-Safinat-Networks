@@ -12,20 +12,14 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-4">
-          <h1 class="m-0">Units</h1>
+          <h1 class="m-0">Delivered Batches</h1>
         </div>
         <div class="col-sm-4">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
             <li class="breadcrumb-item"><a href="{{ url('/admin-dashboard') }}">Admin</a></li>
-            <li class="breadcrumb-item active">Units</li>
+            <li class="breadcrumb-item active">Delivered Batches</li>
           </ol>
-        </div>
-        <div class="col-sm-4">
-          <a href="{{ route('admin-units.create') }}" class="btn btn-primary float-sm-right">
-            <i class="fa fa-plus"></i>
-            &nbsp;&nbsp;&nbsp;New Unit
-          </a>
         </div>
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
@@ -44,11 +38,12 @@
           <thead>
               <tr>
                   <th>#</th>
-                  <th>Type</th>
-                  <th>Name</th>
+                  <th>Batch</th>
+                  <th>Vessel</th>
                   <th>Origin Port</th>
-                  <th>Max. Load</th>
-                  <th>Status</th>
+                  <th>Destination Port</th>
+                  <th>Time Taken</th>
+                  <th>Load</th>
                   <th>Action</th>
               </tr>
           </thead>
@@ -73,11 +68,12 @@
             },
         columns: [
             {data: 'id', name: 'id'},
-            {data: 'type', name: 'type'},
-            {data: 'name', name: 'name'},
-            {data: 'port', name: 'port'},
-            {data: 'max_load', name: 'max_load'},
-            {data: 'status', name: 'status'},
+            {data: 'batch', name: 'batch'},
+            {data: 'vessel', name: 'vessel'},
+            {data: 'origin_port', name: 'origin_port'},
+            {data: 'dest_port', name: 'dest_port'},
+            {data: 'time_taken', name: 'time_taken'},
+            {data: 'load', name: 'load'},
             {data: 'actions', name: 'actions', orderable: false, searchable: false},
         ]
     });

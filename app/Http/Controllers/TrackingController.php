@@ -240,7 +240,44 @@ class TrackingController extends Controller
 
     public function deliveredBatchesData()
     {
-        //return view('admins.delivered_batches.index');
+        $trackings = Tracking::where('status', 'ported')->get();
+        return DataTables::of($trackings)
+            ->editColumn('name', function ($tracking) {
+                return "-";
+            })
+            ->editColumn('curr_port', function ($tracking) {
+                $port = Office::find($tracking->curr_port_id);
+                if($tracking->status == 'ported')
+                    return $port->name.'&nbsp;&nbsp;<span class="badge badge-success"><i class="fa fa-check"></i></span>';
+                return $port->name;
+            })
+            ->editColumn('next_port', function ($tracking) {
+                $port = Office::find($tracking->next_port_id);
+                if($tracking->status == 'ported')
+                    return $port->name.'&nbsp;&nbsp;<span class="badge badge-warning"><i class="fa fa-clock"></i></span>';
+                return $port->name;
+            })
+            ->editColumn('batch', function ($tracking) {
+                $batch = Batch::find($tracking->batch_id);
+                return $batch->name;
+            })
+            ->editColumn('vessel', function ($tracking) {
+                $batch = Vessel::find($tracking->vessel_id);
+                return $batch->name;
+            })
+            ->editColumn('status', function ($tracking) {
+                return '<span class="badge badge-primary">'.ucfirst($tracking->status).'</span>';
+            })
+            ->editColumn('time', function ($tracking) {
+                return date('d-M-Y', strtotime($tracking->created_at));
+            })
+            ->addColumn('actions', function ($tracking) {
+                return view('subadmins.entries.action', ['tracking' => $tracking, 'table_type' => 1]);
+            })
+            ->escapeColumns('status')
+            ->escapeColumns('curr_port')
+            ->rawColumns(['actions'])
+            ->make(true);
     }
 
     public function deliveredBatchesIndex()

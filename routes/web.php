@@ -47,6 +47,7 @@ Route::resource('admin-pricings', 'PricingController');
 
 Route::get('admin-global-traffic/index', 'TrackingController@index')->name('admin-global-traffic.index');
 Route::get('admin-delivered-batches/index', 'TrackingController@deliveredBatchesIndex')->name('admin-delivered-batches.index');
+Route::post('admin-delivered-batches/data', 'TrackingController@deliveredBatchesData')->name('admin-delivered-batches.data');
 
 Auth::routes();
 //Auth::routes(['register' => false]);
