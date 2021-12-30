@@ -267,7 +267,7 @@ class TrackingController extends Controller
                     ['status','=','delivered']
                 ])->first();
                 $port = Office::find($track->curr_port_id);
-                return $port->name;
+                return ' <span class="badge badge-secondary">['.date('d M Y', strtotime($track->created_at)).']</span>&nbsp;&nbsp;'.$port->name;
             })
             ->editColumn('dest_port', function ($tracking) {
                 $track = Tracking::where([
@@ -276,10 +276,22 @@ class TrackingController extends Controller
                     ['status','=','delivered']
                 ])->orderBy('id','desc')->first();
                 $port = Office::find($track->next_port_id);
-                return $port->name;
+                return '<span class="badge badge-secondary">['.date('d M Y', strtotime($track->updated_at)).']</span>&nbsp;&nbsp;'.$port->name;
             })
             ->editColumn('time_taken', function ($tracking) {
-                return "-";
+                $track1 = Tracking::where([
+                    ['vessel_id','=',$tracking->vessel_id],
+                    ['batch_id','=',$tracking->batch_id],
+                    ['status','=','delivered']
+                ])->first();
+
+                $track2 = Tracking::where([
+                    ['vessel_id','=',$tracking->vessel_id],
+                    ['batch_id','=',$tracking->batch_id],
+                    ['status','=','delivered']
+                ])->orderBy('id','desc')->first();
+
+                return $track2->updated_at->diffInDays($track1->created_at).' days';
             })
             ->editColumn('status', function ($tracking) {
                 return '<span class="badge badge-success">'.ucfirst($tracking->status).'</span>';
@@ -288,8 +300,10 @@ class TrackingController extends Controller
                 return date('d-M-Y', strtotime($tracking->created_at));
             })
             ->addColumn('actions', function ($tracking) {
-                return view('subadmins.entries.action', ['tracking' => $tracking, 'table_type' => 1]);
+                return view('admins.delivered_batches.action', ['tracking' => $tracking]);
             })
+            ->escapeColumns('origin_port')
+            ->escapeColumns('dest_port')
             ->escapeColumns('status')
             ->rawColumns(['actions'])
             ->make(true);

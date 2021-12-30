@@ -1,4 +1,135 @@
 <!--begin::Body-->
+@push('styles')
+<style>
+    .cursor-pointer {
+        cursor: pointer
+    }
+
+    .Today {
+        color: rgb(83, 83, 83)
+    }
+
+    .btn-outline-primary {
+        background-color: #fff !important;
+        color: #4bb8a9 !important;
+        border: 1.3px solid #4bb8a9;
+        font-size: 12px;
+        border-radius: 0.4em !important
+    }
+
+    .btn-outline-primary:hover {
+        background-color: #4bb8a9 !important;
+        color: #fff !important;
+        border: 1.3px solid #4bb8a9
+    }
+
+    .btn-outline-primary:focus,
+    .btn-outline-primary:active {
+        outline: none !important;
+        box-shadow: none !important;
+        border-color: #42A5F5 !important
+    }
+
+    #progressbar {
+        margin-bottom: 30px;
+        overflow: hidden;
+        color: #455A64;
+        padding-left: 0px;
+        margin-top: 30px
+    }
+
+    #progressbar li {
+        list-style-type: none;
+        font-size: 13px;
+        width: 33.33%;
+        float: left;
+        position: relative;
+        font-weight: 400;
+        color: #455A64 !important
+    }
+
+    #progressbar #step1:before {
+        content: "1";
+        color: #fff;
+        width: 29px;
+        margin-left: 15px !important;
+        padding-left: 11px !important
+    }
+
+    #progressbar #step2:before {
+        content: "2";
+        color: #fff;
+        width: 29px
+    }
+
+    #progressbar #step3:before {
+        content: "3";
+        color: #fff;
+        width: 29px;
+        margin-right: 15px !important;
+        padding-right: 11px !important
+    }
+
+    #progressbar li:before {
+        line-height: 29px;
+        display: block;
+        font-size: 12px;
+        background: #455A64;
+        border-radius: 50%;
+        margin: auto
+    }
+
+    #progressbar li:after {
+        content: '';
+        width: 121%;
+        height: 2px;
+        background: #455A64;
+        position: absolute;
+        left: 0%;
+        right: 0%;
+        top: 15px;
+        z-index: -1
+    }
+
+    #progressbar li:nth-child(2):after {
+        left: 50%
+    }
+
+    #progressbar li:nth-child(1):after {
+        left: 25%;
+        width: 121%
+    }
+
+    #progressbar li:nth-child(3):after {
+        left: 25% !important;
+        width: 50% !important
+    }
+
+    #progressbar li.active:before,
+    #progressbar li.active:after {
+        background: #4bb8a9
+    }
+
+    .card {
+        background-color: #fff;
+        //box-shadow: 2px 4px 15px 0px rgb(0, 108, 170);
+        z-index: 0
+    }
+    .border-line {
+        border-right: 1px solid rgb(226, 206, 226)
+    }
+
+    .card-footer img {
+        opacity: 0.3
+    }
+
+    .card-footer h5 {
+        font-size: 1.1em;
+        color: #8C9EFF;
+        cursor: pointer
+    }
+</style>
+@endpush
 <div class="card-body">
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -16,7 +147,21 @@
         </div>
     </div>
     <hr class="solid">
-    <div class="form-group row">
+    <div class="container-fluid my-5 justify-content-center">
+        <div class="card">
+            <div class="form-group row">
+                <div class="col col-lg-10">
+                    <ul id="progressbar">
+                    @foreach($route_array as $port)
+                        <li class="step0 active text-center" id="step2">{{ $port }}</li>
+                    @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="solid">
+    <!-- <div class="form-group row">
         <div class="col-md-1">
             <label class="">Current Flow :</label>
         </div>
@@ -26,7 +171,7 @@
                 <i class="fa fa-arrow-right"></i>
             </div>
         @endforeach
-    </div>
+    </div> -->
     <hr class="solid">
     <div class="form-group row">
         <div class="col-lg-12" id="kt_repeater_1">
