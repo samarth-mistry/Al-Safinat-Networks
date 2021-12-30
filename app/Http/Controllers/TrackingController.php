@@ -240,23 +240,17 @@ class TrackingController extends Controller
 
     public function deliveredBatchesData()
     {
-        $trackings = Tracking::where('status', 'ported')->get();
+        $trackings_data = Tracking::where('status', 'delivered')->get();
+        $batch_mark = 0;
+        $trackings = array();
+        foreach($trackings_data as $ent){
+            if($batch_mark != $ent->batch_id){
+                $batch_mark = $ent->batch_id;
+                array_push($trackings, $ent);
+            }
+        }
+        //dd($trackings);
         return DataTables::of($trackings)
-            ->editColumn('name', function ($tracking) {
-                return "-";
-            })
-            ->editColumn('curr_port', function ($tracking) {
-                $port = Office::find($tracking->curr_port_id);
-                if($tracking->status == 'ported')
-                    return $port->name.'&nbsp;&nbsp;<span class="badge badge-success"><i class="fa fa-check"></i></span>';
-                return $port->name;
-            })
-            ->editColumn('next_port', function ($tracking) {
-                $port = Office::find($tracking->next_port_id);
-                if($tracking->status == 'ported')
-                    return $port->name.'&nbsp;&nbsp;<span class="badge badge-warning"><i class="fa fa-clock"></i></span>';
-                return $port->name;
-            })
             ->editColumn('batch', function ($tracking) {
                 $batch = Batch::find($tracking->batch_id);
                 return $batch->name;
@@ -264,9 +258,31 @@ class TrackingController extends Controller
             ->editColumn('vessel', function ($tracking) {
                 $batch = Vessel::find($tracking->vessel_id);
                 return $batch->name;
+                
+            })
+            ->editColumn('origin_port', function ($tracking) {
+                $track = Tracking::where([
+                    ['vessel_id','=',$tracking->vessel_id],
+                    ['batch_id','=',$tracking->batch_id],
+                    ['status','=','delivered']
+                ])->first();
+                $port = Office::find($track->curr_port_id);
+                return $port->name;
+            })
+            ->editColumn('dest_port', function ($tracking) {
+                $track = Tracking::where([
+                    ['vessel_id','=',$tracking->vessel_id],
+                    ['batch_id','=',$tracking->batch_id],
+                    ['status','=','delivered']
+                ])->orderBy('id','desc')->first();
+                $port = Office::find($track->next_port_id);
+                return $port->name;
+            })
+            ->editColumn('time_taken', function ($tracking) {
+                return "-";
             })
             ->editColumn('status', function ($tracking) {
-                return '<span class="badge badge-primary">'.ucfirst($tracking->status).'</span>';
+                return '<span class="badge badge-success">'.ucfirst($tracking->status).'</span>';
             })
             ->editColumn('time', function ($tracking) {
                 return date('d-M-Y', strtotime($tracking->created_at));
@@ -275,7 +291,6 @@ class TrackingController extends Controller
                 return view('subadmins.entries.action', ['tracking' => $tracking, 'table_type' => 1]);
             })
             ->escapeColumns('status')
-            ->escapeColumns('curr_port')
             ->rawColumns(['actions'])
             ->make(true);
     }

@@ -43,7 +43,7 @@
                   <th>Origin Port</th>
                   <th>Destination Port</th>
                   <th>Time Taken</th>
-                  <th>Load</th>
+                  <th>Status</th>
                   <th>Action</th>
               </tr>
           </thead>
@@ -59,8 +59,12 @@
     var table = $('.data-table').DataTable({
         processing: true,
         serverSide: true,
+        "fnRowCallback" : function(nRow, aData, iDisplayIndex){
+            $("td:first", nRow).html(iDisplayIndex +1);
+            return nRow;
+        },
         ajax: {
-                'url': '{!! route("admin-units.data") !!}',
+                'url': '{!! route("admin-delivered-batches.data") !!}',
                 'type': 'POST',
                 'headers': {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -73,7 +77,7 @@
             {data: 'origin_port', name: 'origin_port'},
             {data: 'dest_port', name: 'dest_port'},
             {data: 'time_taken', name: 'time_taken'},
-            {data: 'load', name: 'load'},
+            {data: 'status', name: 'status'},
             {data: 'actions', name: 'actions', orderable: false, searchable: false},
         ]
     });

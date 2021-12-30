@@ -61,6 +61,10 @@
     var table = $('.data-table').DataTable({
         processing: true,
         serverSide: true,
+        "fnRowCallback" : function(nRow, aData, iDisplayIndex){
+            $("td:first", nRow).html(iDisplayIndex +1);
+            return nRow;
+        },
         ajax: {
                 'url': '{!! route("admin-continents.data") !!}',
                 'type': 'POST',
