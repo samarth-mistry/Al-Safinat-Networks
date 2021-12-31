@@ -9,7 +9,7 @@ Route::get('ajax/get-port-by-country/{country_id}', 'AjaxController@getPortByCou
 Route::get('ajax/get-next-port/{vessel_id}/{curr_port_id}', 'AjaxController@getNextPort')->name('ajax/get-next-port');
 
 Route::get('client-dashboard', 'BookingController@dashboard')->name('client-dashboard');
-Route::get('admin-dashboard', 'AdminDashboardController@index')->name('admin-dashboard');
+Route::get('admin-dashboard', 'AdminDashboardController@index')->middleware(['auth'])->name('admin-dashboard');
 
 Route::post('admin-continents/data', 'ContinentsController@data')->name('admin-continents.data');
 Route::resource('admin-continents', 'ContinentsController');
