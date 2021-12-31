@@ -57,9 +57,6 @@
     </div>
   </div>
 
-  <!-- Right Sidebar -->
-  @include('admins.layouts.right_sidebar')
-
   <!-- Main Footer -->
   @include('admins.layouts.footer')
 
