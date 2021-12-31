@@ -17,15 +17,17 @@ class TrackingController extends Controller
     {
         $this->middleware('role:superadministrator');
     }
-    public function upComingData()
-    {
 
-    }
-
-    public function data()
+    public function inComingData(Request $request, $port_id = 0)
     {
-        //$vessel_routes = VesselRoute::where('to_port', 4)->get();
-        $trackings = Tracking::where('status', 'deported')->orWhere('status', 'waiting')->get();
+        $trackings = array();
+        if($port_id != 0){
+            $trackings = Tracking::where([['next_port_id', $port_id],['status','=','deported']])
+                        ->orWhere([['next_port_id', $port_id],['status','=','waiting']])->get();
+            //dd($trackings);
+        } else {
+            $trackings = Tracking::where('status', 'deported')->orWhere('status', 'waiting')->get();
+        }
         return DataTables::of($trackings)
             ->editColumn('name', function ($tracking) {
                 return "-";
@@ -60,7 +62,12 @@ class TrackingController extends Controller
             ->editColumn('time', function ($tracking) {
                 return date('d-M-Y', strtotime($tracking->created_at));
             })
-            ->addColumn('actions', function ($tracking) {
+            ->addColumn('actions', function ($tracking) use ($port_id) {
+                if($port_id != 0){
+                    return view('subadmins.entries.action', ['tracking' => $tracking, 'table_type' => 0]);
+                } else {
+                    return view('admins.global_trackings.action', ['tracking' => $tracking, 'table_type' => 0]);
+                }
                 return view('subadmins.entries.action', ['tracking' => $tracking, 'table_type' => 0]);
             })
             ->escapeColumns('curr_port')
@@ -70,10 +77,14 @@ class TrackingController extends Controller
             ->make(true);
     }
 
-    public function outGoingData()
+    public function outGoingData(Request $request, $port_id = 0)
     {
-        //$vessel_routes = VesselRoute::where('to_port', 4)->get();
-        $trackings = Tracking::where('status', 'ported')->get();
+        $trackings = array();
+        if($port_id != 0){
+            $trackings = Tracking::where('status', 'ported')->where('curr_port_id', $port_id)->get();
+        } else {
+            $trackings = Tracking::where('status', 'ported')->get();
+        }
         return DataTables::of($trackings)
             ->editColumn('name', function ($tracking) {
                 return "-";
@@ -104,8 +115,12 @@ class TrackingController extends Controller
             ->editColumn('time', function ($tracking) {
                 return date('d-M-Y', strtotime($tracking->created_at));
             })
-            ->addColumn('actions', function ($tracking) {
-                return view('subadmins.entries.action', ['tracking' => $tracking, 'table_type' => 1]);
+            ->addColumn('actions', function ($tracking) use ($port_id) {
+                if($port_id != 0){
+                    return view('subadmins.entries.action', ['tracking' => $tracking, 'table_type' => 1]);
+                } else {
+                    return view('admins.global_trackings.action', ['tracking' => $tracking, 'table_type' => 1]);
+                }
             })
             ->escapeColumns('status')
             ->escapeColumns('curr_port')
@@ -115,7 +130,13 @@ class TrackingController extends Controller
     
     public function index()
     {
-        return view('subadmins.entries.index');
+        $ports = Office::where('type_id', 0)->get();
+        return view('subadmins.entries.index', compact('ports'));
+    }
+
+    public function globalTrackingIndex()
+    {
+        return view('admins.global_trackings.index');
     }
 
     public function create()
@@ -214,7 +235,7 @@ class TrackingController extends Controller
         //
     }
 
-    public function setStatusPorted($id)
+    public function setStatusPorted($id, $is_global=0)
     {
         $tracking = Tracking::find($id);
         $last_port_tracking = Tracking::where('vessel_id', $tracking->vessel_id)->where('status', '!=', 'delivered')->orderBy('id', 'desc')->first();
@@ -226,16 +247,24 @@ class TrackingController extends Controller
             $tracking->save();
         }
 
-        return redirect()->route('admin-trackings.index')->with('message', 'Data updated successfully!');
+        if($is_global == 0){
+            return redirect()->route('admin-trackings.index')->with('message', 'Data updated successfully!');
+        } else {
+            return redirect()->route('admin-global-traffic')->with('message', 'Data updated successfully!');
+        }
     }
 
-    public function setStatusDeported($id)
+    public function setStatusDeported($id, $is_global=0)
     {
         $tracking = Tracking::find($id);
         $tracking->status = 'deported';
         $tracking->save();
 
-        return redirect()->route('admin-trackings.index')->with('message', 'Data updated successfully!');
+        if($is_global == 0){
+            return redirect()->route('admin-trackings.index')->with('message', 'Data updated successfully!');
+        } else {
+            return redirect()->route('admin-global-traffic')->with('message', 'Data updated successfully!');
+        }
     }
 
     public function deliveredBatchesData()

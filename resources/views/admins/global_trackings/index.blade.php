@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
 @endpush
 @section('page-title')
-<title>AGN | Port Monitoring</title>
+<title>AGN | Global Traffic</title>
 @endsection
 
 @section('content-header')
@@ -12,13 +12,13 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-4">
-          <h1 class="m-0">Port Monitoring</h1>
+          <h1 class="m-0">Global Traffic Monitoring</h1>
         </div>
         <div class="col-sm-4">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
             <li class="breadcrumb-item"><a href="{{ url('/admin-dashboard') }}">Admin</a></li>
-            <li class="breadcrumb-item active">Port Monitoring</li>
+            <li class="breadcrumb-item active">Global Traffic</li>
           </ol>
         </div>
         <div class="col-sm-4">
@@ -38,21 +38,6 @@
         {{ session()->get('message') }}
     </div>
 @endif
-<div class="mb-15">
-    <div class="row">
-        <label class="col-form-label col-md-4 text-right">Select the Port</label>
-        <div class="col-md-3">
-          <select name="port_id" id="port_id" class="form-control">
-            @foreach($ports as $port)
-            <option value="{{ $port->id }}">{{ $port->name }}</option>
-            @endforeach
-          </select>
-        </div>
-        <div class="col-md-3">
-          <button type="button" class="btn btn-primary" id="view_port">View</button>
-        </div>
-    </div>
-</div><br>
 <div class="card card-success card-outline" style="background: #e8f5e6;">
     <div class="card-header">
       <h4 class="text-center font-weight-bold text-success">Incoming Vessels</h4>
@@ -104,7 +89,7 @@
 <script>
   $(function () {
     $("#port_id").select2({});
-    var table_incoming = $('.data-table').DataTable({
+    $('.data-table').DataTable({
         processing: true,
         serverSide: true,
         "fnRowCallback" : function(nRow, aData, iDisplayIndex){
@@ -112,7 +97,7 @@
             return nRow;
         },
         ajax: {
-                'url': '{!! route("admin-trackings.incoming-data") !!}/'+$("#port_id").val(),
+                'url': '{!! route("admin-trackings.incoming-data") !!}',
                 'type': 'POST',
                 'headers': {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -130,6 +115,7 @@
             {data: 'actions', name: 'actions', orderable: false, searchable: false},
         ]
     });
+    var table_incoming = $('.data-table').DataTable();
     var table_outgoing = $('.data-table-outgoing').DataTable({
         processing: true,
         serverSide: true,
@@ -138,7 +124,7 @@
             return nRow;
         },
         ajax: {
-                'url': '{!! route("admin-trackings.outgoing-data") !!}/'+$("#port_id").val(),
+                'url': '{!! route("admin-trackings.outgoing-data") !!}',
                 'type': 'POST',
                 'headers': {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -155,10 +141,6 @@
             {data: 'status', name: 'status'},
             {data: 'actions', name: 'actions', orderable: false, searchable: false},
         ]
-    });
-    $('#view_port').on('click', function () {
-      table_incoming.ajax.url('{!! route("admin-trackings.incoming-data") !!}/'+$("#port_id").val()).load();
-      table_outgoing.ajax.url('{!! route("admin-trackings.outgoing-data") !!}/'+$("#port_id").val()).load();
     });
   });
 </script>

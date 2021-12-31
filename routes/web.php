@@ -2,15 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 
+//----------------------------auth----------------------------------
 Route::get('/', function () {return view('bizland');});
-
+Auth::routes();
+//Auth::routes(['register' => false]);
+Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+//-------------------------------ajax---------------------------
 Route::get('ajax/get-batch-by-vessel/{vessel_id}', 'AjaxController@getBatchByVessel')->name('ajax/get-batch-by-vessel');
 Route::get('ajax/get-port-by-country/{country_id}', 'AjaxController@getPortByCountry')->name('ajax/get-port-by-county');
 Route::get('ajax/get-next-port/{vessel_id}/{curr_port_id}', 'AjaxController@getNextPort')->name('ajax/get-next-port');
-
-Route::get('client-dashboard', 'BookingController@dashboard')->name('client-dashboard');
-Route::get('admin-dashboard', 'AdminDashboardController@index')->middleware(['auth'])->name('admin-dashboard');
-
+//-----------------------------admin settings-----------------------------
 Route::post('admin-continents/data', 'ContinentsController@data')->name('admin-continents.data');
 Route::resource('admin-continents', 'ContinentsController');
 
@@ -32,30 +33,33 @@ Route::resource('admin-vessels', 'VesselController');
 Route::post('admin-batches/data', 'BatchController@data')->name('admin-batches.data');
 Route::resource('admin-batches', 'BatchController');
 
-Route::post('admin-trackings/data', 'TrackingController@data')->name('admin-trackings.data');
-Route::post('admin-trackings/outgoing-data', 'TrackingController@outGoingData')->name('admin-trackings.outgoing-data');
-Route::get('admin-trackings/status-ported/{id}', 'TrackingController@setStatusPorted')->name('admin-trackings.status-ported');
-Route::get('admin-trackings/status-deported/{id}', 'TrackingController@setStatusDeported')->name('admin-trackings.status-deported');
-Route::resource('admin-trackings', 'TrackingController');
-
 Route::get('admin-vessel-routes/data', 'VesselRouteController@data')->name('admin-vessel-routes.data');
 Route::post('admin-vessel-routes/data', 'VesselRouteController@data')->name('admin-vessel-routes.data');
 Route::resource('admin-vessel-routes', 'VesselRouteController');
+//-----------------------Trackings------------------------------------------
+Route::post('admin-trackings/incoming-data/{port_id?}', 'TrackingController@inComingData')->name('admin-trackings.incoming-data');
+Route::post('admin-trackings/outgoing-data/{port_id?}', 'TrackingController@outGoingData')->name('admin-trackings.outgoing-data');
+Route::get('admin-trackings/status-ported/{id}/is-global/{is_global?}', [
+        'as' => 'status-ported', 
+        'uses' => 'TrackingController@setStatusPorted'
+    ]);
+Route::get('admin-trackings/status-deported/{id}/is-global/{is_global?}', [
+        'as' => 'status-deported', 
+        'uses' => 'TrackingController@setStatusDeported'
+    ]);
+//Route::get('admin-trackings/status-deported/{id}/is-global/{is_global?}', 'TrackingController@setStatusDeported')->name('admin-trackings.status-deported');
+Route::resource('admin-trackings', 'TrackingController');
+
+Route::get('admin-global-traffic', 'TrackingController@globalTrackingIndex')->name('admin-global-traffic');
+Route::get('admin-delivered-batches', 'TrackingController@deliveredBatchesIndex')->name('admin-delivered-batches');
+Route::post('admin-delivered-batches/data', 'TrackingController@deliveredBatchesData')->name('admin-delivered-batches.data');
 
 Route::post('admin-pricings/data', 'PricingController@data')->name('admin-pricings.data');
 Route::resource('admin-pricings', 'PricingController');
-
-Route::get('admin-global-traffic/index', 'TrackingController@index')->name('admin-global-traffic.index');
-Route::get('admin-delivered-batches/index', 'TrackingController@deliveredBatchesIndex')->name('admin-delivered-batches.index');
-//Route::get('admin-delivered-batches/data', 'TrackingController@deliveredBatchesData')->name('admin-delivered-batches.data');
-Route::post('admin-delivered-batches/data', 'TrackingController@deliveredBatchesData')->name('admin-delivered-batches.data');
-
-Auth::routes();
-//Auth::routes(['register' => false]);
-
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
-
+//--------------------------------client urls----------------------------------
 Route::post('client-booking/data', 'BookingController@data')->name('client-booking.data');
 Route::resource('client-booking', 'BookingController');
+
+Route::get('client-dashboard', 'BookingController@dashboard')->name('client-dashboard');
+Route::get('admin-dashboard', 'AdminDashboardController@index')->middleware(['auth'])->name('admin-dashboard');
 

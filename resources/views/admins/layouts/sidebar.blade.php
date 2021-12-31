@@ -88,13 +88,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('admin-global-traffic.index') }}" class="nav-link {{ request()->is('admin-global-traffic*') ? 'active':'' }}">
+                        <a href="{{ route('admin-global-traffic') }}" class="nav-link {{ request()->is('admin-global-traffic*') ? 'active':'' }}">
                             <i class="fa fa-map-signs nav-icon"></i>
                             <p>Global Traffic</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('admin-delivered-batches.index') }}" class="nav-link {{ request()->is('admin-delivered-batches*') ? 'active':'' }}">
+                        <a href="{{ route('admin-delivered-batches') }}" class="nav-link {{ request()->is('admin-delivered-batches*') ? 'active':'' }}">
                             <i class="fa fa-check-circle nav-icon"></i>
                             <p>Delivered Batches</p>
                         </a>
