@@ -22,11 +22,12 @@ class TrackingController extends Controller
     {
         $trackings = array();
         if($port_id != 0){
-            $trackings = Tracking::where([['next_port_id', $port_id],['status','=','deported']])
-                        ->orWhere([['next_port_id', $port_id],['status','=','waiting']])->get();
+            $trackings = Tracking::where([['next_port_id', $port_id],['status','=','travelling']])
+                        ->orWhere([['curr_port_id', $port_id],['status','=','travelling']])->get();
             //dd($trackings);
         } else {
-            $trackings = Tracking::where('status', 'deported')->orWhere('status', 'waiting')->get();
+            //$trackings = Tracking::where('status', 'deported')->orWhere('status', 'waiting')->get();
+            $trackings = Tracking::where('status','!=','delivered')->get();
         }
         return DataTables::of($trackings)
             ->editColumn('name', function ($tracking) {
@@ -81,7 +82,9 @@ class TrackingController extends Controller
     {
         $trackings = array();
         if($port_id != 0){
-            $trackings = Tracking::where('status', 'ported')->where('curr_port_id', $port_id)->get();
+            //$trackings = Tracking::where('status', 'ported')->where('next_port_id', $port_id)->get();
+            $trackings = Tracking::where([['next_port_id', $port_id],['status','=','ported']])
+                        ->orWhere([['curr_port_id', $port_id],['status','=','OOS']])->get();
         } else {
             $trackings = Tracking::where('status', 'ported')->get();
         }
@@ -110,7 +113,11 @@ class TrackingController extends Controller
                 return $batch->name;
             })
             ->editColumn('status', function ($tracking) {
-                return '<span class="badge badge-primary">'.ucfirst($tracking->status).'</span>';
+                if($tracking->status == 'OOS'){
+                    return '<span class="badge badge-danger">'.ucfirst($tracking->status).'</span>';
+                } else {
+                    return '<span class="badge badge-primary">'.ucfirst($tracking->status).'</span>';
+                }
             })
             ->editColumn('time', function ($tracking) {
                 return date('d-M-Y', strtotime($tracking->created_at));
@@ -257,8 +264,17 @@ class TrackingController extends Controller
     public function setStatusDeported($id, $is_global=0)
     {
         $tracking = Tracking::find($id);
-        $tracking->status = 'deported';
-        $tracking->save();
+        if($tracking->status == 'OOS'){
+            $tracking->status = 'travelling';
+            $tracking->save();
+        } else {
+            $tracking->status = 'deported';
+            $tracking->save();
+
+            $tracking = Tracking::find($id+1);
+            $tracking->status = 'travelling';
+            $tracking->save();
+        }
 
         if($is_global == 0){
             return redirect()->route('admin-trackings.index')->with('message', 'Data updated successfully!');

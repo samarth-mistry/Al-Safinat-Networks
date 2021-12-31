@@ -87,8 +87,8 @@
                   <th>Tracking #</th>
                   <th>Batch #</th>
                   <th>Vessel</th>
+                  <th>From port</th>
                   <th>Current port</th>
-                  <th>Next port</th>
                   <th>Time of arrival</th>
                   <th>Status</th>
                   <th>Actions</th>

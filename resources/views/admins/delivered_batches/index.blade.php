@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
 @endpush
 @section('page-title')
-<title>AGN | Units</title>
+<title>AGN | Delivered Batches</title>
 @endsection
 
 @section('content-header')
