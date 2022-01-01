@@ -56,6 +56,9 @@ Route::post('admin-delivered-batches/data', 'TrackingController@deliveredBatches
 
 Route::post('admin-pricings/data', 'PricingController@data')->name('admin-pricings.data');
 Route::resource('admin-pricings', 'PricingController');
+
+Route::post('admin-users/data', 'UserController@data')->name('admin-users.data');
+Route::resource('admin-users', 'UserController');
 //--------------------------------client urls----------------------------------
 Route::post('client-booking/data', 'BookingController@data')->name('client-booking.data');
 Route::resource('client-booking', 'BookingController');
