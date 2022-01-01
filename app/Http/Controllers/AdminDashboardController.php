@@ -9,7 +9,7 @@ class AdminDashboardController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('role:superadministrator');
+        $this->middleware('role:superadministrator|portadministrator');
     }
     
     public function index()

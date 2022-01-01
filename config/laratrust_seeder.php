@@ -15,17 +15,23 @@ return [
         'superadministrator' => [
             'users' => 'c,r,u,d',
             'payments' => 'c,r,u,d',
-            'profile' => 'r,u'
+            'vessels' => 'c,r,u,d',
+            'vessel-routes' => 'c,r,u,d',
+            'port-monitorings' => 'c,r,u,d',
+            'global-traffics' => 'c,r,u,d',
+            'delivered-batches' => 'c,r,u,d',
+            'offices' => 'c,r,u,d',
+            'resources' => 'c,r,u,d',
+            'geography' => 'c,r,u,d',
+            'pricings' => 'c,r,u,d',
+            'admin-dashboard' => 'c,r,u,d'
         ],
-        'administrator' => [
-            'users' => 'c,r,u,d',
-            'profile' => 'r,u'
+        'portadministrator' => [
+            'port-monitoring' => 'c,r,u,d',
+            'delivered-batches' => 'c,r,u,d'
         ],
-        'user' => [
+        'client' => [
             'profile' => 'r,u',
-        ],
-        'role_name' => [
-            'module_1_name' => 'c,r,u,d',
         ]
     ],
 

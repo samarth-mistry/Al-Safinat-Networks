@@ -15,7 +15,7 @@ class TrackingController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('role:superadministrator');
+        $this->middleware('role:superadministrator|portadministrator');
     }
 
     public function inComingData(Request $request, $port_id = 0)

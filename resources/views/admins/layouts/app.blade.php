@@ -1,3 +1,4 @@
+@role('superadministrator|portadministrator')
 <!DOCTYPE html>
 
 <html lang="en">
@@ -81,3 +82,4 @@
   @stack('scripts')
 </body>
 </html>
+@endrole

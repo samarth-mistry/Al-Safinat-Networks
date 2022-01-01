@@ -18,6 +18,9 @@ class LoginController extends Controller
         if($user->hasRole('superadministrator')){
             return redirect('/admin-dashboard');
         }
+        if($user->hasRole('portadministrator')){
+            return redirect('/admin-dashboard');
+        }
         if($user->hasRole('user')){
             return redirect('/client-dashboard');
         }
