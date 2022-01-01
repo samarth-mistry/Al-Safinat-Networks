@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\User;
-use DataTables;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Role;
+use DataTables;
 
 class UserController extends Controller
 {
@@ -20,13 +21,24 @@ class UserController extends Controller
         return DataTables::of($users)
             ->addColumn('role', function ($user) {
                 $role = $user->roles->first();
-                if($role)
-                    return $role->name;
+                if($role){
+                    if($role->id == 1){
+                        return '<span class="badge badge-danger">'.ucfirst($role->name).'</span>';
+                    } elseif($role->id == 2){
+                        return '<span class="badge badge-warning">'.ucfirst($role->name).'</span>';
+                    } else {
+                        return '<span class="badge badge-primary">'.ucfirst($role->name).'</span>';
+                    }
+                }
                 else
                     return '-';
             })
+            ->editColumn('created_at', function($user){
+                return date('d M Y', strtotime($user->created_at));
+            })
+            ->escapeColumns('role')
             ->addColumn('actions', function ($user) {
-                return view('users.action', ['user' => $user]);
+                return view('admins.users.action', ['user' => $user]);
             })
             ->rawColumns(['actions'])->make(true);
     }
@@ -44,6 +56,7 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        //dd($request);
         $this->validate($request, [
             'name' => 'required|min:3|max:50',
             //'email' => 'email|unique:users,email',
@@ -58,7 +71,7 @@ class UserController extends Controller
             'password' => Hash::make($request->password)
         ]);
         
-        $user->assignRole($request->role_id);
+        $user->attachRole($request->role_id);
         return redirect()->route('admin-users.index')->with('message', 'New User created successfully!');
     }
 
@@ -87,7 +100,6 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->save();
-        $user->assignRole($request->role_id);
         return redirect()->route('admin-users.index')->with('message', 'User updated successfully!');
     }
 

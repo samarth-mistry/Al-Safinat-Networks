@@ -88,3 +88,10 @@
     <input type="reset" class="btn btn-warning mr-2" value="Reset"/>
 	<a href="{{ route('admin-countries.index') }}" class="btn btn-secondary">Back</a>
 </div>
+@push('scripts')
+<script>
+    $(document).ready(function(){
+        $("#continent_id").select2({});
+    });
+</script>
+@endpush

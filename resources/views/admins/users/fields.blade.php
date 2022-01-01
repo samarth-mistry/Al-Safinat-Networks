@@ -61,32 +61,40 @@
             </div>
         </div>
     </div>
-    @endif
     <div class="row">
+        <span class="col-md-6 text-small text-danger">Keep the Password fields empty to keep the same password</span>
+    </div>
+    @endif
+    <div class="form-group row">
         <div class="col-md-6">
-            <div class="form-group">
-                <label>Role <span class="text-danger">*</span></label>
-                @if(empty($user))
-                <select name="role_id" class="form-control">
-                    <option value="">Select Role</option>
-                    @foreach($roles as $role)
-                        <option value="{{ $role->id }}" {{ old('role_id') == $role->id ? 'selected':'' }}>{{ $role->name }}</option>
-                    @endforeach
-                </select>
-                @else
-                <select name="role_id" class="form-control">
-                    <option value="">Select Role</option>
-                    @foreach($roles as $role)
-                        <option value="{{ $role->id }}" {{ $user->roles->first()->id == $role->id ? 'selected':'' }}>{{ $role->name }}</option>
-                    @endforeach
-                </select>
-                @endif
-            </div>
+            <label>Role <span class="text-danger">*</span></label>
+            @if(empty($user))
+            <select name="role_id" id="role_id" class="form-control">
+                <option value="">--Select Role--</option>
+                @foreach($roles as $role)
+                    <option value="{{ $role->id }}" {{ old('role_id') == $role->id ? 'selected':'' }}>{{ $role->name }}</option>
+                @endforeach
+            </select>
+            @else
+            <select name="role_id" id="role_id" class="form-control" disabled="true">
+                <option value="">--Select Role--</option>
+                @foreach($roles as $role)
+                    <option value="{{ $role->id }}" {{ $user->roles->first()->id == $role->id ? 'selected':'' }}>{{ $role->name }}</option>
+                @endforeach
+            </select>
+            @endif
         </div>
     </div>
 </div>
 <div class="card-footer" style="background: khaki;">
     <button type="submit" class="btn btn-primary mr-2">Save</button>
     <input type="reset" class="btn btn-warning mr-2" value="Reset"/>
-	<a href="{{ route('admin-batches.index') }}" class="btn btn-secondary">Back</a>
+	<a href="{{ route('admin-users.index') }}" class="btn btn-secondary">Back</a>
 </div>
+@push('scripts')
+<script>
+    $(document).ready(function(){
+        $("#role_id").select2({});
+    });
+</script>
+@endpush

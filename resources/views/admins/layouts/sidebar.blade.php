@@ -158,37 +158,11 @@
             </li><!-- users -->
             @endrole
             @role('superadministrator')
-            <li class="nav-item">
-                <a href="#" class="main-drop-bg nav-link">
-                    <i class="nav-icon fas fa-user-plus"></i>
-                    <p>Manage Users<i class="fas fa-angle-left right"></i></p>
+            <li class="nav-item {{ request()->is('admin-users*') ? 'menu-open':'' }}">
+                <a href="{{ route('admin-users.index') }}" class="main-drop-bg nav-link {{ request()->is('admin-users*') ? 'active':'' }}">
+                    <i class="nav-icon fas fa-users"></i>
+                    <p>Manage Users</p>
                 </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="far fa-user nav-icon"></i>
-                            <p>Clients</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="fa fa-user nav-icon"></i>
-                            <p>Port Admins</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="fa fa-users nav-icon"></i>
-                            <p>Staff</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link text-red font-weight-bold">
-                            <i class="fa fa-star nav-icon text-yellow"></i>
-                            <p>Super Account</p>
-                        </a>
-                    </li>
-                 </ul>
             </li><!-- Loggings -->
             @endrole
             @role('superadministrator')

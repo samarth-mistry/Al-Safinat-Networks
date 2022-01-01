@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
 @endpush
 @section('page-title')
-<title>AGN | Batches</title>
+<title>AGN | Users</title>
 @endsection
 
 @section('content-header')
@@ -12,19 +12,19 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-4">
-          <h1 class="m-0">Batches</h1>
+          <h1 class="m-0">Users</h1>
         </div>
         <div class="col-sm-4">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
             <li class="breadcrumb-item"><a href="{{ url('/admin-dashboard') }}">Admin</a></li>
-            <li class="breadcrumb-item active">Batches</li>
+            <li class="breadcrumb-item active">Users</li>
           </ol>
         </div>
         <div class="col-sm-4">
-          <a href="{{ route('admin-batches.create') }}" class="btn btn-primary float-sm-right">
+          <a href="{{ route('admin-users.create') }}" class="btn btn-primary float-sm-right">
             <i class="fa fa-plus"></i>
-            &nbsp;&nbsp;&nbsp;New Batch
+            &nbsp;&nbsp;&nbsp;New User
           </a>
         </div>
       </div><!-- /.row -->
@@ -44,11 +44,10 @@
           <thead>
               <tr>
                   <th>#</th>
+                  <th>Role</th>
                   <th>Name</th>
-                  <th>Vessel</th>
-                  <th>From Unit</th>
-                  <th>To Unit</th>
-                  <th>Status</th>
+                  <th>Email</th>
+                  <th>Joined since</th>
                   <th>Action</th>
               </tr>
           </thead>
@@ -65,7 +64,7 @@
         processing: true,
         serverSide: true,
         ajax: {
-                'url': '{!! route("admin-batches.data") !!}',
+                'url': '{!! route("admin-users.data") !!}',
                 'type': 'POST',
                 'headers': {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -73,11 +72,10 @@
             },
         columns: [
             {data: 'id', name: 'id'},
+            {data: 'role', name: 'role'},
             {data: 'name', name: 'name'},
-            {data: 'vessel', name: 'vessel'},
-            {data: 'from_unit', name: 'from_unit'},
-            {data: 'to_unit', name: 'to_unit'},
-            {data: 'status', name: 'status'},
+            {data: 'email', name: 'email'},
+            {data: 'created_at', name: 'created_at'},
             {data: 'actions', name: 'actions', orderable: false, searchable: false},
         ]
     });

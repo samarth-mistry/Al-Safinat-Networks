@@ -112,3 +112,10 @@
     <input type="reset" class="btn btn-warning mr-2" value="Reset"/>
 	<a href="{{ route('admin-batches.index') }}" class="btn btn-secondary">Back</a>
 </div>
+@push('scripts')
+<script>
+    $(document).ready(function(){
+        $("#vessel_id, #from_unit, #to_unit").select2({});
+    });
+</script>
+@endpush

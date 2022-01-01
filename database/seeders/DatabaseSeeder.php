@@ -23,5 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UnitSeeder::class);
         $this->call(BatchSeeder::class);
         $this->call(LaratrustSeeder::class);
+        $this->call(PortAdminSeeder::class);
     }
 }
