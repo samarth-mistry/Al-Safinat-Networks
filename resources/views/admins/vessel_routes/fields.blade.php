@@ -1,133 +1,53 @@
 <!--begin::Body-->
 @push('styles')
 <style>
-    .cursor-pointer {
-        cursor: pointer
-    }
+.events li { 
+  display: flex; 
+  color: #999;
+}
 
-    .Today {
-        color: rgb(83, 83, 83)
-    }
+.events port { 
+  position: relative;
+  padding: 0 1.5em;  }
 
-    .btn-outline-primary {
-        background-color: #fff !important;
-        color: #4bb8a9 !important;
-        border: 1.3px solid #4bb8a9;
-        font-size: 12px;
-        border-radius: 0.4em !important
-    }
+.events port::after { 
+   content: "";
+   position: absolute;
+   z-index: 2;
+   right: 0;
+   top: 0;
+   transform: translateX(50%);
+   border-radius: 50%;
+   background: #fff;
+   border: 1px #ccc solid;
+   width: .8em;
+   height: .8em;
+}
 
-    .btn-outline-primary:hover {
-        background-color: #4bb8a9 !important;
-        color: #fff !important;
-        border: 1.3px solid #4bb8a9
-    }
 
-    .btn-outline-primary:focus,
-    .btn-outline-primary:active {
-        outline: none !important;
-        box-shadow: none !important;
-        border-color: #42A5F5 !important
-    }
+.events span {
+  padding: 0 1.5em 1.5em 1.5em;
+  position: relative;
+}
 
-    #progressbar {
-        margin-bottom: 30px;
-        overflow: hidden;
-        color: #455A64;
-        padding-left: 0px;
-        margin-top: 30px
-    }
+.events span::before {
+   content: "";
+   position: absolute;
+   z-index: 1;
+   left: 0;
+   height: 100%;
+   border-left: 1px #ccc solid;
+}
 
-    #progressbar li {
-        list-style-type: none;
-        font-size: 13px;
-        width: 33.33%;
-        float: left;
-        position: relative;
-        font-weight: 400;
-        color: #455A64 !important
-    }
+.events strong {
+   display: block;
+   font-weight: bolder;
+}
 
-    #progressbar #step1:before {
-        content: "1";
-        color: #fff;
-        width: 29px;
-        margin-left: 15px !important;
-        padding-left: 11px !important
-    }
-
-    #progressbar #step2:before {
-        content: "2";
-        color: #fff;
-        width: 29px
-    }
-
-    #progressbar #step3:before {
-        content: "3";
-        color: #fff;
-        width: 29px;
-        margin-right: 15px !important;
-        padding-right: 11px !important
-    }
-
-    #progressbar li:before {
-        line-height: 29px;
-        display: block;
-        font-size: 12px;
-        background: #455A64;
-        border-radius: 50%;
-        margin: auto
-    }
-
-    #progressbar li:after {
-        content: '';
-        width: 121%;
-        height: 2px;
-        background: #455A64;
-        position: absolute;
-        left: 0%;
-        right: 0%;
-        top: 15px;
-        z-index: -1
-    }
-
-    #progressbar li:nth-child(2):after {
-        left: 50%
-    }
-
-    #progressbar li:nth-child(1):after {
-        left: 25%;
-        width: 121%
-    }
-
-    #progressbar li:nth-child(3):after {
-        left: 25% !important;
-        width: 50% !important
-    }
-
-    #progressbar li.active:before,
-    #progressbar li.active:after {
-        background: #4bb8a9
-    }
-
-    .card {
-        background-color: #fff;
-        //box-shadow: 2px 4px 15px 0px rgb(0, 108, 170);
-        z-index: 0
-    }
-    .border-line {
-        border-right: 1px solid rgb(226, 206, 226)
-    }
-
-    .card-footer img {
-        opacity: 0.3
-    }
-
-    .card-footer h5 {
-        font-size: 1.1em;
-        color: #8C9EFF;
-        cursor: pointer
-    }
+.events { margin: 1em; width: 50%; }
+.events, 
+.events *::before, 
+.events *::after { box-sizing: border-box; font-family: arial; }
 </style>
 @endpush
 <div class="card-body">
@@ -147,39 +67,22 @@
         </div>
     </div>
     <hr class="solid">
-    <div class="container-fluid my-5 justify-content-center">
-        <div class="card">
-            <div class="form-group row">
-                <div class="col col-lg-10">
-                    <ul id="progressbar">
-                    @foreach($route_array as $port)
-                        <li class="step0 active text-center" id="step2">{{ $port }}</li>
-                    @endforeach
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <hr class="solid">
-    <!-- <div class="form-group row">
-        <div class="col-md-1">
-            <label class="">Current Flow :</label>
-        </div>
-        @foreach($route_array as $port)
-            <div class="col-md-1">
-                <label class="text-primary">{{ $port }}</label>
-                <i class="fa fa-arrow-right"></i>
-            </div>
-        @endforeach
-    </div> -->
-    <hr class="solid">
     <div class="form-group row">
-        <div class="col-lg-12" id="kt_repeater_1">
-            <div class="form-group row">
-                <div class="col-lg-1">
-                    <label class="col-form-label text-dark">New Route :</label>
-                </div>
-            </div>
+        <div class="col-lg-6">
+            <label class="col-md-6 text-center badge badge-success">Start</label>
+            <ul class="events">
+                @php $cnt = 1; @endphp
+                @foreach($route_array as $port)
+                <li>
+                    <port>{{ $cnt++ }}</port> 
+                    <span><strong>{{ $port }}</strong></span>
+                </li>
+                @endforeach
+            </ul>
+            <label class="col-md-6 text-center badge badge-dark">End</label>
+        </div>
+        <div class="col-lg-6" id="kt_repeater_1">
+            <label class="col-lg-6 col-form-label badge badge-primary">New Route :</label>
             <div data-repeater-list="ports">
                 <div data-repeater-item="" class="align-items-center">
                     <div class="form-group row">
