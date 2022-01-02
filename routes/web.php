@@ -12,6 +12,8 @@ Route::get('ajax/get-batch-by-vessel/{vessel_id}', 'AjaxController@getBatchByVes
 Route::get('ajax/get-port-by-country/{country_id}', 'AjaxController@getPortByCountry')->name('ajax/get-port-by-county');
 Route::get('ajax/get-next-port/{vessel_id}/{curr_port_id}', 'AjaxController@getNextPort')->name('ajax/get-next-port');
 //-----------------------------admin settings-----------------------------
+Route::get('admin-dashboard', 'AdminDashboardController@index')->middleware(['auth'])->name('admin-dashboard');
+
 Route::post('admin-continents/data', 'ContinentsController@data')->name('admin-continents.data');
 Route::resource('admin-continents', 'ContinentsController');
 
@@ -64,5 +66,5 @@ Route::post('client-booking/data', 'BookingController@data')->name('client-booki
 Route::resource('client-booking', 'BookingController');
 
 Route::get('client-dashboard', 'BookingController@dashboard')->name('client-dashboard');
-Route::get('admin-dashboard', 'AdminDashboardController@index')->middleware(['auth'])->name('admin-dashboard');
+Route::get('client-trackings/index', 'ClientTrackingController@index')->name('client-trackings.index');
 

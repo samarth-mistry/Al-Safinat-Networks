@@ -70,11 +70,7 @@
         &copy; Copyright <strong><span>{{ config('app.name') }} Networks</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/bizland-bootstrap-business-template/ -->
-        Development by <a href="https://github.com/headathigh">Samarth Mistry Al-Gujarati</a>
+        Development by <a target="_blank" href="https://github.com/headathigh">Samarth Mistry Al-Gujarati</a>
       </div>
     </div>
 </footer><!-- End Footer -->

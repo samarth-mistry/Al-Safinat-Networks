@@ -124,13 +124,11 @@
 	<a href="{{ route('admin-vessel-routes.index') }}" class="btn btn-secondary">Back</a>
 </div>
 @push('scripts')
-<!-- <script src="{{ asset('dist/js/form_repeater/form-repeater.min.js') }}"></script> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.repeater/1.2.1/jquery.repeater.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.repeater/1.2.1/jquery.repeater.js"></script>
 <script>
     $(document).ready(function () {
         $('#kt_repeater_1').repeater({});
-        // $('.port-field').select2({});
     });
 </script>
 @endpush

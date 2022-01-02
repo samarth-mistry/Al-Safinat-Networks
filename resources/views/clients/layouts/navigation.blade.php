@@ -12,13 +12,15 @@
             <li>
               @if(Auth::user()->getRoles()[0] == 'superadministrator')
                 <a class="nav-link scrollto {{ request()->is('admin-dashboard*') ? 'active' : '' }}" href="{{ route('admin-dashboard') }}">Dashboard</a>
-              @elseif(Auth::user()->getRoles()[0] == 'user')
+              @elseif(Auth::user()->getRoles()[0] == 'client')
                 <a class="nav-link scrollto {{ request()->is('client-dashboard*') ? 'active' : '' }}" href="{{ route('client-dashboard') }}">Dashboard</a>
               @endif
             </li>
+            @if(Auth::user()->getRoles()[0] == 'client')
+              <li><a class="nav-link scrollto {{ request()->is('client-booking*') ? 'active' : '' }}" href="{{ route('client-booking.index') }}">Book</a></li>
+              <li><a class="nav-link scrollto {{ request()->is('client-tracking*') ? 'active' : '' }}" href="{{ route('client-trackings.index') }}">Track</a></li>
+            @endif
           @endif
-          <li><a class="nav-link scrollto {{ request()->is('client-booking*') ? 'active' : '' }}" href="{{ route('client-booking.index') }}">Book</a></li>
-          <li><a class="nav-link scrollto {{ request()->is('client-tracking*') ? 'active' : '' }}" href="{{ route('client-booking.create') }}">Track</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="nav-link scrollto" href="#services">Services</a></li>
           <li><a class="nav-link scrollto" href="#team">Team</a></li>
