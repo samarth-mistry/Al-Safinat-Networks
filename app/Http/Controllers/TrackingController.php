@@ -10,6 +10,7 @@ use App\Models\VesselRoute;
 use App\Models\Tracking;
 use Illuminate\Http\Request;
 use DataTables;
+use Auth;
 
 class TrackingController extends Controller
 {
@@ -138,7 +139,13 @@ class TrackingController extends Controller
     public function index()
     {
         $ports = Office::where('type_id', 0)->get();
-        return view('subadmins.entries.index', compact('ports'));
+        $is_port_admin = 0;
+        if(Auth::user()->hasRole('portadministrator')){
+            $exp = explode('.',Auth::user()->email);
+            $is_port_admin = $exp[0];
+        }
+        //dd($is_port_admin);
+        return view('subadmins.entries.index', compact('ports','is_port_admin'));
     }
 
     public function globalTrackingIndex()

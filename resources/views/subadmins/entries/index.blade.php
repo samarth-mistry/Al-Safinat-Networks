@@ -41,7 +41,8 @@
 <form action="">
 <div class="mb-15">
     <div class="row">
-        <label class="col-form-label col-md-4 text-right">Select the Port{{ session()->get('last_selected_port_id') }}</label>
+        <label class="col-form-label col-md-4 text-right">Select the Port</label>
+        @if($is_port_admin == 0)
         <div class="col-md-3">
           <select name="port_id" id="port_id" class="form-control">
             @foreach($ports as $port)
@@ -52,6 +53,18 @@
         <div class="col-md-3">
           <button type="button" class="btn btn-primary" id="view_port">View</button>
         </div>
+        @else
+        <div class="col-md-3">
+          <select name="port_id" id="port_id" class="form-control" disabled="true">
+            @foreach($ports as $port)
+            <option value="{{ $port->id }}" {{ $port->id == $is_port_admin ? 'selected' : ''}}>{{ $port->name }}</option>
+            @endforeach
+          </select>
+        </div>
+        <div class="col-md-3">
+          <button type="button" class="btn btn-primary" id="view_port" disabled="true">View</button>
+        </div>
+        @endif
     </div>
 </div><br>
 <div class="card card-success card-outline" style="background: #e8f5e6;">
@@ -105,12 +118,14 @@
 <script src="{{ asset('dist/js/jquery.session.js') }}"></script>
 <script>
   $(function () {
-    $("#port_id").select2({});
-    $('#port_id').val($.session.get('last_selected_port_id')).change();
-    console.log($.session.get('last_selected_port_id'));
+    var is_port_admin = '{{ $is_port_admin }}';
+    if(is_port_admin == 0){
+      $("#port_id").select2({});
+      $('#port_id').val($.session.get('last_selected_port_id')).change();
+    }
+    
     $('#port_id').change(function(){
       $.session.set("last_selected_port_id", $('#port_id').val());
-      console.log($.session.get('last_selected_port_id'));
     });
     var table_incoming = $('.data-table').DataTable({
         processing: true,
