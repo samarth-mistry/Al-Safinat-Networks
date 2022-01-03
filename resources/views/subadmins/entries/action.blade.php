@@ -7,7 +7,7 @@
 	</a>
 	@if($tracking->status != 'deported')
 		@if($table_type == '0')
-		<a href="{{ route('status-ported', ['id' => $tracking->id, 'is_global' => '0'])}}" title="Mark as Ported" class="btn btn-sm btn-success btn-icon btn-icon-md">
+		<a id="status_ported" href="{{ route('status-ported', ['id' => $tracking->id, 'is_global' => '0'])}}" title="Mark as Ported" class="btn btn-sm btn-success btn-icon btn-icon-md">
 			<i class="fas fa-check-square"></i>&nbsp;&nbsp;Ported
 		</a>
 		@else

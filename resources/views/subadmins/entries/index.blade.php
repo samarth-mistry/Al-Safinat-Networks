@@ -38,9 +38,10 @@
         {{ session()->get('message') }}
     </div>
 @endif
+<form action="">
 <div class="mb-15">
     <div class="row">
-        <label class="col-form-label col-md-4 text-right">Select the Port</label>
+        <label class="col-form-label col-md-4 text-right">Select the Port{{ session()->get('last_selected_port_id') }}</label>
         <div class="col-md-3">
           <select name="port_id" id="port_id" class="form-control">
             @foreach($ports as $port)
@@ -97,13 +98,20 @@
       </table>
     </div>
 </div>
+</form>
 @endsection
 @push('scripts')
 <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-
+<script src="{{ asset('dist/js/jquery.session.js') }}"></script>
 <script>
   $(function () {
     $("#port_id").select2({});
+    $('#port_id').val($.session.get('last_selected_port_id')).change();
+    console.log($.session.get('last_selected_port_id'));
+    $('#port_id').change(function(){
+      $.session.set("last_selected_port_id", $('#port_id').val());
+      console.log($.session.get('last_selected_port_id'));
+    });
     var table_incoming = $('.data-table').DataTable({
         processing: true,
         serverSide: true,

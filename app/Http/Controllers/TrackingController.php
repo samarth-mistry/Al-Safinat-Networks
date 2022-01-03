@@ -244,6 +244,7 @@ class TrackingController extends Controller
 
     public function setStatusPorted($id, $is_global=0)
     {
+        //dd('st');
         $tracking = Tracking::find($id);
         $last_port_tracking = Tracking::where('vessel_id', $tracking->vessel_id)->where('status', '!=', 'delivered')->orderBy('id', 'desc')->first();
 
