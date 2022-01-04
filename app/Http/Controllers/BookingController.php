@@ -7,6 +7,7 @@ use App\Models\Country;
 use App\Models\Office;
 use Illuminate\Http\Request;
 use DataTables;
+use Hashids\Hashids;
 
 class BookingController extends Controller
 {
@@ -104,7 +105,13 @@ class BookingController extends Controller
         $booking->destination_address = $request->destination_address;
         $booking->save();
 
-        return redirect()->route('client-booking.index')->with('message', 'New Booking created successfully!');
+        $tracking_id_encoded = $booking->id.'|'.$booking->s_date_of_arrival;
+        //$raw_no = '2|Urwarshi';
+        // $hashids = new Hashids();
+        // $tracking_id_encoded = $hashids->encode(2);
+
+        // dd($tracking_id_encoded);
+        return redirect()->route('client-booking.index')->with(['message', 'New Booking created successfully!'],['tracking_id', $tracking_id_encoded]);
     }
 
     public function show(Booking $booking)

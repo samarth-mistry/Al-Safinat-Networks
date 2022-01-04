@@ -2,7 +2,7 @@
     <h5 class="text-green">Booking requestor's information:</h5>
     <div class="mb-15">
         <div class="form-group row">
-        <label class="col-lg-4 text-right">Are you the owner of the transaction? </label>
+            <label class="col-lg-4 text-right">Are you the owner of the transaction? </label>
             <div class="custom-control custom-switch col-lg-5">
                 @if(empty($booking))
                     <input type="checkbox" name="is_own" class="custom-control-input" id="switch_1" checked="checked">

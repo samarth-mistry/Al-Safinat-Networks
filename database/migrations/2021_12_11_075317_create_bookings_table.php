@@ -18,6 +18,7 @@ class CreateBookingsTable extends Migration
             $table->boolean('is_own')->default(1);
             $table->string('owner_name', 255);
             $table->string('proof_id', 255);
+            $table->string('tracking_id', 255)->nullable();
             $table->integer('country_id');
             $table->string('source_address', 255);
             $table->string('source_email', 255);

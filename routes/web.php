@@ -67,4 +67,5 @@ Route::resource('client-booking', 'BookingController');
 
 Route::get('client-dashboard', 'BookingController@dashboard')->name('client-dashboard');
 Route::get('client-trackings/index', 'ClientTrackingController@index')->name('client-trackings.index');
+Route::post('client-trackings/show', 'ClientTrackingController@showToClient')->name('client-trackings.show');
 
