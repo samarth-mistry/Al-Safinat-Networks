@@ -38,9 +38,9 @@
         {{ session()->get('message') }}
     </div>
 @endif
-<div class="card card-success card-outline" style="background: #e8f5e6;">
+<div class="card card-warning card-outline" style="background: #f2f2e1;">
     <div class="card-header">
-      <h4 class="text-center font-weight-bold text-success">Incoming Vessels</h4>
+      <h4 class="text-center font-weight-bold">Deported, Travelling or Waiting Vessels</h4>
     </div>
     <div class="card-body">
       <table class="table table-bordered data-table">
@@ -60,9 +60,9 @@
       </table>
     </div>
 </div>
-<div class="card card-danger card-outline" style="background: #ffedf2;">
+<div class="card card-info card-outline" style="background: #d3e7f0;">
     <div class="card-header">
-      <h4 class="text-center font-weight-bold text-danger">Outgoing Vessels</h4>
+      <h4 class="text-center font-weight-bold">Ported Vessels</h4>
     </div>
     <div class="card-body">
       <table class="table table-bordered data-table-outgoing">
