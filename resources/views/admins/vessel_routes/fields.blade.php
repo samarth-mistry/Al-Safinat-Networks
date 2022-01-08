@@ -95,7 +95,7 @@
                             <select name="port_id" class="form-control port-field" id="port">
                                 <option value="">--Select Port--</option>
                                 @foreach($ports as $port)
-                                <option value="{{ $port->id }}">{{ $port->name }}</option>
+                                    <option value="{{ $port->id }}">{{ $port->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -128,7 +128,22 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.repeater/1.2.1/jquery.repeater.js"></script>
 <script>
     $(document).ready(function () {
-        $('#kt_repeater_1').repeater({});
+        $('.select2-container').remove();
+        $('.port-field').select2({});
+        $('.select2-container').css('width','100%');
+        $('#kt_repeater_1').repeater({
+            show: function () {
+                $(this).slideDown();
+                $('.select2-container').remove();
+                $('.port-field').select2({});
+                $('.select2-container').css('width','100%');
+            },
+            hide: function (remove) {
+                if(confirm('Are you sure?')) {
+                    $(this).slideUp(remove);
+                }
+            }
+        });
     });
 </script>
 @endpush

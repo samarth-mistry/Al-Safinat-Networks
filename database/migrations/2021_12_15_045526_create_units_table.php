@@ -17,7 +17,7 @@ class CreateUnitsTable extends Migration
             $table->id();
             $table->string('name', 255);
             $table->integer('port_id');
-            $table->integer('group_id')->default(1);
+            $table->integer('batch_id')->nullable();
             $table->integer('unit_size')->default(0);
             $table->integer('max_load');
             $table->string('description')->nullable();
