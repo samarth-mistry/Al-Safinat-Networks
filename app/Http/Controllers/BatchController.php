@@ -21,7 +21,9 @@ class BatchController extends Controller
         return DataTables::of($batches)
             ->editColumn('vessel', function ($batch) {
                 $vessel = Vessel::find($batch->vessel_id);
-                return $vessel->name;
+                if($vessel)
+                    return $vessel->name;
+                return "-";
             })
             ->editColumn('from_unit', function ($batch) {
                 $unit = Unit::find($batch->from_unit);
@@ -58,7 +60,7 @@ class BatchController extends Controller
         //dd($request);
         $this->validate($request, [
             'name' => 'required|min:3',
-            'vessel_id' => 'required',
+            // 'vessel_id' => 'required',
             'from_unit' => 'required',
             'to_unit' => 'required',
             'status' => 'required'
@@ -94,7 +96,7 @@ class BatchController extends Controller
         //dd($request);
         $this->validate($request, [
             'name' => 'required|min:3',
-            'vessel_id' => 'required',
+            // 'vessel_id' => 'required',
             'from_unit' => 'required',
             'to_unit' => 'required',
             'status' => 'required'

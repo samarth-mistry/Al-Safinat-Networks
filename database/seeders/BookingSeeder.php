@@ -31,7 +31,7 @@ class BookingSeeder extends Seeder
         $booking->d_l = "50";
         $booking->d_w = "50";
         $booking->d_h = "50";
-        $booking->sensitivity = $request->sensitivity == 0;
+        $booking->sensitivity = 0;
         $booking->destination_country_id = "9";
         $booking->destination_port_id = "3";
         $booking->destination_address = "Shenzen, HK, CN";
@@ -54,7 +54,7 @@ class BookingSeeder extends Seeder
         $booking->d_l = "50";
         $booking->d_w = "50";
         $booking->d_h = "50";
-        $booking->sensitivity = $request->sensitivity == 0;
+        $booking->sensitivity = 0;
         $booking->destination_country_id = "1";
         $booking->destination_port_id = "1";
         $booking->destination_address = "Karachi, PK";

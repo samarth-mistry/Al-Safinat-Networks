@@ -174,6 +174,8 @@ class TrackingController extends Controller
         ]);
         //$route = VesselRoute::where([['from_port', '=', $request->curr_port_id],['vessel_id','=',$request->vessel_id]])->first();
         $vessel = Vessel::find($request->vessel_id);
+        $batch = Batch::where('status', 'ideal')->where('vessel_id', $vessel->id)->first();
+
         //$tracking_id = $vessel->name."-".date('d-m-Y');
         $route_array = array();
         $routes = VesselRoute::where('vessel_id', $vessel->id)->get();
@@ -184,7 +186,7 @@ class TrackingController extends Controller
                 $tracking->curr_port_id = $route->from_port;
                 $tracking->next_port_id = $route->to_port;
                 $tracking->vessel_id = $vessel->id;
-                $tracking->batch_id = $vessel->batch_id;
+                $tracking->batch_id = $batch->id;
                 $tracking->status = $request->status;
                 $tracking->save();
                 $index++;
@@ -193,7 +195,7 @@ class TrackingController extends Controller
                 $tracking->curr_port_id = $route->from_port;
                 $tracking->next_port_id = $route->to_port;
                 $tracking->vessel_id = $vessel->id;
-                $tracking->batch_id = $vessel->batch_id;
+                $tracking->batch_id = $batch->id;
                 $tracking->status = 'waiting';
                 $tracking->save();
             }
@@ -233,11 +235,12 @@ class TrackingController extends Controller
         ]);
         $route = VesselRoute::where([['from_port', '=', $request->curr_port_id],['vessel_id','=',$request->vessel_id]])->first();
         $vessel = Vessel::find($request->vessel_id);
+        $batch = Batch::where('status', 'ideal')->where('vessel_id', $vessel->id)->first();
         $tracking = Tracking::find($id);
         $tracking->curr_port_id = $request->curr_port_id;
         $tracking->next_port_id = $route->to_port;
         $tracking->vessel_id = $request->vessel_id;
-        $tracking->batch_id = $vessel->batch_id;
+        $tracking->batch_id = $batch->id;
         $tracking->status = $request->status;
         $tracking->save();
 
@@ -257,6 +260,7 @@ class TrackingController extends Controller
 
         if($tracking == $last_port_tracking){
             $trackings = Tracking::where('vessel_id', $tracking->vessel_id)->where('status', '!=', 'delivered')->update(['status' => 'delivered']);
+            $batch = Batch::where('vessel_id', $tracking->vessel_id)->where('status', 'ideal')->update(['status' => 'OOS']);
         } else {
             $tracking->status = 'ported';
             $tracking->save();

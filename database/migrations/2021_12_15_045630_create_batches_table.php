@@ -17,7 +17,7 @@ class CreateBatchesTable extends Migration
             $table->id();
             $table->string('name', 255);
             $table->integer('annual_id')->nullable();
-            $table->integer('vessel_id');
+            $table->integer('vessel_id')->nullable();
             $table->integer('from_unit');
             $table->integer('to_unit');
             $table->string('description')->nullable();

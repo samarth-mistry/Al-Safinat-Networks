@@ -38,6 +38,10 @@ Route::resource('admin-batches', 'BatchController');
 Route::get('admin-vessel-routes/data', 'VesselRouteController@data')->name('admin-vessel-routes.data');
 Route::post('admin-vessel-routes/data', 'VesselRouteController@data')->name('admin-vessel-routes.data');
 Route::resource('admin-vessel-routes', 'VesselRouteController');
+
+Route::post('admin-bookings/data', 'AdminBookingController@data')->name('admin-bookings.data');
+Route::get('admin-bookings/index', 'AdminBookingController@index')->name('admin-bookings.index');
+// Route::resource('admin-bookings', 'AdminBookingController');
 //-----------------------Trackings------------------------------------------
 Route::post('admin-trackings/incoming-data/{port_id?}', 'TrackingController@inComingData')->name('admin-trackings.incoming-data');
 Route::post('admin-trackings/outgoing-data/{port_id?}', 'TrackingController@outGoingData')->name('admin-trackings.outgoing-data');

@@ -54,6 +54,14 @@
             </li><!-- resources -->
             @endrole
             @role('superadministrator')
+            <li class="nav-item">
+                <a href="{{ route('admin-bookings.index') }}" class="main-drop-bg nav-link {{ request()->is('admin-bookings*') ? 'active':'' }}">
+                    <i class="nav-icon fa fa-book"></i>
+                    <p>Bookings</p>
+                </a>
+            </li><!-- resources -->
+            @endrole
+            @role('superadministrator')
             <li class="nav-item {{ request()->is('admin-units*') || request()->is('admin-vessels*') || request()->is('admin-batches*') ? 'menu-open':'' }}">
                 <a href="#" class="main-drop-bg nav-link {{ request()->is('admin-vessels*') || request()->is('admin-batches*') || request()->is('admin-units*') ? 'active':'' }}">
                     <i class="fa fa-flag nav-icon"></i>

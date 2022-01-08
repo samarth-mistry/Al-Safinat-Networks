@@ -39,7 +39,11 @@ class AjaxController extends Controller
     }
     public function getBatchByVessel(Request $request, $vessel_id)
     {
-        $vessel = Vessel::find($vessel_id);
-        return $vessel->batch->name;
+        $batch = Batch::where('status', 'ideal')->where('vessel_id', $vessel_id)->first();
+
+        if($batch)
+            return $batch->name;
+        return "-";
+        // return $vessel->batch->name;
     }
 }
