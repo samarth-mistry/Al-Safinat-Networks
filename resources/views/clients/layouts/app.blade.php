@@ -74,17 +74,21 @@
     <script src="{{ asset('dist/vendor/php-email-form/validate.js') }}"></script>
     <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
-  <!-- Template Main JS File -->
+<!-- Template Main JS File -->
     <script src="{{ asset('dist/js/main.js') }}"></script>
-    <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
-    <!-- <script id="botmanWidget" src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/chat.js'></script> -->
-    <script type="text/javascript">
-    var botmanWidget = {
-        // frameEndpoint: '/botman',
-        introMesaage: 'Hi! I am Sanfina.',
-        title: 'Safina'
-    };
+<!-- Bot man vendor -->
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/assets/css/chat.min.css"> -->
+    <script>
+        var botmanWidget = {
+            title: 'Safina',
+            aboutText: 'Al-Safinat.net',
+            introMessage: "Hi! ✋<br>I'm Safina.",
+            mainColor: '#fcba03',
+            bubbleBackground: '#fcba03'
+        };
     </script>
+   
+    <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
     @stack('scripts')
 </body>
 </html>
