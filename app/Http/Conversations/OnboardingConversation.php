@@ -12,7 +12,7 @@ class OnboardingConversation extends Conversation
 {
     public function askName()
     {
-        $this->ask('What is your name?', function(Answer $answer) {
+        $this->ask('Hi there! What is your name?', function(Answer $answer) {
             $this->bot->userStorage()->save([
                 'name' => $answer->getText(),
             ]);
@@ -34,7 +34,7 @@ class OnboardingConversation extends Conversation
             $this->bot->userStorage()->save([
                 'email' => $answer->getText(),
             ]);
-            // dd("stop");
+
             $name = $this->bot->userStorage()->get('name');
             $this->say('Well, '. $name.' everthing is going fine');
             $this->askMobile();
@@ -48,7 +48,7 @@ class OnboardingConversation extends Conversation
                 'mobile' => $answer->getText(),
             ]);
 
-            $this->say('Great!');
+            $this->say('Great! We have saved your number "'.$this->bot->userStorage()->get('mobile').'"');
         });
     }
 
