@@ -28,6 +28,8 @@
   
   <!-- Template Main CSS File -->
   <link href="{{ asset('dist/css/style.css') }}" rel="stylesheet">
+    <!-- bot -->
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/assets/css/chat.min.css"> -->
   @stack('styles')
 </head>
 <body class="hold-transition sidebar-mini">
@@ -74,6 +76,15 @@
     <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
   <!-- Template Main JS File -->
     <script src="{{ asset('dist/js/main.js') }}"></script>
+    <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
+    <!-- <script id="botmanWidget" src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/chat.js'></script> -->
+    <script type="text/javascript">
+    var botmanWidget = {
+        // frameEndpoint: '/botman',
+        introMesaage: 'Hi! I am Sanfina.',
+        title: 'Safina'
+    };
+    </script>
     @stack('scripts')
 </body>
 </html>

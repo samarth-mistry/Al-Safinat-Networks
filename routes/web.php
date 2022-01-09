@@ -7,6 +7,9 @@ Route::get('/', function () {return view('bizland');});
 Auth::routes();
 //Auth::routes(['register' => false]);
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+//------------------------------- BITMAN ---------------------------
+Route::get('/botman', 'BotManController@accept')->name('botman');
+Route::post('/botman', 'BotManController@accept')->name('botman');
 //-------------------------------ajax---------------------------
 Route::get('ajax/get-batch-by-vessel/{vessel_id}', 'AjaxController@getBatchByVessel')->name('ajax/get-batch-by-vessel');
 Route::get('ajax/get-port-by-country/{country_id}', 'AjaxController@getPortByCountry')->name('ajax/get-port-by-county');
