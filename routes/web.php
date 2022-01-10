@@ -8,9 +8,10 @@ Auth::routes();
 //Auth::routes(['register' => false]);
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 //------------------------------- BITMAN ---------------------------
-// Route::get('/botman', 'BotManController@accept')->name('botman');
+Route::get('/botman', 'BotManController@accept')->name('botman');
 Route::post('/botman', 'BotManController@accept')->name('botman');
 //-------------------------------ajax---------------------------
+Route::get('ajax/test', 'AjaxController@test')->name('ajax.test');
 Route::get('ajax/get-batch-by-vessel/{vessel_id}', 'AjaxController@getBatchByVessel')->name('ajax/get-batch-by-vessel');
 Route::get('ajax/get-port-by-country/{country_id}', 'AjaxController@getPortByCountry')->name('ajax/get-port-by-county');
 Route::get('ajax/get-next-port/{vessel_id}/{curr_port_id}', 'AjaxController@getNextPort')->name('ajax/get-next-port');

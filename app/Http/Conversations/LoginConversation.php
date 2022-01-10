@@ -40,8 +40,7 @@ class LoginConversation extends Conversation
             $email = $this->bot->userStorage()->get('login_email');
             $password = $answer->getText();
             if(Auth::attempt(['email' => $email, 'password' => $password])){
-                $this->say('Login successfully');
-                // return redirect()->intended($this->redirectPath());
+                $this->say('Login successfully!');
             } else {
                 $this->say('Invalid Email or Password. Try again!');
                 $this->askEmail();

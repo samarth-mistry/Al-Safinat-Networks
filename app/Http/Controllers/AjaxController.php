@@ -9,13 +9,26 @@ use App\Models\VesselRoute;
 use App\Models\Office;
 use Illuminate\Http\Request;
 use DataTables;
+use Auth;
 
 class AjaxController extends Controller
 {
     // public function __construct()
     // {
-    //     $this->middleware('role:superadministrator');
+    //     $this->middleware('role:superadministrator|portadministrator');
     // }
+    public function test()
+    {
+        dd(Auth::user()->name);
+        $email = "client@alsafinat.net";
+        $password = "password";
+        if(Auth::attempt(['email' => $email, 'password' => $password])){
+            print_r('Login successfully!<br>');
+            return redirect()->intended('/client-dashboard');
+        } else {
+            print_r('Invalid Email or Password. Try again!');
+        }
+    }
     public function getNextPort(Request $request, $vessel_id, $curr_port_id)
     {
         $route = VesselRoute::where([['from_port', '=', $curr_port_id],['vessel_id','=',$vessel_id]])->first();
