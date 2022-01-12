@@ -72,8 +72,9 @@ Route::resource('admin-users', 'UserController');
 //--------------------------------client urls----------------------------------
 Route::post('client-booking/data', 'BookingController@data')->name('client-booking.data');
 Route::resource('client-booking', 'BookingController');
+Route::get('client-booking-pdf/{booking_id}', 'ClientDashboardController@sendPdf');
 
-Route::get('client-dashboard', 'BookingController@dashboard')->name('client-dashboard');
+Route::get('client-dashboard', 'ClientDashboardController@index')->name('client-dashboard');
 Route::get('client-trackings/index', 'ClientTrackingController@index')->name('client-trackings.index');
 Route::post('client-trackings/show', 'ClientTrackingController@showToClient')->name('client-trackings.show');
 

@@ -7,6 +7,7 @@ use App\Models\Country;
 use App\Models\Office;
 use Illuminate\Http\Request;
 use DataTables;
+use PDF;
 use Hashids\Hashids;
 
 class BookingController extends Controller
@@ -42,11 +43,6 @@ class BookingController extends Controller
             })
             ->rawColumns(['actions'])
             ->make(true);
-    }
-
-    public function dashboard()
-    {
-        return view('clients.dashboard');
     }
     
     public function index()

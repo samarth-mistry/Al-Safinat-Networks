@@ -20,7 +20,7 @@ class BotManController extends Controller
     {
         $botman = app('botman');
         $botman->hears('{message}', function($botman, $message) {
-            if ($message == 'Hi' || $message == 'hi' || $message == 'Hello') {
+            if ($message == 'Hi' || $message == 'hi' || $message == 'Hello' || $message == 'hello') {
                 // $this->askName($botman);
                 $attachment = new Audio(asset("dist/mp3/botman-name.mp3"), [
                     'custom_payload' => true,
@@ -35,6 +35,7 @@ class BotManController extends Controller
                 $botman->reply("For Basic information querying <br>
                 (1) /start <br> 
                 (2) /login <br> 
+                (2) /logout <br> 
                 (3) /about <br> 
                 (4) /exit <br>
                 Please login for using advance features like booking, tracking, viewing billing and requesting a PDF.");
@@ -46,7 +47,7 @@ class BotManController extends Controller
                 $this->logout($botman);
             } else if($message == '/stop') {
                 return false;
-            } else{
+            } else {
                 $botman->reply("Please type 'Hi' for starting.");
             }
         });

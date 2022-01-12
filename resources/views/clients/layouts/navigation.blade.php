@@ -17,8 +17,8 @@
               @endif
             </li>
             @if(Auth::user()->getRoles()[0] == 'client')
-              <li><a class="nav-link scrollto {{ request()->is('client-booking*') ? 'active' : '' }}" href="{{ route('client-booking.index') }}">Book</a></li>
-              <li><a class="nav-link scrollto {{ request()->is('client-tracking*') ? 'active' : '' }}" href="{{ route('client-trackings.index') }}">Track</a></li>
+              <li><a class="nav-link scrollto {{ request()->is('client-booking*') ? 'active' : '' }}" href="{{ route('client-booking.index') }}">Bookings</a></li>
+              <li><a class="nav-link scrollto {{ request()->is('client-tracking*') ? 'active' : '' }}" href="{{ route('client-trackings.index') }}">Trackings</a></li>
             @endif
           @endif
           <li><a class="nav-link scrollto" href="#about">About</a></li>
