@@ -46,6 +46,7 @@
                     <th>Arrival at Source port</th>
                     <th>Destination Port</th>
                     <th>Dimentions</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -77,6 +78,7 @@
             {data: 's_date_arrival', name: 's_date_arrival'},
             {data: 'destination_port', name: 'destination_port'},
             {data: 'dimentions', name: 'dimentions'},
+            {data: 'status', name: 'status'},
             {data: 'actions', name: 'actions', orderable: false, searchable: false},
         ]
     });

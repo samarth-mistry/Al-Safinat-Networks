@@ -45,7 +45,9 @@ Route::resource('admin-vessel-routes', 'VesselRouteController');
 
 Route::post('admin-bookings/data', 'AdminBookingController@data')->name('admin-bookings.data');
 Route::get('admin-bookings/index', 'AdminBookingController@index')->name('admin-bookings.index');
-// Route::resource('admin-bookings', 'AdminBookingController');
+Route::get('admin-bookings/show/{id}', 'AdminBookingController@show')->name('admin-bookings.show');
+Route::get('admin-bookings-unit/assign/{booking_id}', 'AdminBookingController@assignUnit')->name('admin-bookings-unit.edit');
+Route::post('admin-bookings-unit/update/{booking_id}', 'AdminBookingController@updateUnit')->name('admin-bookings-unit.update');
 //-----------------------Trackings------------------------------------------
 Route::post('admin-trackings/incoming-data/{port_id?}', 'TrackingController@inComingData')->name('admin-trackings.incoming-data');
 Route::post('admin-trackings/outgoing-data/{port_id?}', 'TrackingController@outGoingData')->name('admin-trackings.outgoing-data');

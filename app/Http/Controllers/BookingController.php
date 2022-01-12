@@ -107,6 +107,7 @@ class BookingController extends Controller
         // $tracking_id_encoded = $hashids->encode(2);
 
         // dd($tracking_id_encoded);
+        DB::table('booking_units')->insert(['booking_id' => $booking->id]);
         return redirect()->route('client-booking.index')->with(['message', 'New Booking created successfully!'],['tracking_id', $tracking_id_encoded]);
     }
 
