@@ -1,7 +1,7 @@
 @extends('admins.layouts.app')
 
 @section('page-title')
-<title>AGN | Edit</title>
+<title>AGN | Show</title>
 @endsection
 
 @section('content-header')
@@ -9,7 +9,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-4">
-          <h1 class="m-0">Edit Batch</h1>
+          <h1 class="m-0">View Booking</h1>
         </div>
         <div class="col-sm-4">
           <ol class="breadcrumb">
