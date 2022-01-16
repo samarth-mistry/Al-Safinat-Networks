@@ -80,7 +80,12 @@ class ClientTrackingController extends Controller
             }
             $index++;
         }
-        $pdf = PDF::loadView('clients.trackings.pdf', compact('tracking_id','booking','route_array'));
+        $pdf_url = url(asset('file-system/booking-pdfs/'.str_replace(' ', '_', strtolower($booking->owner_name))."_details.pdf"));
+
+        dd($pdf_url);
+        $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('clients.trackings.pdf', compact('tracking_id','booking','route_array'));
+        $pdf_path = public_path('file-system/booking-pdfs/'.str_replace(' ', '_', strtolower($booking->owner_name))."_details.pdf");
+        $pdf->save($pdf_path, array('Attachment' => 0));
         return $pdf->stream(str_replace(' ', '_', strtolower($booking->owner_name)) . "_details.pdf", array('Attachment' => 0));
     }
 }

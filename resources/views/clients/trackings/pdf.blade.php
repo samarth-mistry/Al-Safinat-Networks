@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title> {{ $booking->owner_name }}'s Details</title>
+    <title> {{ $booking->owner_name }}'s Booking Details</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <meta content="" name="description">
@@ -113,11 +113,13 @@
                         </tr>
                     </table>
                     <table width="100%" class="details" border="1">
-                        <thead class="bg-info"><tr>
-                            <th></th>
-                            <th>Source Details</th>
-                            <th>Destination Details</th>
-                        </tr></thead>
+                        <thead class="bg-info">
+                            <tr>
+                                <th></th>
+                                <th>Source Details</th>
+                                <th>Destination Details</th>
+                            </tr>
+                        </thead>
                         <tbody>
                             <tr>
                                 <td>Country</td>
@@ -158,8 +160,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <td width="33%"></td>
-                            <td width="33%" style="background: green; color: white;"><center>START</center></td>
+                            <td width="33.33%"></td>
+                            <td width="33.33%" style="background: green; color: white;"><center><b>START</b></center></td>
                             <td></td>
                         </tr>
                     </table>
@@ -167,16 +169,16 @@
                         @php $cnt = 1; @endphp
                         @foreach($route_array as $port)
                         <tr>
-                            <td width="25%">&nbsp;</td>
-                            <td width="25%">{{ $cnt++ }}</td>
-                            <td>{{ $port }}</td>
+                            <td width="33.33%"></td>
+                            <td width="33.33%">({{ $cnt++ }}) {{ $port }}</td>
+                            <td></td>
                         </tr>
                         @endforeach
                     </table>
                     <table width="100%" style="border-top:1px solid #ccc;">
                         <tr>
-                            <td width="33%"></td>
-                            <td width="33%" style="background: black; color: white;"><center>END</center></td>
+                            <td width="33.33%"></td>
+                            <td width="33.33%" style="background: black; color: white;"><center><b>END</b></center></td>
                             <td></td>
                         </tr>
                     </table>
