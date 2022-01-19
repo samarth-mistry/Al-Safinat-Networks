@@ -53,15 +53,18 @@ class ClientTrackingController extends Controller
         return view('clients.trackings.show', compact('tracking_id','booking','route_array'));
     }
 
-    public function streamPdf()
+    public function streamPdf($booking_id)
     {
         // $this->validate($request, [
         //     'tracking_id' => 'required|min:3'
         // ]);
 
-        $tracking_id = 'AZIFO';//$request->tracking_id;
-        $booking = Booking::where('tracking_id', $tracking_id)->first();
+        $randomness_factor = "Aaziya Nazakat Ali";
+        $hashids = new Hashids($randomness_factor);
+        $decoded_array = $hashids->decode($booking_id);
 
+        // $booking = Booking::where('tracking_id', $decoded_array[1])->first();
+        $booking = Booking::find($decoded_array[1]);
         $vessel = Vessel::find(2);
         
         $route_array = array();
@@ -80,12 +83,9 @@ class ClientTrackingController extends Controller
             }
             $index++;
         }
-        $pdf_url = url(asset('file-system/booking-pdfs/'.str_replace(' ', '_', strtolower($booking->owner_name))."_details.pdf"));
-
-        dd($pdf_url);
-        $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('clients.trackings.pdf', compact('tracking_id','booking','route_array'));
+        $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('clients.trackings.pdf', compact('booking','route_array'));
         $pdf_path = public_path('file-system/booking-pdfs/'.str_replace(' ', '_', strtolower($booking->owner_name))."_details.pdf");
-        $pdf->save($pdf_path, array('Attachment' => 0));
+        // $pdf->save($pdf_path, array('Attachment' => 0));
         return $pdf->stream(str_replace(' ', '_', strtolower($booking->owner_name)) . "_details.pdf", array('Attachment' => 0));
     }
 }

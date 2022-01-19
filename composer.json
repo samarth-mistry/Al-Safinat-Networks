@@ -17,6 +17,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
         "santigarcor/laratrust": "^6.3",
+        "vinkla/hashids": "^9.1",
         "yajra/laravel-datatables": "^1.5"
     },
     "require-dev": {

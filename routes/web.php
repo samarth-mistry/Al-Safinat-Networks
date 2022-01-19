@@ -76,6 +76,7 @@ Route::post('client-booking/data', 'BookingController@data')->name('client-booki
 Route::resource('client-booking', 'BookingController');
 Route::get('client-booking-pdf', 'ClientTrackingController@streamPdf')->name('client-booking-pdf');
 // Route::get('client-booking-pdf/{booking_id}', 'ClientDashboardController@sendPdf');
+Route::get('/pdf-links/{booking_id}', 'ClientTrackingController@streamPdf');
 
 Route::get('client-dashboard', 'ClientDashboardController@index')->name('client-dashboard');
 Route::get('client-trackings/index', 'ClientTrackingController@index')->name('client-trackings.index');

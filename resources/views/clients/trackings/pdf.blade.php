@@ -73,7 +73,7 @@
                                 <img alt="Logo" src="/favicon.ico" style="width:80%" />
                             </td>
                             <td align="center"> <!-- padding-right:70px -->
-                                <h2 align="center" style="color:#333">Booking Details for <b>{{ $tracking_id }}</b></h2>
+                                <h2 align="center" style="color:#333">Booking Details for <b>{{ $booking->tracking_id }}</b></h2>
                             </td>
                         </tr>
                     </table>

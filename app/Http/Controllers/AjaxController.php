@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Batch;
 use App\Models\Unit;
 use App\Models\Vessel;
+use Hashids\Hashids;
 use App\Models\VesselRoute;
 use App\Models\Office;
 use Illuminate\Http\Request;
@@ -19,6 +20,13 @@ class AjaxController extends Controller
     // }
     public function test()
     {
+        $raw_no = '2|Urwarshi';
+        $hashids = new Hashids();
+        $tracking_id_encoded = $hashids->encode('121a');
+
+        $tracking_id_encoded = $hashids->decode($tracking_id_encoded);
+        dd($tracking_id_encoded);
+        //---------------------------------------------------------------
         dd(Auth::user()->name);
         $email = "client@alsafinat.net";
         $password = "password";
