@@ -28,8 +28,7 @@
   
   <!-- Template Main CSS File -->
   <link href="{{ asset('dist/css/style.css') }}" rel="stylesheet">
-    <!-- bot -->
-    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/assets/css/chat.min.css"> -->
+
   @stack('styles')
 </head>
 <body class="hold-transition sidebar-mini">
@@ -87,19 +86,6 @@
             mainColor: '#fcba03',
             bubbleBackground: '#fcba03'
         };
-        $(document).on('click', '.desktop-closed-message-avatar img', function() {
-            var iframe = document.getElementById("chatBotManFrame");
-            iframe.addEventListener('load', function () {
-                var htmlFrame = this.contentWindow.document.getElementsByTagName("html")[0];
-                var bodyFrame = this.contentWindow.document.getElementsByTagName("body")[0];
-                var headFrame = this.contentWindow.document.getElementsByTagName("head")[0];
-
-                var image = "https://images.unsplash.com/photo-1501597301489-8b75b675ba0a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1349&q=80"
-
-                htmlFrame.style.backgroundImage = "url("+image+")";
-                bodyFrame.style.backgroundImage = "url("+image+")";
-            });
-        });
     </script>
     <script src='{{ asset("dist/js/botman-widget.js") }}'></script>
     @stack('scripts')

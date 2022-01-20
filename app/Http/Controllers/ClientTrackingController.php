@@ -55,15 +55,10 @@ class ClientTrackingController extends Controller
 
     public function streamPdf($booking_id)
     {
-        // $this->validate($request, [
-        //     'tracking_id' => 'required|min:3'
-        // ]);
-
         $randomness_factor = "Aaziya Nazakat Ali";
         $hashids = new Hashids($randomness_factor);
         $decoded_array = $hashids->decode($booking_id);
 
-        // $booking = Booking::where('tracking_id', $decoded_array[1])->first();
         $booking = Booking::find($decoded_array[1]);
         $vessel = Vessel::find(2);
         
@@ -85,7 +80,7 @@ class ClientTrackingController extends Controller
         }
         $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('clients.trackings.pdf', compact('booking','route_array'));
         $pdf_path = public_path('file-system/booking-pdfs/'.str_replace(' ', '_', strtolower($booking->owner_name))."_details.pdf");
-        // $pdf->save($pdf_path, array('Attachment' => 0));
+
         return $pdf->stream(str_replace(' ', '_', strtolower($booking->owner_name)) . "_details.pdf", array('Attachment' => 0));
     }
 }

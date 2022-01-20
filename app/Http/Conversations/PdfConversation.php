@@ -36,15 +36,14 @@ class PdfConversation extends Conversation
                 
                 if($selectedValue == 'yes'){
                     $pdf_url = (new BotManController)->generatePdfLink();
-                    
-                    $this->say($pdf_url);
+                    $this->say("Please login and then use this <a href='".$pdf_url."' target='_blank'>Download</a> link to view your PDF.");
                 }
-                else
+                else{
                     $this->say("Abort.");
+                }
             }
         });
     }
-
 
     public function askPassword()
     {
