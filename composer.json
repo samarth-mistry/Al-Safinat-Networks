@@ -10,7 +10,7 @@
         "botman/botman": "^2.6",
         "botman/driver-web": "^1.5",
         "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^7.0.1",
+        "guzzlehttp/guzzle": "^7.4",
         "hashids/hashids": "^4.1",
         "laravel/framework": "^8.65",
         "laravel/sanctum": "^2.11",

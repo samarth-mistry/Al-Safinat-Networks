@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use DB;
+use Mail;
 use DataTables;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Unit;
+use App\Mail\BookingApproved;
 use App\Models\Batch;
 use App\Models\Country;
 use App\Models\Office;
@@ -97,6 +100,7 @@ class AdminBookingController extends Controller
         $unit->status = 'queued';
         $unit->save();
 
+        Mail::to($booking->source_email)->send(new BookingApproved($booking, $unit));
         return redirect()->route('admin-bookings.index')->with(['message', 'Unit assigned successfully']);
     }
 }

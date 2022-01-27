@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use PDF;
+use Mail;
+use DataTables;
+use Hashids\Hashids;
+use App\Mail\BookingPlaced;
+use App\Mail\BookingApproved;
 use App\Models\Booking;
 use App\Models\Country;
 use App\Models\Office;
 use Illuminate\Http\Request;
-use DataTables;
-use PDF;
-use Hashids\Hashids;
 
 class BookingController extends Controller
 {
@@ -108,6 +112,8 @@ class BookingController extends Controller
 
         // dd($tracking_id_encoded);
         DB::table('booking_units')->insert(['booking_id' => $booking->id]);
+
+        Mail::to($request->source_email)->send(new BookingPlaced($booking));
         return redirect()->route('client-booking.index')->with(['message', 'New Booking created successfully!'],['tracking_id', $tracking_id_encoded]);
     }
 
